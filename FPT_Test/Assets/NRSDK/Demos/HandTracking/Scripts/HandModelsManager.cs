@@ -32,7 +32,7 @@ namespace NRKernal.NRExamples
 
         private void Start()
         {
-            OnRefresh();
+            //OnRefresh();
         }
 
         public void ToggleHandModelsGroup()
