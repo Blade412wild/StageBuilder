@@ -50,7 +50,8 @@ public class HeadTracking : MonoBehaviour
                 value = minValue;
             }
 
-            UIoutput.text = value.ToString();
+            string formattedOutput = $"{value:F2}";
+            UIoutput.text = formattedOutput;
         }
 
     }
