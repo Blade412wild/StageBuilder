@@ -11,6 +11,8 @@ public class HeadTracking : MonoBehaviour
     [SerializeField] private Transform indicatorTransform;
     [SerializeField] private HeadRotationLimit sphereLimit;
 
+    [SerializeField] private TMPro.TMP_Text UIoutput;
+    
     private float maxValue = 127.0f;
     private float minValue = 0f;
     private float dotProduct;
@@ -48,8 +50,7 @@ public class HeadTracking : MonoBehaviour
                 value = minValue;
             }
 
-
-            Debug.Log(value);
+            UIoutput.text = value.ToString();
         }
 
     }
