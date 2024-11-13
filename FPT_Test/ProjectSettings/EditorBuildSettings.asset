@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/NRSDK/Demos/HandTracking.unity
     guid: 7d33c4a3bc8da9745acac0e1d62c44bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/05_Scenes/HandTracking.unity
     guid: 35fe5cb4367051a4982a2c72410b058d
+  - enabled: 1
+    path: Assets/05_Scenes/HeadRotation.unity
+    guid: e34ce6fffa4749a4fa4c662edbb69b03
   m_configObjects: {}

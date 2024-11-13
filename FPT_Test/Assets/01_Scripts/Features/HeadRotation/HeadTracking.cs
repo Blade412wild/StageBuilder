@@ -12,7 +12,7 @@ public class HeadTracking : MonoBehaviour
     [SerializeField] private HeadRotationLimit sphereLimit;
 
     [SerializeField] private TMPro.TMP_Text UIoutput;
-    
+
     private float maxValue = 127.0f;
     private float minValue = 0f;
     private float dotProduct;
@@ -34,26 +34,35 @@ public class HeadTracking : MonoBehaviour
     void Update()
     {
         dotProduct = CalculateDotProduct();
-        AddRotationValue();
         UpdateLimitPositions();
 
         if (counter >= 2)
         {
-            float value = CalculateNewValueInNewScale(dotProduct, rotationLimits[0].dotProduct, rotationLimits[1].dotProduct, minValue, maxValue);
-
-            if(value > maxValue)
-            {
-                value = maxValue;
-            }
-            else if(value < minValue)
-            {
-                value = minValue;
-            }
-
-            string formattedOutput = $"{value:F2}";
-            UIoutput.text = formattedOutput;
+            float value = MapData();
+            FormatUIOutput(value);
         }
 
+    }
+
+    private void FormatUIOutput(float value)
+    {
+        string formattedOutput = $"{value:F2}";
+        UIoutput.text = formattedOutput;
+    }
+
+    private float MapData()
+    {
+        float value = CalculateNewValueInNewScale(dotProduct, rotationLimits[0].dotProduct, rotationLimits[1].dotProduct, minValue, maxValue);
+
+        if (value > maxValue)
+        {
+            value = maxValue;
+        }
+        else if (value < minValue)
+        {
+            value = minValue;
+        }
+        return value;
     }
 
 
@@ -81,32 +90,30 @@ public class HeadTracking : MonoBehaviour
         }
     }
 
-    private void AddRotationValue()
+    public void AddRotationValue()
     {
         if (counter < 2)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (counter >= 2) return;
+
+            HeadRotationLimit limit = Instantiate(sphereLimit, indicatorTransform.position, Quaternion.identity);
+            rotationLimits.Add(limit);
+
+            if (counter == 0)
             {
-                if (counter >= 2) return;
+                rotationLimits[counter].GetComponent<MeshRenderer>().material = minLimit;
+                limit.index = 0;
+                limit.dotProduct = dotProduct;
 
-                HeadRotationLimit limit = Instantiate(sphereLimit, indicatorTransform.position, Quaternion.identity);
-                rotationLimits.Add(limit);
-
-                if (counter == 0)
-                {
-                    rotationLimits[counter].GetComponent<MeshRenderer>().material = minLimit;
-                    limit.index = 0;
-                    limit.dotProduct = dotProduct;
-
-                }
-                else
-                {
-                    rotationLimits[counter].GetComponent<MeshRenderer>().material = maxLimit;
-                    limit.index = 1;
-                    limit.dotProduct = dotProduct;
-                }
-                counter++;
             }
+            else
+            {
+                rotationLimits[counter].GetComponent<MeshRenderer>().material = maxLimit;
+                limit.index = 1;
+                limit.dotProduct = dotProduct;
+            }
+            counter++;
+
         }
         else if (counter == angles.Length)
         {
