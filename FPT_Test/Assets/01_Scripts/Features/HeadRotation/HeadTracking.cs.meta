@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 40fbf19d10c0a6a47967e15d672f338d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - minLimit: {fileID: 2100000, guid: 1e26bf2f77f9e37429dadffd7b5bb1c9, type: 2}
+  - maxLimit: {fileID: 2100000, guid: 75cb91b32db6fc5428407a2f2c38a244, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
