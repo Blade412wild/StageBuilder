@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class SwitchManager : MonoBehaviour
 {
+    [SerializeField] private OSCManager oscManager;
+    [SerializeField] private GameObject light;
     private StateMachine switchMachine;
-    private bool BuilderMode = false;
+    private bool BuilderMode = true;
+
 
     private void Start()
     {
@@ -20,8 +24,8 @@ public class SwitchManager : MonoBehaviour
     private void CreateStateMachine()
     {
 
-        IState builderState = new BuilderState(this);
-        IState performanceState = new PerformanceState(this);
+        IState builderState = new BuilderState(this, light);
+        IState performanceState = new PerformanceState(this, oscManager);
 
         switchMachine = new StateMachine();
 
@@ -34,13 +38,61 @@ public class SwitchManager : MonoBehaviour
 
     private bool ChangeToPerformance()
     {
-        if (BuilderMode == false) return true;
+        if (BuilderMode == true) return false;
+
+        // check before going into perfromance mode if there is made a connection
+        checkErrorList();
+
+
+        
+
         return false;
     }
     private bool ChangeToBuilder()
     {
         if (BuilderMode) return true;
         return false;
+    }
+
+    private bool checkErrorList()
+    {
+        List<CustomError> customErrors = CreateErrorList();
+
+        ErrorList errorList = new ErrorList(customErrors);
+
+        if (errorList.list.Count <= 0) return true;
+
+        else
+        {
+            foreach(CustomError error in errorList.list)
+            {
+                if (error.errorLevel == CustomError.ErrorLevel.Fatal)
+                {
+                    errorList.FatalErrors++;
+                }
+
+                if (error.errorLevel == CustomError.ErrorLevel.Recommondation)
+                {
+                    errorList.RecomdationErrors++;
+                }
+            }
+
+            if(errorList.FatalErrors == 0) return true;
+
+            return false;
+        }
+    }
+
+    private List<CustomError> CreateErrorList()
+    {
+        List<CustomError> errorList = new List<CustomError>();
+
+        if (oscManager.CheckSenderAvailable() == false)
+        {
+            errorList.Add(new CustomError("There is No Sender, Fix that before you go into Perforance mode"));
+        } 
+
+        return errorList;
     }
 
 

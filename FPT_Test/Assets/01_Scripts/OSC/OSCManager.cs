@@ -1,6 +1,8 @@
 using SharpOSC;
 using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OSCManager : MonoBehaviour
@@ -21,10 +23,15 @@ public class OSCManager : MonoBehaviour
     public UIStatusBlock ListenerUIStatus;
     public UIStatusBlock SenderUIStatus;
 
+    public int Value;
+
+   // readonly List<>
+
     private OSCSender sender;
     private OSCReceiver listener;
 
     private string incommingData;
+
 
 
 
@@ -107,6 +114,16 @@ public class OSCManager : MonoBehaviour
         ListenerUIStatus.ChangeColor(false);
     }
 
+    public bool CheckSenderAvailable()
+    {
+        if (sender == null) return false;
+        else return true;
+    }
+    public bool CheckListenerAvailable()
+    {
+        if (listener == null) return false;
+        else return true;
+    }
     private void OnDestroy()
     {
         if (sender != null)

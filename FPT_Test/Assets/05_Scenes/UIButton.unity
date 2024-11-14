@@ -6162,6 +6162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1e97bcc6c60e64a8abe04b8b93d65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oscManager: {fileID: 1433059694}
+  light: {fileID: 45001212}
 --- !u!4 &1266885652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6420241020223802052, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
@@ -7419,6 +7421,7 @@ MonoBehaviour:
   chatIncomingData: {fileID: 731575175}
   ListenerUIStatus: {fileID: 298027252}
   SenderUIStatus: {fileID: 876722157}
+  Value: 0
 --- !u!4 &1433059695
 Transform:
   m_ObjectHideFlags: 0

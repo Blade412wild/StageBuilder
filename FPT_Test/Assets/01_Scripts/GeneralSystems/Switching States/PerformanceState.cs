@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class PerformanceState : State<SwitchManager>
 {
-    public PerformanceState(SwitchManager owner) : base(owner)
+    private OSCManager oscManager;
+    public PerformanceState(SwitchManager owner, OSCManager oscManager) : base(owner)
     {
-
+        this.oscManager = oscManager;
     }
 
     public override void OnEnter()
     {
         Debug.Log("Entered Perfromance State");
+        CheckInputList();
     }
 
     public override void OnUpdate()
     {
-        Debug.Log("Perform");
+        //oscManager.SendMessage();
     }
 
     public override void OnExit()
     {
+    }
+
+    private void CheckInputList()
+    {
+
     }
 }
