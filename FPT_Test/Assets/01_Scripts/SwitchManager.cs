@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class SwitchManager : MonoBehaviour
@@ -38,10 +37,10 @@ public class SwitchManager : MonoBehaviour
 
     private bool ChangeToPerformance()
     {
-        if (BuilderMode == true) return false;
+        if (BuilderMode == false) return true;
 
         // check before going into perfromance mode if there is made a connection
-        checkErrorList();
+        //checkErrorList();
 
 
         

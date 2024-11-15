@@ -23,7 +23,9 @@ public class OSCManager : MonoBehaviour
     public UIStatusBlock ListenerUIStatus;
     public UIStatusBlock SenderUIStatus;
 
-    public int Value;
+    [Header("HeadRotation")]
+    public HeadTracking HeadTracking;
+    public string Value;
 
    // readonly List<>
 
@@ -39,6 +41,7 @@ public class OSCManager : MonoBehaviour
     private void Update()
     {
         chatIncomingData.text = incommingData;
+        Value = HeadTracking.TempValue;
     }
 
     public void CreateUDPSender()
@@ -76,8 +79,7 @@ public class OSCManager : MonoBehaviour
         }
         else
         {
-            string value = chatInput.text;
-            sender.SendMessage("button/test", value);
+            sender.SendMessage("button/test", Value);
         }
     }
 
