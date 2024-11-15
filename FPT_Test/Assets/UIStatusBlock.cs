@@ -17,7 +17,7 @@ public class UIStatusBlock : MonoBehaviour
         uiImage = GetComponent<Image>();
     }
 
-    public void ChangeImage(bool state)
+    public void DoImage(bool state)
     {
         if (uiImage != null)
         {
@@ -32,7 +32,7 @@ public class UIStatusBlock : MonoBehaviour
             }
         }
     }
-    public void ChangeColor(bool state)
+    public void DoColor(bool state)
     {
         if (uiImage != null)
         {
@@ -46,6 +46,13 @@ public class UIStatusBlock : MonoBehaviour
                 uiImage.color = failedColor;
             }
         }
+    }
+    public void ChangeColor(bool state)
+    {
+        if (useImage)
+            DoImage(state);
+        else
+            DoColor(state);
     }
 
 
