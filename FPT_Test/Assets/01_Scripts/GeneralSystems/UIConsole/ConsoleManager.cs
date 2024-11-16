@@ -52,7 +52,9 @@ public class ConsoleManager : MonoBehaviour
             }
 
 
-            // create container size
+            // check eerst of de container wel veranderd hoeft te worden, het mage niet kleiner worden dan het scroll vak
+
+            // Change container size
             float messageCount = customErrors.Count;
             float heightmessage = messagePrefab.GetComponent<RectTransform>().sizeDelta.y;
             float newHeight = messageCount * (heightmessage + verticalLayoutGroup.spacing);
