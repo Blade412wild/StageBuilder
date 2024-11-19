@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 7084864446986118541}
   - component: {fileID: 224455350102529861}
   - component: {fileID: 5988295087019487172}
+  - component: {fileID: 6362096124809738321}
   m_Layer: 5
   m_Name: UPD
   m_TagString: Untagged
@@ -445,12 +446,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3219130087232930524}
-  m_Father: {fileID: 8246221894094902990}
+  m_Father: {fileID: 6315403686059506762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 122.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7084864446986118541
 CanvasRenderer:
@@ -511,10 +512,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.90196085, g: 0.9607844, b: 0.7686275, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.90196085, g: 0.9607844, b: 0.7686275, a: 1}
     m_PressedColor: {r: 0.3137255, g: 0.4627451, b: 0, a: 1}
-    m_SelectedColor: {r: 0.90196085, g: 0.9607844, b: 0.7686275, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -534,9 +535,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OSCManager, Assembly-CSharp
-        m_MethodName: CreateUDPSender
+      - m_Target: {fileID: 6362096124809738321}
+        m_TargetAssemblyTypeName: SwitchButtons, Assembly-CSharp
+        m_MethodName: Swap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -546,6 +547,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6362096124809738321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736303291366427999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c787a69288b9312409a48f1d7419b005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switched: 0
+  thisButton: {fileID: 0}
+  otherButton: {fileID: 4515046106085728108}
 --- !u!1 &983083863420703770
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +651,8 @@ RectTransform:
   - {fileID: 1710881890193048602}
   - {fileID: 592896675526168020}
   - {fileID: 8552269429557145891}
+  - {fileID: 6419812462747384798}
+  - {fileID: 3359447636834673610}
   - {fileID: 8246221894094902990}
   - {fileID: 3919036166382781707}
   m_Father: {fileID: 8273028398741341782}
@@ -2393,7 +2411,8 @@ RectTransform:
   - {fileID: 4971646222016579649}
   - {fileID: 6533500774386604502}
   - {fileID: 605668311456493535}
-  - {fileID: 6916233982748028026}
+  - {fileID: 7354213925405453462}
+  - {fileID: 5402623322133878029}
   - {fileID: 4126842405493210231}
   m_Father: {fileID: 8273028398741341782}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3076,6 +3095,7 @@ GameObject:
   - component: {fileID: 6920131135208126088}
   - component: {fileID: 3910642637417042419}
   - component: {fileID: 8604489173381215747}
+  - component: {fileID: 6563340042020371638}
   m_Layer: 5
   m_Name: Reset Button
   m_TagString: Untagged
@@ -3096,12 +3116,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1833799735303778023}
-  m_Father: {fileID: 8246221894094902990}
+  m_Father: {fileID: 6315403686059506762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6920131135208126088
 CanvasRenderer:
@@ -3185,9 +3205,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OSCManager, Assembly-CSharp
-        m_MethodName: ResetSender
+      - m_Target: {fileID: 6563340042020371638}
+        m_TargetAssemblyTypeName: SwitchButtons, Assembly-CSharp
+        m_MethodName: Swap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3197,6 +3217,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6563340042020371638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4515046106085728108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c787a69288b9312409a48f1d7419b005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switched: 1
+  thisButton: {fileID: 0}
+  otherButton: {fileID: 736303291366427999}
 --- !u!1 &4530441201198106227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3603,70 +3638,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &5311136517182426712
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6916233982748028026}
-  - component: {fileID: 3702114476667561210}
-  m_Layer: 5
-  m_Name: Horizontal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6916233982748028026
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5311136517182426712}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7354213925405453462}
-  - {fileID: 5402623322133878029}
-  m_Father: {fileID: 5551193144587538744}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3702114476667561210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5311136517182426712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 5
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &5524762709708602245
 GameObject:
   m_ObjectHideFlags: 0
@@ -4324,9 +4295,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6419812462747384798}
-  - {fileID: 3359447636834673610}
+  m_Children: []
   m_Father: {fileID: 6315403686059506762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5810,6 +5779,7 @@ GameObject:
   - component: {fileID: 6010158314428540904}
   - component: {fileID: 5361883882100307718}
   - component: {fileID: 7420761971947560034}
+  - component: {fileID: 906900078517848562}
   m_Layer: 5
   m_Name: Reset Button
   m_TagString: Untagged
@@ -5830,12 +5800,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4699485122324591321}
-  m_Father: {fileID: 6916233982748028026}
+  m_Father: {fileID: 5551193144587538744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6010158314428540904
 CanvasRenderer:
@@ -5919,9 +5889,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OSCManager, Assembly-CSharp
-        m_MethodName: ResetListener
+      - m_Target: {fileID: 906900078517848562}
+        m_TargetAssemblyTypeName: SwitchButtons, Assembly-CSharp
+        m_MethodName: Swap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5931,6 +5901,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &906900078517848562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256300350129347064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c787a69288b9312409a48f1d7419b005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switched: 1
+  thisButton: {fileID: 0}
+  otherButton: {fileID: 9175819871868744098}
 --- !u!1 &8396551467720062534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6575,6 +6560,7 @@ GameObject:
   - component: {fileID: 1578971434429348057}
   - component: {fileID: 9142462921152708480}
   - component: {fileID: 6619391306746299968}
+  - component: {fileID: 3420135260301896462}
   m_Layer: 5
   m_Name: Listen Button
   m_TagString: Untagged
@@ -6595,12 +6581,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3060053535367541618}
-  m_Father: {fileID: 6916233982748028026}
+  m_Father: {fileID: 5551193144587538744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1578971434429348057
 CanvasRenderer:
@@ -6661,10 +6647,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9364706, g: 1, b: 0.8, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_HighlightedColor: {r: 0.93725497, g: 1, b: 0.8000001, a: 1}
     m_PressedColor: {r: 0.3137255, g: 0.4627451, b: 0, a: 1}
-    m_SelectedColor: {r: 0.93725497, g: 1, b: 0.8000001, a: 1}
+    m_SelectedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -6684,9 +6670,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OSCManager, Assembly-CSharp
-        m_MethodName: CreateUDPListener
+      - m_Target: {fileID: 3420135260301896462}
+        m_TargetAssemblyTypeName: SwitchButtons, Assembly-CSharp
+        m_MethodName: Swap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6696,6 +6682,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3420135260301896462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175819871868744098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c787a69288b9312409a48f1d7419b005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switched: 0
+  thisButton: {fileID: 0}
+  otherButton: {fileID: 8256300350129347064}
 --- !u!1001 &2534889098401822619
 PrefabInstance:
   m_ObjectHideFlags: 0
