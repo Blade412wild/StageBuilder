@@ -7579,7 +7579,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1431095665}
   - component: {fileID: 1431095666}
-  - component: {fileID: 1431095668}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -7632,36 +7631,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1431095668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431095664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75133027b57f35f43881a30f82eb5316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messageSpawnTransform: {fileID: 1431095665}
-  moreInfoTextField: {fileID: 2126098239}
-  spawnMessages: 0
-  consoleMessage: {fileID: 7026465619987878707, guid: c744d732c23ec0d49bf0f67caba0a3ea, type: 3}
-  artBase: {fileID: 11400000, guid: 5c76c4dd1ebd451408c311cc42a894b4, type: 2}
-  messages:
-  - {fileID: 11400000, guid: 3500be3fa4f73ea429e3574f42879006, type: 2}
-  - {fileID: 11400000, guid: 8923d7ba490b3a2479e20d52ec4b8b0b, type: 2}
-  - {fileID: 11400000, guid: 30bbceb2efbb0a6459138d0c3bc0ed45, type: 2}
-  - {fileID: 11400000, guid: 1d13345b0fbad7e4b9b15c84784255c2, type: 2}
-  - {fileID: 11400000, guid: 70ae8ed5c69f75648ad1627a48566b13, type: 2}
-  - {fileID: 11400000, guid: 585045224a7708c44abf194856ad1b3c, type: 2}
-  - {fileID: 11400000, guid: 803347ced4ba1844ca381577c4de7771, type: 2}
-  - {fileID: 11400000, guid: e1dd2ac66cf56a74181a74f1eaa19279, type: 2}
-  - {fileID: 11400000, guid: 32dfbdf137d4851429532057ff13df05, type: 2}
-  - {fileID: 11400000, guid: 5da597cdc548cec46b8565fb0480566f, type: 2}
-  - {fileID: 11400000, guid: aab659b354b6ade42a07ef4a09c77cab, type: 2}
-  - {fileID: 11400000, guid: f71f14bd4b58ee9409d562fbc2d8a8e9, type: 2}
 --- !u!1 &1433059693
 GameObject:
   m_ObjectHideFlags: 0
@@ -9733,6 +9702,7 @@ GameObject:
   - component: {fileID: 1736674812}
   - component: {fileID: 1736674811}
   - component: {fileID: 1736674810}
+  - component: {fileID: 1736674814}
   m_Layer: 5
   m_Name: Console Canvas
   m_TagString: Untagged
@@ -9821,6 +9791,28 @@ RectTransform:
   m_AnchoredPosition: {x: -0.003, y: 0.158}
   m_SizeDelta: {x: 4731.477, y: 2542.9175}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1736674814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736674809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75133027b57f35f43881a30f82eb5316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageSpawnTransform: {fileID: 1431095665}
+  moreInfoTextField: {fileID: 2126098239}
+  scrollRect: {fileID: 1808236761}
+  verticalLayoutGroup: {fileID: 1431095666}
+  spawnMessages: 0
+  consoleMessage: {fileID: 7026465619987878707, guid: c744d732c23ec0d49bf0f67caba0a3ea, type: 3}
+  artBase: {fileID: 11400000, guid: 5c76c4dd1ebd451408c311cc42a894b4, type: 2}
+  messages:
+  - {fileID: 11400000, guid: 3500be3fa4f73ea429e3574f42879006, type: 2}
+  - {fileID: 11400000, guid: 8923d7ba490b3a2479e20d52ec4b8b0b, type: 2}
 --- !u!1 &1783647273
 GameObject:
   m_ObjectHideFlags: 0
