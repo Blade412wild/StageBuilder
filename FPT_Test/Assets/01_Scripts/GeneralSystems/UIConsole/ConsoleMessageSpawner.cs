@@ -17,21 +17,16 @@ public class ConsoleMessageSpawner : MonoBehaviour
         this.artDataBase = artDataBase;
     }
 
-    public void CheckMessagesList()
+    public List<CustomError2> SortMessageList(List<CustomError2> CustomMessages)
     {
-
-    }
-
-    public void SortMessageList(List<CustomError2> CustomMessages)
-    {
-
+       return CustomMessages.OrderBy(x => x.type).ToList();
     }
 
     public void CreateUIMessages(List<CustomError2> CustomMessages)
     {
-        SortMessageList(CustomMessages);
+        List<CustomError2> newList =  SortMessageList(CustomMessages);
 
-        foreach (CustomError2 customMessage in CustomMessages)
+        foreach (CustomError2 customMessage in newList)
         {
             UIConsoleMessage consoleMessage =  Instantiate(uiMessage, parent);
             consoleMessage.Text.text = customMessage.ShortMessage;
@@ -49,7 +44,7 @@ public class ConsoleMessageSpawner : MonoBehaviour
 
             }
 
-            //consoleMessage.CustomMessage = customMessage;
+            consoleMessage.CustomMessage = customMessage;
         }
     }
 }

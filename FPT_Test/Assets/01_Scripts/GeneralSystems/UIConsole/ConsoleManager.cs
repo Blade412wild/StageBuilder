@@ -18,11 +18,6 @@ public class ConsoleManager : MonoBehaviour
     private UIDynamicHeightScaler heightScaler;
     private VerticalLayoutGroup verticalLayoutGroup;
 
-    private ErrorList errorList;
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {

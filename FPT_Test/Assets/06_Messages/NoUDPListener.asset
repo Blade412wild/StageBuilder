@@ -15,4 +15,4 @@ MonoBehaviour:
   ShortMessage: You haven't activated a Port
   DetailedMessage: Go to your Networking menu and click on ... to listen the filled
     in port
-  type: 1
+  type: 0

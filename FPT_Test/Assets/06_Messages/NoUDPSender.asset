@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShortMessage: You haven't setup a connection with a device.
   DetailedMessage: Go to the Networking Menu and setup a connection.
-  type: 1
+  type: 0
