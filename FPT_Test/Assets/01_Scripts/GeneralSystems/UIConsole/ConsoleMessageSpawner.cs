@@ -22,9 +22,10 @@ public class ConsoleMessageSpawner : MonoBehaviour
        return CustomMessages.OrderBy(x => x.type).ToList();
     }
 
-    public void CreateUIMessages(List<CustomError2> CustomMessages)
+    public List<UIConsoleMessage> CreateUIMessages(List<CustomError2> CustomMessages)
     {
         List<CustomError2> newList =  SortMessageList(CustomMessages);
+        List<UIConsoleMessage> uIConsoleMessages = new List<UIConsoleMessage>();
 
         foreach (CustomError2 customMessage in newList)
         {
@@ -35,16 +36,17 @@ public class ConsoleMessageSpawner : MonoBehaviour
             {
                 Debug.Log("artbase : " + artDataBase.RecommondationIcon);
                 consoleMessage.Icon.sprite = artDataBase.RecommondationIcon;
-
             }
 
             if(customMessage.type == CustomError2.TypeMessage.FatalError)
             {
                 consoleMessage.Icon.sprite = artDataBase.FatalIcon;
-
             }
 
             consoleMessage.CustomMessage = customMessage;
+            uIConsoleMessages.Add(consoleMessage);
         }
+
+        return uIConsoleMessages;
     }
 }

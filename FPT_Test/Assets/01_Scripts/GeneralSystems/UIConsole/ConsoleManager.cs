@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class ConsoleManager : MonoBehaviour
 {
+    [Header("UICanvas")]
+    [SerializeField] private Transform messageSpawnTransform;
+    [SerializeField] private TMPro.TMP_Text moreInfoTextField;
+
     [Header("Messages")]
     [SerializeField] private bool spawnMessages;
     [SerializeField] private UIConsoleMessage consoleMessage;
     [SerializeField] private ArtDataBase artBase;
+    [SerializeField] private List<UIConsoleMessage> uiConsoleMessages;
 
     [Header("Errors")]
     [SerializeField] private List<CustomError2> messages = new List<CustomError2>();
@@ -23,7 +28,7 @@ public class ConsoleManager : MonoBehaviour
     {
         verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
         heightScaler = GetComponent<UIDynamicHeightScaler>();
-        consoleMessageSpawner = new ConsoleMessageSpawner(consoleMessage, transform, artBase);
+        consoleMessageSpawner = new ConsoleMessageSpawner(consoleMessage, messageSpawnTransform, artBase);
     }
 
     // Update is called once per frame
@@ -33,7 +38,7 @@ public class ConsoleManager : MonoBehaviour
         {
             if (messages.Count == 0) return;
 
-            SpawnMessages();
+             SpawnMessages();
 
             // check eerst of de container wel veranderd hoeft te worden, het mag niet kleiner worden dan het scroll van
             ResizeContainer();
@@ -45,7 +50,8 @@ public class ConsoleManager : MonoBehaviour
 
     private void SpawnMessages()
     {
-        consoleMessageSpawner.CreateUIMessages(messages);
+        List<UIConsoleMessage> uIConsoleMessages =  consoleMessageSpawner.CreateUIMessages(messages);
+        SetEvents(uIConsoleMessages);
     }
 
     private void ResizeContainer()
@@ -55,5 +61,21 @@ public class ConsoleManager : MonoBehaviour
         float heightmessage = consoleMessage.gameObject.GetComponent<RectTransform>().sizeDelta.y;
         float newHeight = messageCount * (heightmessage + verticalLayoutGroup.spacing);
         heightScaler.CalculateNewYPos(newHeight);
+    }
+
+    private void SetEvents(List<UIConsoleMessage> uiConsoleMessages)
+    {
+        foreach(UIConsoleMessage uIConsoleMessage in uiConsoleMessages)
+        {
+            uIConsoleMessage.OnMoreInformation += HandleRequestMoreInfo;
+        }
+    }
+
+
+
+    private void HandleRequestMoreInfo(CustomError2 message)
+    {
+        Debug.Log(message);
+        moreInfoTextField.text = message.DetailedMessage;
     }
 }
