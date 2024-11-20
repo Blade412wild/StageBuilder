@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class HeadTracking : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class HeadTracking : MonoBehaviour
     int counter = 0;
     List<HeadRotationLimit> rotationLimits = new List<HeadRotationLimit>();
 
+    // even voor vrijdag
+    public string TempValue = "0";
+
 
 
     // Start is called before the first frame update
@@ -40,6 +44,7 @@ public class HeadTracking : MonoBehaviour
         {
             float value = MapData();
             FormatUIOutput(value);
+
         }
 
     }
@@ -47,6 +52,7 @@ public class HeadTracking : MonoBehaviour
     private void FormatUIOutput(float value)
     {
         string formattedOutput = $"{value:F2}";
+        TempValue = formattedOutput;
         UIoutput.text = formattedOutput;
     }
 

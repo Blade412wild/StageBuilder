@@ -1,6 +1,8 @@
 using SharpOSC;
 using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OSCManager : MonoBehaviour
@@ -21,6 +23,12 @@ public class OSCManager : MonoBehaviour
     public UIStatusBlock ListenerUIStatus;
     public UIStatusBlock SenderUIStatus;
 
+    [Header("HeadRotation")]
+    public HeadTracking HeadTracking;
+    public string Value;
+
+   // readonly List<>
+
     private OSCSender sender;
     private OSCReceiver listener;
 
@@ -29,9 +37,11 @@ public class OSCManager : MonoBehaviour
 
 
 
+
     private void Update()
     {
         chatIncomingData.text = incommingData;
+        Value = HeadTracking.TempValue;
     }
 
     public void CreateUDPSender()
@@ -69,8 +79,7 @@ public class OSCManager : MonoBehaviour
         }
         else
         {
-            string value = chatInput.text;
-            sender.SendMessage("button/test", value);
+            sender.SendMessage("button/test", Value);
         }
     }
 
@@ -107,6 +116,16 @@ public class OSCManager : MonoBehaviour
         ListenerUIStatus.ChangeColor(false);
     }
 
+    public bool CheckSenderAvailable()
+    {
+        if (sender == null) return false;
+        else return true;
+    }
+    public bool CheckListenerAvailable()
+    {
+        if (listener == null) return false;
+        else return true;
+    }
     private void OnDestroy()
     {
         if (sender != null)
