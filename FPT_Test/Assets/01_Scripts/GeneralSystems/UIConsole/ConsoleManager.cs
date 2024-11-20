@@ -13,7 +13,6 @@ public class ConsoleManager : MonoBehaviour
     [SerializeField] private bool spawnMessages;
     [SerializeField] private UIConsoleMessage consoleMessage;
     [SerializeField] private ArtDataBase artBase;
-    [SerializeField] private List<UIConsoleMessage> uiConsoleMessages;
 
     [Header("Errors")]
     [SerializeField] private List<CustomError2> messages = new List<CustomError2>();
@@ -50,8 +49,8 @@ public class ConsoleManager : MonoBehaviour
 
     private void SpawnMessages()
     {
-        List<UIConsoleMessage> uIConsoleMessages =  consoleMessageSpawner.CreateUIMessages(messages);
-        SetEvents(uIConsoleMessages);
+        List<UIConsoleMessage> uiConsoleMessages =  consoleMessageSpawner.CreateUIMessages(messages);
+        SetEvents(uiConsoleMessages);
     }
 
     private void ResizeContainer()
