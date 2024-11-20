@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIConsoleMessage : MonoBehaviour
 {
-    [SerializeField] private TMPro.TMP_Text text;
-    [SerializeField] private Image image;
+    [SerializeField] public TMPro.TMP_Text Text;
+    [SerializeField] public Image Icon;
+    public CustomError2 CustomMessage;
 }

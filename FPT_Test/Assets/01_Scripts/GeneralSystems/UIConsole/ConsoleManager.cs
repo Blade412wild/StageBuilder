@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class ConsoleManager : MonoBehaviour
 {
-    [Header("'Messages")]
+    [Header("Messages")]
     [SerializeField] private bool spawnMessages;
-    [SerializeField] private GameObject messagePrefab;
-    [SerializeField] private List<GameObject> messages;
+    [SerializeField] private UIConsoleMessage consoleMessage;
+    [SerializeField] private ArtDataBase artBase;
 
     [Header("Errors")]
-    [SerializeField] private List<CustomError> customErrors = new List<CustomError>();
+    [SerializeField] private List<CustomError2> messages = new List<CustomError2>();
 
+
+    private ConsoleMessageSpawner consoleMessageSpawner;
     private UIDynamicHeightScaler heightScaler;
     private VerticalLayoutGroup verticalLayoutGroup;
 
@@ -26,17 +28,7 @@ public class ConsoleManager : MonoBehaviour
     {
         verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
         heightScaler = GetComponent<UIDynamicHeightScaler>();
-
-        customErrors.Add(new CustomError("hallo"));
-        customErrors.Add(new CustomError("Lach eens :)"));
-        customErrors.Add(new CustomError("hallo"));
-        customErrors.Add(new CustomError("Lach eens :)"));
-        customErrors.Add(new CustomError("hallo"));
-        customErrors.Add(new CustomError("hallo"));
-        customErrors.Add(new CustomError("Lach eens :)"));
-        customErrors.Add(new CustomError("hallo"));
-        customErrors.Add(new CustomError("Lach eens :)"));
-        customErrors.Add(new CustomError("Lach eens :)"));
+        consoleMessageSpawner = new ConsoleMessageSpawner(consoleMessage, transform, artBase);
     }
 
     // Update is called once per frame
@@ -44,21 +36,12 @@ public class ConsoleManager : MonoBehaviour
     {
         if (spawnMessages)
         {
-            if (customErrors.Count == 0) return;
+            if (messages.Count == 0) return;
 
-            foreach (var error in customErrors)
-            {
-                Instantiate(messagePrefab, transform);
-            }
+            SpawnMessages();
 
-
-            // check eerst of de container wel veranderd hoeft te worden, het mage niet kleiner worden dan het scroll vak
-
-            // Change container size
-            float messageCount = customErrors.Count;
-            float heightmessage = messagePrefab.GetComponent<RectTransform>().sizeDelta.y;
-            float newHeight = messageCount * (heightmessage + verticalLayoutGroup.spacing);
-            heightScaler.CalculateNewYPos(newHeight);
+            // check eerst of de container wel veranderd hoeft te worden, het mag niet kleiner worden dan het scroll van
+            ResizeContainer();
 
             spawnMessages = false;
         }
@@ -67,6 +50,15 @@ public class ConsoleManager : MonoBehaviour
 
     private void SpawnMessages()
     {
+        consoleMessageSpawner.CreateUIMessages(messages);
+    }
 
+    private void ResizeContainer()
+    {
+        // Change container size
+        float messageCount = messages.Count;
+        float heightmessage = consoleMessage.gameObject.GetComponent<RectTransform>().sizeDelta.y;
+        float newHeight = messageCount * (heightmessage + verticalLayoutGroup.spacing);
+        heightScaler.CalculateNewYPos(newHeight);
     }
 }
