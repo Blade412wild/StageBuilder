@@ -39,6 +39,19 @@ public class ScaleUIHeight : MonoBehaviour
         CalculateScales = false;
     }
 
+    public bool CheckNewHeight(float newHeight)
+    {
+        if (newHeight < oldHeight)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
 
 
 }
