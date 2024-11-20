@@ -34,7 +34,6 @@ public class ConsoleMessageSpawner : MonoBehaviour
 
             if (customMessage.type == CustomError2.TypeMessage.Recommondation)
             {
-                Debug.Log("artbase : " + artDataBase.RecommondationIcon);
                 consoleMessage.Icon.sprite = artDataBase.RecommondationIcon;
             }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ConsoleManager : MonoBehaviour
 {
     [Header("UICanvas")]
-    [SerializeField] private Transform messageSpawnTransform;
+    [SerializeField] private RectTransform messageSpawnTransform;
     [SerializeField] private TMPro.TMP_Text moreInfoTextField;
 
     [Header("Messages")]
@@ -19,15 +19,17 @@ public class ConsoleManager : MonoBehaviour
 
 
     private ConsoleMessageSpawner consoleMessageSpawner;
-    private UIDynamicHeightScaler heightScaler;
     private VerticalLayoutGroup verticalLayoutGroup;
+    private ScaleUIHeight scaleUIHeight;
+    private List<UIConsoleMessage> uiMessages;
 
     // Start is called before the first frame update
     void Start()
     {
         verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
-        heightScaler = GetComponent<UIDynamicHeightScaler>();
         consoleMessageSpawner = new ConsoleMessageSpawner(consoleMessage, messageSpawnTransform, artBase);
+        scaleUIHeight = new ScaleUIHeight(messageSpawnTransform, verticalLayoutGroup);
+        uiMessages = new List<UIConsoleMessage>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,11 @@ public class ConsoleManager : MonoBehaviour
         if (spawnMessages)
         {
             if (messages.Count == 0) return;
+
+            if(uiMessages.Count > 0)
+            {
+                DestroyUIMessages();
+            }
 
              SpawnMessages();
 
@@ -46,11 +53,10 @@ public class ConsoleManager : MonoBehaviour
         }
     }
 
-
     private void SpawnMessages()
     {
-        List<UIConsoleMessage> uiConsoleMessages =  consoleMessageSpawner.CreateUIMessages(messages);
-        SetEvents(uiConsoleMessages);
+        uiMessages =  consoleMessageSpawner.CreateUIMessages(messages);
+        SubscribeEvents(uiMessages);
     }
 
     private void ResizeContainer()
@@ -59,10 +65,11 @@ public class ConsoleManager : MonoBehaviour
         float messageCount = messages.Count;
         float heightmessage = consoleMessage.gameObject.GetComponent<RectTransform>().sizeDelta.y;
         float newHeight = messageCount * (heightmessage + verticalLayoutGroup.spacing);
-        heightScaler.CalculateNewYPos(newHeight);
+
+        scaleUIHeight.CalculateNewYPos(newHeight);
     }
 
-    private void SetEvents(List<UIConsoleMessage> uiConsoleMessages)
+    private void SubscribeEvents(List<UIConsoleMessage> uiConsoleMessages)
     {
         foreach(UIConsoleMessage uIConsoleMessage in uiConsoleMessages)
         {
@@ -70,6 +77,22 @@ public class ConsoleManager : MonoBehaviour
         }
     }
 
+    private void UnsubscribeEvents(List<UIConsoleMessage> uiConsoleMessages)
+    {
+        foreach (UIConsoleMessage uIConsoleMessage in uiConsoleMessages)
+        {
+            uIConsoleMessage.OnMoreInformation -= HandleRequestMoreInfo;
+        }
+    }
+
+    private void DestroyUIMessages()
+    {
+        UnsubscribeEvents(uiMessages);
+        foreach(UIConsoleMessage uiMessage in uiMessages)
+        {
+            Destroy(uiMessage.gameObject);
+        }
+    }
 
 
     private void HandleRequestMoreInfo(CustomError2 message)
