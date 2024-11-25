@@ -5,18 +5,22 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class HeadTracking : MonoBehaviour
+public class HeadTracking1 : MonoBehaviour
 {
     [SerializeField] private Material minLimit;
     [SerializeField] private Material maxLimit;
     [SerializeField] private Transform indicatorTransform;
     [SerializeField] private HeadRotationLimit sphereLimit;
 
-    [SerializeField] private TMPro.TMP_Text UIoutput;
+    [SerializeField] private TMPro.TMP_Text UIoutputV;
+    [SerializeField] private TMPro.TMP_Text UIoutputH;
+
 
     private float maxValue = 127.0f;
     private float minValue = 0f;
-    private float dotProduct;
+    private float dotProductV;
+    private float dotProductH;
+    private Vector3 lockVector3;
 
 
     Vector3[] angles = new Vector3[2];
@@ -29,28 +33,39 @@ public class HeadTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dotProduct = CalculateDotProduct();
+        dotProductV = CalculateDotProduct(Vector3.up);
+
+        if (lockVector3 != null)
+        {
+            dotProductH = CalculateDotProduct(lockVector3);
+        }
+
         UpdateLimitPositions();
 
         if (counter >= 2)
         {
-            float value = MapData();
-            FormatUIOutput(value);
+            float value = MapData(dotProductV, rotationLimits[0].dotProduct, rotationLimits[1].dotProduct);
+            FormatUIOutput(value, UIoutputV);
+        }
 
+        if(counter >= 4)
+        {
+            float value = MapData(dotProductH, rotationLimits[2].dotProduct, rotationLimits[3].dotProduct);
+            FormatUIOutput(value, UIoutputH);
         }
 
     }
 
-    private void FormatUIOutput(float value)
+    private void FormatUIOutput(float value, TMPro.TMP_Text uiOutput)
     {
         string formattedOutput = $"{value:F2}";
         TempValue = formattedOutput;
-        UIoutput.text = formattedOutput;
+        uiOutput.text = formattedOutput;
     }
 
-    private float MapData()
+    private float MapData(float dotProduct, float minProduct, float maxProduct)
     {
-        float value = CalculateNewValueInNewScale(dotProduct, rotationLimits[0].dotProduct, rotationLimits[1].dotProduct, minValue, maxValue);
+        float value = CalculateNewValueInNewScale(dotProduct, minProduct, maxProduct, minValue, maxValue);
 
         if (value > maxValue)
         {
@@ -73,26 +88,36 @@ public class HeadTracking : MonoBehaviour
     }
 
 
-    private float CalculateDotProduct()
+    private float CalculateDotProduct(Vector3 axis)
     {
-        float dotProduct = Vector3.Dot(Vector3.up, transform.forward);
+        float dotProduct = Vector3.Dot(axis, transform.forward);
         return dotProduct;
     }
 
     private void UpdateLimitPositions()
     {
+        if (rotationLimits.Count < 4) return;
+
         foreach (HeadRotationLimit limit in rotationLimits)
         {
-            Vector3 RelativePostion = new Vector3(indicatorTransform.transform.position.x, limit.transform.position.y, indicatorTransform.transform.position.z);
-            limit.transform.position = RelativePostion;
+            if (limit.index == 0 || limit.index == 1)
+            {
+                Vector3 RelativePostion = new Vector3(indicatorTransform.transform.position.x, limit.transform.position.y, indicatorTransform.transform.position.z);
+                limit.transform.position = RelativePostion;
+            }
+            if (limit.index == 2 || limit.index == 3)
+            {
+                Vector3 RelativePostion = new Vector3(limit.transform.position.x, indicatorTransform.transform.position.y, limit.transform.position.z);
+                limit.transform.position = RelativePostion;
+            }
         }
     }
 
     public void AddRotationValue()
     {
-        if (counter < 2)
+        if (counter < 4)
         {
-            if (counter >= 2) return;
+            if (counter >= 4) return;
 
             HeadRotationLimit limit = Instantiate(sphereLimit, indicatorTransform.position, Quaternion.identity);
             rotationLimits.Add(limit);
@@ -101,14 +126,26 @@ public class HeadTracking : MonoBehaviour
             {
                 rotationLimits[counter].GetComponent<MeshRenderer>().material = minLimit;
                 limit.index = 0;
-                limit.dotProduct = dotProduct;
+                limit.dotProduct = dotProductV;
 
             }
-            else
+            else if (counter == 1)
             {
                 rotationLimits[counter].GetComponent<MeshRenderer>().material = maxLimit;
                 limit.index = 1;
-                limit.dotProduct = dotProduct;
+                limit.dotProduct = dotProductV;
+            }
+            else if (counter == 2)
+            {
+                rotationLimits[counter].GetComponent<MeshRenderer>().material = minLimit;
+                limit.index = 2;
+                limit.dotProduct = dotProductH;
+            }
+            else if (counter == 3)
+            {
+                rotationLimits[counter].GetComponent<MeshRenderer>().material = maxLimit;
+                limit.index = 3;
+                limit.dotProduct = dotProductH;
             }
             counter++;
 
@@ -117,6 +154,11 @@ public class HeadTracking : MonoBehaviour
         {
             counter++;
         }
+    }
+
+    public void LockVector()
+    {
+        lockVector3 = new Vector3(transform.right.x, transform.right.y, transform.right.z);
     }
 
     private void addValue()
