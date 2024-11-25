@@ -3630,7 +3630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870334048}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: ToggleRaycastMode
         m_Mode: 1
@@ -3763,7 +3763,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870334048}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: StopHandTracking
         m_Mode: 1
@@ -4646,7 +4646,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870334048}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: ResetItems
         m_Mode: 1
@@ -6923,7 +6923,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870334048}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: HideRayFor5Seconds
         m_Mode: 1
@@ -7958,6 +7958,7 @@ MonoBehaviour:
   UIoutputV: {fileID: 684294376}
   UIoutputH: {fileID: 345953935}
   TempValue: 0
+  TempValue2: 0
 --- !u!1 &1430560475
 GameObject:
   m_ObjectHideFlags: 0
@@ -8092,7 +8093,9 @@ MonoBehaviour:
   ListenerUIStatus: {fileID: 298027252}
   SenderUIStatus: {fileID: 876722157}
   HeadTracking: {fileID: 1422296039}
+  HeadTracking1: {fileID: 1422296040}
   Value: 
+  Value2: 
 --- !u!4 &1433059695
 Transform:
   m_ObjectHideFlags: 0
@@ -9140,7 +9143,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870334048}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: StartHandTracking
         m_Mode: 1
@@ -9695,7 +9698,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870334048}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: SwitchHandVisual
         m_Mode: 1
@@ -11626,7 +11629,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1870334049}
-  - component: {fileID: 1870334048}
   m_Layer: 0
   m_Name: HandTrackingExample
   m_TagString: Untagged
@@ -11634,20 +11636,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1870334048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870334047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6aa4e3bb7937704d8ce3618c18a4dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsCollector: {fileID: 0}
-  handModelsManager: {fileID: 494020143}
 --- !u!4 &1870334049
 Transform:
   m_ObjectHideFlags: 0

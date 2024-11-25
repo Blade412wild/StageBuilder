@@ -15,7 +15,6 @@ public class HeadTracking1 : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text UIoutputV;
     [SerializeField] private TMPro.TMP_Text UIoutputH;
 
-
     private float maxValue = 127.0f;
     private float minValue = 0f;
     private float dotProductV;
@@ -29,6 +28,7 @@ public class HeadTracking1 : MonoBehaviour
 
     // even voor vrijdag
     public string TempValue = "0";
+    public string TempValue2 = "0";
 
     // Update is called once per frame
     void Update()
@@ -56,11 +56,12 @@ public class HeadTracking1 : MonoBehaviour
 
     }
 
-    private void FormatUIOutput(float value, TMPro.TMP_Text uiOutput)
+    private string FormatUIOutput(float value, TMPro.TMP_Text uiOutput)
     {
         string formattedOutput = $"{value:F2}";
-        TempValue = formattedOutput;
+        //TempValue = formattedOutput;
         uiOutput.text = formattedOutput;
+        return formattedOutput;
     }
 
     private float MapData(float dotProduct, float minProduct, float maxProduct)
@@ -77,7 +78,6 @@ public class HeadTracking1 : MonoBehaviour
         }
         return value;
     }
-
 
     public static float CalculateNewValueInNewScale(float valueOldScale, float oldMin, float oldMax, float newMin, float newMax)
     {
@@ -184,8 +184,8 @@ public class HeadTracking1 : MonoBehaviour
         if (counter >= angles.Length) return;
         angles[counter] = transform.forward;
         counter++;
-
     }
+
 
 
 }

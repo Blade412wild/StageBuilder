@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/05_Scenes/Nathan/HeadRotation.unity
     guid: e34ce6fffa4749a4fa4c662edbb69b03
-  - enabled: 1
+  - enabled: 0
     path: Assets/05_Scenes/Nathan/UIButton.unity
     guid: 94a4e0412b828fd45a18f721ff8ac146
+  - enabled: 1
+    path: Assets/05_Scenes/Nathan/CustomErros.unity
+    guid: 9b18d3e19c1fdee4a85a0294b4de5c71
   m_configObjects: {}
