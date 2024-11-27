@@ -45,13 +45,15 @@ public class HeadTracking1 : MonoBehaviour
         if (counter >= 2)
         {
             float value = MapData(dotProductV, rotationLimits[0].dotProduct, rotationLimits[1].dotProduct);
-            FormatUIOutput(value, UIoutputV);
+            string outputValue = FormatUIOutput(value, UIoutputV);
+            TempValue = outputValue;
         }
 
         if(counter >= 4)
         {
             float value = MapData(dotProductH, rotationLimits[2].dotProduct, rotationLimits[3].dotProduct);
-            FormatUIOutput(value, UIoutputH);
+            string outputValue = FormatUIOutput(value, UIoutputH);
+            TempValue2 = outputValue;
         }
 
     }

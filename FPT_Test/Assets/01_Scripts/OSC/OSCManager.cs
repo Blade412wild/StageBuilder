@@ -83,7 +83,7 @@ public class OSCManager : MonoBehaviour
         }
         else
         {
-            oscSendMessage = "HeadTracking/1" + Value + "HeadTracking/2" + Value2;
+            oscSendMessage = "HeadTracking/1/" + Value + "/" + "HeadTracking/2/" + Value2 + "/";
             //sender.SendMessage("HeadTracking/1", Value);
             //sender.SendMessage("HeadTracking/2", Value2);
             sender.SendMessage("ARGlasses", oscSendMessage);
