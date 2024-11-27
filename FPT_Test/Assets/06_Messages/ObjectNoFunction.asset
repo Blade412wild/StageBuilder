@@ -15,4 +15,4 @@ MonoBehaviour:
   ShortMessage: Object <objectname> has no assigned function.
   DetailedMessage: Interacting with this obect won't do anything. You may click on
     the object and assign it a function from your DAW.
-  Icon: {fileID: 21300000, guid: 47a185ef0e9e2134c957578577221c4b, type: 3}
+  type: 1
