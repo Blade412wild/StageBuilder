@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShortMessage: You haven't setup a connection with a device.
   DetailedMessage: Go to the Networking Menu and setup a connection.
-  Icon: {fileID: 21300000, guid: f7f2c37449d517b458c08a41fe69619a, type: 3}
+  type: 0

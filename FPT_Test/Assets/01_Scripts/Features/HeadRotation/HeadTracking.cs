@@ -26,14 +26,6 @@ public class HeadTracking : MonoBehaviour
     // even voor vrijdag
     public string TempValue = "0";
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
