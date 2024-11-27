@@ -6,5 +6,5 @@ using UnityEngine.UI;
 public class UIConsoleMessage : MonoBehaviour
 {
     [SerializeField] private TMPro.TMP_Text text;
-    [SerializeField] private Image image;
+    [SerializeField] private Sprite sprite;
 }

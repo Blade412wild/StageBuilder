@@ -12,5 +12,5 @@ public class CustomError2 : ScriptableObject
     [TextAreaAttribute]
     public string DetailedMessage;
 
-    public Image Icon;
+    public Sprite Icon;
 }
