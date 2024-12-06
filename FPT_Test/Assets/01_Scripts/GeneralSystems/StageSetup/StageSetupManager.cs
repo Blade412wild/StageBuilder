@@ -1,14 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
 
 public class StageSetupManager : MonoBehaviour
 {
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private GameObject leftHand;
+    [SerializeField] private Transform headTrans;
+    [SerializeField] private GameObject setupUI;
 
     private StateMachine setupStateMachine;
     private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
@@ -18,7 +18,8 @@ public class StageSetupManager : MonoBehaviour
     void Start()
     {
         SeptupStatemMachine();
-        GoToIdleState();
+        //GoToIdleState();
+        GoToSetHeight();
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class StageSetupManager : MonoBehaviour
 
     private void SeptupStatemMachine()
     {
-        IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor);
+        IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor, headTrans, setupUI);
         IState setupFloorSizeState = new SetupFloorSize(this);
         IState setupStageIdle = new StageSetupIdle(this);
 
