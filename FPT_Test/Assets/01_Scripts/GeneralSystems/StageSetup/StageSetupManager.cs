@@ -6,9 +6,9 @@ using static UnityEditor.VersionControl.Asset;
 
 public class StageSetupManager : MonoBehaviour
 {
-    [SerializeField] GameObject Floor;
-    [SerializeField] GameObject RightHand;
-    [SerializeField] GameObject LeftHand;
+    [SerializeField] private GameObject floor;
+    [SerializeField] private GameObject rightHand;
+    [SerializeField] private GameObject leftHand;
 
     private StateMachine setupStateMachine;
     private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
@@ -25,11 +25,12 @@ public class StageSetupManager : MonoBehaviour
     {
         if (setupStateMachine == null) return;
         setupStateMachine.OnUpdate();
+        Debug.Log("update stateMachine");
     }
 
     private void SeptupStatemMachine()
     {
-        IState SetupFloorHeightState = new SetupFloorHeight(this);
+        IState SetupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor);
         IState SetupFloorSizeState = new SetupFloorSize(this);
 
         states.Add(typeof(SetupFloorHeight), SetupFloorHeightState);

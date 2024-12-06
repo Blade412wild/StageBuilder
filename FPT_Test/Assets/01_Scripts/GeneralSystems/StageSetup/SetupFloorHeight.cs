@@ -4,22 +4,65 @@ using UnityEngine;
 
 public class SetupFloorHeight : State<StageSetupManager>
 {
-    public SetupFloorHeight(StageSetupManager owner) : base(owner)
-    {
+    private Transform leftHandTrans;
+    private Transform rightHandTrans;
+    private Transform floorVisual;
 
+
+    public SetupFloorHeight(StageSetupManager owner, GameObject rightHand, GameObject leftHand, GameObject floor) : base(owner)
+    {
+        leftHandTrans = leftHand.transform;
+        rightHandTrans = rightHand.transform;
+        floorVisual = floor.transform;
     }
 
     public override void OnEnter()
     {
         Debug.Log("enterd Floor height setup");
+        SetFloorHeightToHandHeight();
         // show UI for floor setuo
         // Reset Floor height to mid
         // Activate Hands
     }
 
+    public override void OnUpdate()
+    {
+        LowerFloor();
+    }
+
     public override void OnExit()
     {
         // disable UI Floor Setup
+    }
+
+    private void LowerFloor()
+    {
+        Debug.Log("check");
+        Vector3 lowestHand = CheckLowestHand();
+
+        if (lowestHand.y > floorVisual.position.y) return;
+        Debug.Log("loweringFloor");
+        floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y, floorVisual.position.z);
+    }
+
+    private Vector3 CheckLowestHand()
+    {
+        if (leftHandTrans.position.y < rightHandTrans.position.y)
+        {
+            return leftHandTrans.position;
+        }
+        else
+        {
+            return rightHandTrans.position;
+        }
+    }
+
+    private void SetFloorHeightToHandHeight()
+    {
+        if (leftHandTrans)
+        {
+
+        }
     }
 
 }
