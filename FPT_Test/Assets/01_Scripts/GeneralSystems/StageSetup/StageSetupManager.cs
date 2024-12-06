@@ -36,7 +36,7 @@ public class StageSetupManager : MonoBehaviour
         states.Add(typeof(SetupFloorHeight), SetupFloorHeightState);
         states.Add(typeof(SetupFloorSize), SetupFloorSizeState);
 
-        setupStateMachine = new StateMachine();
+        setupStateMachine = new StateMachine(SetupFloorHeightState, SetupFloorSizeState);
         //setupStateMachine.AddTransition(new Transition(SetupFloorHeightState, SetupFloorSizeState, GoToSetSize));
         setupStateMachine.SwitchState(SetupFloorHeightState);
 

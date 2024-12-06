@@ -7054,9 +7054,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2be66d4235c15c41b3e54e70a04c8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Floor: {fileID: 1580936459}
-  RightHand: {fileID: 1662740371}
-  LeftHand: {fileID: 931728239}
+  floor: {fileID: 1580936459}
+  rightHand: {fileID: 1662740371}
+  leftHand: {fileID: 931728239}
 --- !u!1 &1324954790
 GameObject:
   m_ObjectHideFlags: 0

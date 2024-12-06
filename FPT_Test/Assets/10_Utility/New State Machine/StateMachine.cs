@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
-public class StateMachine : MonoBehaviour
+public class StateMachine
 {
     private List<Transition> allTransitions = new List<Transition>();
     private List<Transition> activeTransitions = new List<Transition>();
@@ -29,8 +31,6 @@ public class StateMachine : MonoBehaviour
         }
         currentState?.OnUpdate();
     }
-
-
     public void SwitchState(System.Type newStateType)
     {
         if (stateCollection.ContainsKey(newStateType))
@@ -39,8 +39,7 @@ public class StateMachine : MonoBehaviour
         }
         else
         {
-            //Debug.LogError($"State {newStateType.ToString()} not found in
-            //stateCollection");
+            Debug.LogError($"State {newStateType.ToString()} not found in stateCollection");
         }
     }
     public void SwitchState(IState newState)
@@ -59,33 +58,118 @@ public class StateMachine : MonoBehaviour
     {
         allTransitions.Add(transition);
     }
-
-    public class LocomotionState : State<Actor>
+}
+/// <summary>
+/// The Transition class allows to inject Transitions into the Statemachine.
+/// In this way the state themselves don't know about transitions which keeps states oblivious to eachother.
+/// We can pass a condition along with the transition, either in lamba-format or just a function which returns a boolean.
+/// </summary>
+public class Transition
+{
+    public IState fromState;
+    public IState toState;
+    public Func<bool> condition;
+    public Transition(IState fromState, IState toState, Func<bool> condition)
     {
-        public LocomotionState(Actor actor) : base(actor)
-        {
-            //Do setup for the state here
-        }
-        public override void OnEnter()
-        {
-            Debug.Log(" entered Locomotion");
-        }
-        public override void OnExit() { }
-        public override void OnUpdate() { }
+        this.fromState = fromState;
+        this.toState = toState;
+        this.condition = condition;
     }
-
-    public class AnotherState : State<Actor>
+    public bool Evalutate()
     {
-        public AnotherState(Actor actor) : base(actor)
-        {
-            //Do setup for the state here
-        }
-        public override void OnEnter()
-        {
-            Debug.Log(" entered AnotherState");
-        }
-        public override void OnExit() { }
-        public override void OnUpdate() { }
+        return condition();
     }
 }
-
+/// <summary>
+/// The interface for using States, we can also just use concrete States,
+/// but this is more abstract, because we can now easily turn everything into a state by implementing the interface.
+/// </summary>
+public interface IState
+{
+    void OnEnter();
+    void OnUpdate();
+    void OnExit();
+}
+/// <summary>
+/// This is an abstract State, it also is generic so we can pass along a specific Actor which can then easily be accessed by specific States.
+/// We make sure that the generic type is always a MonoBehaviour using the 'where' keyword.
+/// </summary>
+public abstract class State<T> : IState where T : MonoBehaviour
+{
+    public T Owner { get; protected set; }
+    public State(T owner)
+    {
+        Owner = owner;
+    }
+    public virtual void OnEnter() { }
+    public virtual void OnExit() { }
+    public virtual void OnUpdate() { }
+}
+/// <summary>
+/// This is a specific State, we can set extra settings in the constructor.
+/// Note that we have access to the Actor automatically because of the GenericState.
+/// We pass the Actor along to the base constructor so it is always set.
+/// </summary>
+public class LocomotionState : State<Actor>
+{
+    public LocomotionState(Actor actor) : base(actor)
+    {
+        //Do setup for the state here
+    }
+    public override void OnEnter() { }
+    public override void OnExit() { }
+    public override void OnUpdate() { }
+}
+/// <summary>
+/// This is another specific State, we can set extra settings in the constructor.
+/// Note that we have access to the Actor automatically because of the GenericState.
+/// We pass the Actor along to the base constructor so it is always set.
+/// </summary>
+public class AnotherState : State<Actor>
+{
+    public AnotherState(Actor actor) : base(actor)
+    {
+        //Do setup for the state here
+    }
+    public override void OnEnter() { }
+    public override void OnExit() { }
+    public override void OnUpdate() { }
+}
+/// <summary>
+/// The Actor provides the context for the statemachine.
+/// We have to create new monobehaviours for each specific Actor (e.g. Goblin, Orc etc.)
+/// In this way we can set it up however we like.
+/// The Actor runs and sets up the stateMachine, note that you have to manually call SwitchState
+/// on the stateMachine in the Setup to go to the preferred startState.
+/// </summary>
+public class Actor : MonoBehaviour
+{
+    public float Health = 100;
+    ///public IAttack attackComponent;
+    private StateMachine stateMachine;
+    private void Start()
+    {
+        SetupStateMachine();
+    }
+    private void SetupStateMachine()
+    {
+        IState locomotionState = new LocomotionState(this);
+        IState anotherState = new AnotherState(this);
+        stateMachine = new StateMachine(locomotionState, anotherState);
+        stateMachine.AddTransition(new Transition(locomotionState, anotherState, IsDead)); //We can create the condition as a delegate
+        stateMachine.AddTransition(new Transition(null, locomotionState, () => Health > 0)); //Or as a lambda expression. By omitting the FromState, the transition works for any state
+        stateMachine.SwitchState(locomotionState);
+    }
+    public void Attack()
+    {
+        //attackComponent.DoAttack();
+    }
+    private void FixedUpdate()
+    {
+        //stateMachine.OnFixedUpdate();
+    }
+    public bool IsDead()
+    {
+        return Health <= 0;
+    }
+}
