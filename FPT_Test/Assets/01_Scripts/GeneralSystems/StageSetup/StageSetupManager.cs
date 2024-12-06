@@ -18,6 +18,7 @@ public class StageSetupManager : MonoBehaviour
     void Start()
     {
         SeptupStatemMachine();
+        GoToIdleState();
     }
 
     // Update is called once per frame
@@ -25,21 +26,19 @@ public class StageSetupManager : MonoBehaviour
     {
         if (setupStateMachine == null) return;
         setupStateMachine.OnUpdate();
-        Debug.Log("update stateMachine");
     }
 
     private void SeptupStatemMachine()
     {
-        IState SetupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor);
-        IState SetupFloorSizeState = new SetupFloorSize(this);
+        IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor);
+        IState setupFloorSizeState = new SetupFloorSize(this);
+        IState setupStageIdle = new StageSetupIdle(this);
 
-        states.Add(typeof(SetupFloorHeight), SetupFloorHeightState);
-        states.Add(typeof(SetupFloorSize), SetupFloorSizeState);
+        states.Add(typeof(SetupFloorHeight), setupFloorHeightState);
+        states.Add(typeof(SetupFloorSize), setupFloorSizeState);
+        states.Add(typeof(StageSetupIdle), setupStageIdle);
 
-        setupStateMachine = new StateMachine(SetupFloorHeightState, SetupFloorSizeState);
-        //setupStateMachine.AddTransition(new Transition(SetupFloorHeightState, SetupFloorSizeState, GoToSetSize));
-        setupStateMachine.SwitchState(SetupFloorHeightState);
-
+        setupStateMachine = new StateMachine(setupFloorHeightState, setupFloorSizeState, setupStageIdle);
     }
 
     public void GoToSetSize()
@@ -53,6 +52,14 @@ public class StageSetupManager : MonoBehaviour
     public void GoToSetHeight()
     {
         if (states.TryGetValue(typeof(SetupFloorHeight), out IState state))
+        {
+            setupStateMachine.SwitchState(state);
+        }
+    }
+
+    public void GoToIdleState()
+    {
+        if (states.TryGetValue(typeof(StageSetupIdle), out IState state))
         {
             setupStateMachine.SwitchState(state);
         }

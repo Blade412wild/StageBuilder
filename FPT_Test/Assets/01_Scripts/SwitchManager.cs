@@ -6,8 +6,10 @@ public class SwitchManager : MonoBehaviour
 {
     [SerializeField] private OSCManager oscManager;
     [SerializeField] private GameObject light;
+    [SerializeField] private GameObject builderMode;
+    [SerializeField] private GameObject performanceMode;
     private StateMachine switchMachine;
-    private bool BuilderMode = true;
+    private bool builderModeState = true;
 
 
     private void Start()
@@ -22,8 +24,8 @@ public class SwitchManager : MonoBehaviour
 
     private void CreateStateMachine()
     {
-
-        IState builderState = new BuilderState(this, light);
+        IState idleState = new IdleState(this);
+        IState builderState = new BuilderState(this, light, builderMode);
         IState performanceState = new PerformanceState(this, oscManager);
 
         switchMachine = new StateMachine();
@@ -31,13 +33,13 @@ public class SwitchManager : MonoBehaviour
         switchMachine.AddTransition(new Transition(builderState, performanceState, ChangeToPerformance));
         switchMachine.AddTransition(new Transition(performanceState, builderState, ChangeToBuilder));
 
-        switchMachine.SwitchState(builderState);
+        switchMachine.SwitchState(idleState);
 
     }
 
     private bool ChangeToPerformance()
     {
-        if (BuilderMode == false) return true;
+        if (builderModeState == false) return true;
 
         // check before going into perfromance mode if there is made a connection
         //checkErrorList();
@@ -49,7 +51,7 @@ public class SwitchManager : MonoBehaviour
     }
     private bool ChangeToBuilder()
     {
-        if (BuilderMode) return true;
+        if (builderModeState) return true;
         return false;
     }
 
@@ -97,13 +99,13 @@ public class SwitchManager : MonoBehaviour
 
     public void ChangeButtonState()
     {
-        if (BuilderMode)
+        if (builderModeState)
         {
-            BuilderMode = false;
+            builderModeState = false;
         }
         else
         {
-            BuilderMode = true;
+            builderModeState = true;
         }
     }
 

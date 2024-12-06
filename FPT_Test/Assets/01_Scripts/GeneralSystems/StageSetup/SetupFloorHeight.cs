@@ -37,11 +37,9 @@ public class SetupFloorHeight : State<StageSetupManager>
 
     private void LowerFloor()
     {
-        Debug.Log("check");
         Vector3 lowestHand = CheckLowestHand();
 
         if (lowestHand.y > floorVisual.position.y) return;
-        Debug.Log("loweringFloor");
         floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y, floorVisual.position.z);
     }
 
@@ -59,10 +57,8 @@ public class SetupFloorHeight : State<StageSetupManager>
 
     private void SetFloorHeightToHandHeight()
     {
-        if (leftHandTrans)
-        {
-
-        }
+        Vector3 lowestHand = CheckLowestHand();
+        floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y -0.3f, floorVisual.position.z);
     }
 
 }
