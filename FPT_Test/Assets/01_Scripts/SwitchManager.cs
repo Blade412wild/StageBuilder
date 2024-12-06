@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,11 @@ public class SwitchManager : MonoBehaviour
     [SerializeField] private GameObject light;
     [SerializeField] private GameObject builderMode;
     [SerializeField] private GameObject performanceMode;
-    private StateMachine switchMachine;
+    private StateMachine stateMachine;
     private bool builderModeState = true;
+
+    private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
+
 
 
     private void Start()
@@ -19,7 +22,7 @@ public class SwitchManager : MonoBehaviour
 
     private void Update()
     {
-        switchMachine.OnUpdate();
+        stateMachine.OnUpdate();
     }
 
     private void CreateStateMachine()
@@ -28,12 +31,16 @@ public class SwitchManager : MonoBehaviour
         IState builderState = new BuilderState(this, light, builderMode);
         IState performanceState = new PerformanceState(this, oscManager);
 
-        switchMachine = new StateMachine();
+        states.Add(typeof(IdleState), idleState);
+        states.Add(typeof(BuilderState), builderState);
+        states.Add(typeof(PerformanceState), performanceState);
 
-        switchMachine.AddTransition(new Transition(builderState, performanceState, ChangeToPerformance));
-        switchMachine.AddTransition(new Transition(performanceState, builderState, ChangeToBuilder));
+        stateMachine = new StateMachine();
 
-        switchMachine.SwitchState(idleState);
+        stateMachine.AddTransition(new Transition(builderState, performanceState, ChangeToPerformance));
+        stateMachine.AddTransition(new Transition(performanceState, builderState, ChangeToBuilder));
+
+        stateMachine.SwitchState(idleState);
 
     }
 
@@ -43,9 +50,6 @@ public class SwitchManager : MonoBehaviour
 
         // check before going into perfromance mode if there is made a connection
         //checkErrorList();
-
-
-        
 
         return false;
     }
@@ -106,6 +110,14 @@ public class SwitchManager : MonoBehaviour
         else
         {
             builderModeState = true;
+        }
+    }
+
+    public void GoToBuilderMode()
+    {
+        if (states.TryGetValue(typeof(BuilderState), out IState state))
+        {
+            stateMachine.SwitchState(state);
         }
     }
 

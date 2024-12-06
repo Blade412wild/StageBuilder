@@ -26,22 +26,16 @@ public class SetupFloorHeight : State<StageSetupManager>
         SetFloorHeightToHandHeight();
         UI.transform.position = new Vector3(UI.transform.position.x, headTrans.position.y, UI.transform.position.z);
         UI.SetActive(true);
-        // show UI for floor setuo
-        // Reset Floor height to mid
-        // Activate Hands
     }
 
     public override void OnUpdate()
     {
         LowerFloor();
         UI.transform.position = new Vector3(UI.transform.position.x, headTrans.position.y, UI.transform.position.z);
-        Debug.Log(headTrans.position.y);
-
     }
 
     public override void OnExit()
     {
-        // disable UI Floor Setup
         UI.SetActive(false);
     }
 
@@ -68,7 +62,7 @@ public class SetupFloorHeight : State<StageSetupManager>
     private void SetFloorHeightToHandHeight()
     {
         Vector3 lowestHand = CheckLowestHand();
-        floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y -0.3f, floorVisual.position.z);
+        floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y - 0.3f, floorVisual.position.z);
     }
 
 }
