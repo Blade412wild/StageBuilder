@@ -6,7 +6,7 @@ public class SetupFloorHeight : State<StageSetupManager>
 {
     private Transform leftHandTrans;
     private Transform rightHandTrans;
-    private Transform floorVisual;
+    private Transform floor;
     private Transform headTrans;
     private GameObject UI;
 
@@ -15,7 +15,7 @@ public class SetupFloorHeight : State<StageSetupManager>
     {
         leftHandTrans = leftHand.transform;
         rightHandTrans = rightHand.transform;
-        floorVisual = floor.transform;
+        this.floor = floor.transform;
         this.headTrans = headTrans;
         this.UI = UI;
     }
@@ -43,8 +43,8 @@ public class SetupFloorHeight : State<StageSetupManager>
     {
         Vector3 lowestHand = CheckLowestHand();
 
-        if (lowestHand.y > floorVisual.position.y) return;
-        floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y, floorVisual.position.z);
+        if (lowestHand.y > floor.position.y) return;
+        floor.position = new Vector3(floor.position.x, lowestHand.y, floor.position.z);
     }
 
     private Vector3 CheckLowestHand()
@@ -62,7 +62,7 @@ public class SetupFloorHeight : State<StageSetupManager>
     private void SetFloorHeightToHandHeight()
     {
         Vector3 lowestHand = CheckLowestHand();
-        floorVisual.position = new Vector3(floorVisual.position.x, lowestHand.y - 0.3f, floorVisual.position.z);
+        floor.position = new Vector3(floor.position.x, lowestHand.y - 0.3f, floor.position.z);
     }
 
 }

@@ -26,6 +26,14 @@ public class StageSetupManager : MonoBehaviour
     void Update()
     {
         if (setupStateMachine == null) return;
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (states.TryGetValue(typeof(SetupFloorDirection), out IState state))
+            {
+                setupStateMachine.SwitchState(state);
+            }
+        }
         setupStateMachine.OnUpdate();
     }
 
@@ -34,10 +42,12 @@ public class StageSetupManager : MonoBehaviour
         IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor, headTrans, setupUI);
         IState setupFloorSizeState = new SetupFloorSize(this);
         IState setupStageIdle = new StageSetupIdle(this);
+        IState setupFloorDir = new SetupFloorDirection(this, floor, headTrans);
 
         states.Add(typeof(SetupFloorHeight), setupFloorHeightState);
         states.Add(typeof(SetupFloorSize), setupFloorSizeState);
         states.Add(typeof(StageSetupIdle), setupStageIdle);
+        states.Add(typeof(SetupFloorDirection), setupFloorDir);
 
         setupStateMachine = new StateMachine(setupFloorHeightState, setupFloorSizeState, setupStageIdle);
     }
