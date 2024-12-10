@@ -26,13 +26,9 @@ public class StageSetupManager : MonoBehaviour
     void Update()
     {
         if (setupStateMachine == null) return;
-
-        if (Input.GetKeyDown(KeyCode.M))
+        if(Input.GetKeyDown(KeyCode.M))
         {
-            if (states.TryGetValue(typeof(SetupFloorDirection), out IState state))
-            {
-                setupStateMachine.SwitchState(state);
-            }
+            GoToSetDir();
         }
         setupStateMachine.OnUpdate();
     }
@@ -71,6 +67,14 @@ public class StageSetupManager : MonoBehaviour
     public void GoToIdleState()
     {
         if (states.TryGetValue(typeof(StageSetupIdle), out IState state))
+        {
+            setupStateMachine.SwitchState(state);
+        }
+    }
+
+    public void GoToSetDir()
+    {
+        if (states.TryGetValue(typeof(SetupFloorDirection), out IState state))
         {
             setupStateMachine.SwitchState(state);
         }

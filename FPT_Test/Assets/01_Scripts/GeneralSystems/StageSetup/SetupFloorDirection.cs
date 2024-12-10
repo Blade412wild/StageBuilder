@@ -6,29 +6,45 @@ public class SetupFloorDirection : State<StageSetupManager>
 {
     private Transform floor;
     private Transform headTrans;
+    private Timer timer;
+    private StageSetupManager owner;
 
     public SetupFloorDirection(StageSetupManager owner, GameObject floor, Transform headTrans) : base(owner)
     {
+        this.owner = owner;
         this.floor = floor.transform;
         this.headTrans = headTrans;
     }
 
     public override void OnEnter()
     {
+        timer = new Timer(3);
+        AddEvents();
+    }
+    public override void OnExit()
+    {
+
+    }
+
+    private void SetDirection()
+    {
         float directionY = headTrans.rotation.eulerAngles.y;
         Quaternion target = Quaternion.Euler(0, directionY, 0);
         floor.transform.rotation = target;
         floor.transform.position = new Vector3(headTrans.position.x, floor.position.y, headTrans.position.z);
-
+        RemoveEvents();
     }
 
-    public override void OnUpdate()
+    private void AddEvents()
     {
-        
+        timer.OnTimerIsDone += SetDirection;
+        timer.OnTimerIsDone += owner.GoToIdleState;
     }
 
-    public override void OnExit()
+    private void RemoveEvents()
     {
+        timer.OnTimerIsDone -= SetDirection;
+        timer.OnTimerIsDone -= owner.GoToIdleState;
     }
 
 }
