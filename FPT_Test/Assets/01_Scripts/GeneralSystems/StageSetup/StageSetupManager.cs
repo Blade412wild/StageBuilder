@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class StageSetupManager : MonoBehaviour
 {
+    [Header("Other")]
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private GameObject leftHand;
     [SerializeField] private Transform headTrans;
-    [SerializeField] private GameObject setupUI;
+
+    [Header("UI")]
+    [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject UIMenu;
+    [SerializeField] private GameObject UIFloor;
+    [SerializeField] private GameObject UIDirection;
+
 
     private StateMachine setupStateMachine;
     private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
@@ -35,10 +42,10 @@ public class StageSetupManager : MonoBehaviour
 
     private void SeptupStatemMachine()
     {
-        IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor, headTrans, setupUI);
+        IState setupStageIdle = new StageSetupIdle(this,headTrans ,UIMenu, UI);
+        IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor, headTrans, UIFloor);
+        IState setupFloorDir = new SetupFloorDirection(this, floor, headTrans, UIDirection);
         IState setupFloorSizeState = new SetupFloorSize(this);
-        IState setupStageIdle = new StageSetupIdle(this);
-        IState setupFloorDir = new SetupFloorDirection(this, floor, headTrans);
 
         states.Add(typeof(SetupFloorHeight), setupFloorHeightState);
         states.Add(typeof(SetupFloorSize), setupFloorSizeState);

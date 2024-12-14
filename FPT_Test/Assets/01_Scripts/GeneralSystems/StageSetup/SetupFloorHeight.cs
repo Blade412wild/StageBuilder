@@ -24,14 +24,14 @@ public class SetupFloorHeight : State<StageSetupManager>
     {
         Debug.Log("enterd Floor height setup");
         SetFloorHeightToHandHeight();
-        UI.transform.position = new Vector3(UI.transform.position.x, headTrans.position.y, UI.transform.position.z);
+        //UI.transform.position = new Vector3(UI.transform.position.x, headTrans.position.y, UI.transform.position.z);
         UI.SetActive(true);
     }
 
     public override void OnUpdate()
     {
         LowerFloor();
-        UI.transform.position = new Vector3(UI.transform.position.x, headTrans.position.y, UI.transform.position.z);
+        //UI.transform.position = new Vector3(UI.transform.position.x, headTrans.position.y, UI.transform.position.z);
     }
 
     public override void OnExit()
