@@ -41,13 +41,13 @@ public class SetupFloorDirection : State<StageSetupManager>
     private void AddEvents()
     {
         timer.OnTimerIsDone += SetDirection;
-        timer.OnTimerIsDone += owner.GoToIdleState;
+        timer.OnTimerIsDone += owner.GoToMenu;
     }
 
     private void RemoveEvents()
     {
         timer.OnTimerIsDone -= SetDirection;
-        timer.OnTimerIsDone -= owner.GoToIdleState;
+        timer.OnTimerIsDone -= owner.GoToMenu;
     }
 
 }

@@ -4,28 +4,19 @@ using UnityEngine;
 
 public class StageSetupIdle : State<StageSetupManager>
 {
-    private GameObject UIMenu;
-    private GameObject UI;
-    private Transform headTrans;
-    public StageSetupIdle(StageSetupManager owner, Transform HeadTrans, GameObject UIMenu, GameObject UI) : base(owner)
+    private GameObject setup;
+    public StageSetupIdle(StageSetupManager owner, GameObject setup) : base(owner)
     {
-        this.UIMenu = UIMenu;
-        this.UI = UI;
-        this.headTrans = HeadTrans;
+        this.setup = setup;
     }
 
     public override void OnEnter()
     {
-        UI.transform.position = headTrans.position;
-        Vector3 headRotationEuler = headTrans.rotation.eulerAngles;
-        headRotationEuler = new Vector3(0, headRotationEuler.y, 0);
-
-        UI.transform.rotation = Quaternion.Euler(headRotationEuler);
-        UIMenu.SetActive(true);
+        setup.SetActive(false);
     }
 
     public override void OnExit()
     {
-        UIMenu.SetActive(false);
+        setup.SetActive(true);
     }
 }

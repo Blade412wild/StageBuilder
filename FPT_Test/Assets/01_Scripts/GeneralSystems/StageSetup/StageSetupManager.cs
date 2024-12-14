@@ -11,6 +11,7 @@ public class StageSetupManager : MonoBehaviour
     [SerializeField] private Transform headTrans;
 
     [Header("UI")]
+    [SerializeField] private GameObject setup;
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject UIMenu;
     [SerializeField] private GameObject UIFloor;
@@ -33,7 +34,7 @@ public class StageSetupManager : MonoBehaviour
     void Update()
     {
         if (setupStateMachine == null) return;
-        if(Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             GoToSetDir();
         }
@@ -42,14 +43,16 @@ public class StageSetupManager : MonoBehaviour
 
     private void SeptupStatemMachine()
     {
-        IState setupStageIdle = new StageSetupIdle(this,headTrans ,UIMenu, UI);
+        IState setupStageIdle = new StageSetupIdle(this, setup);
+        IState setupStageMenuState = new StageSetupMenu(this, headTrans, UIMenu, UI);
         IState setupFloorHeightState = new SetupFloorHeight(this, rightHand, leftHand, floor, headTrans, UIFloor);
-        IState setupFloorDir = new SetupFloorDirection(this, floor, headTrans, UIDirection);
         IState setupFloorSizeState = new SetupFloorSize(this);
+        IState setupFloorDir = new SetupFloorDirection(this, floor, headTrans, UIDirection);
 
+        states.Add(typeof(StageSetupIdle), setupStageIdle);
+        states.Add(typeof(StageSetupMenu), setupStageMenuState);
         states.Add(typeof(SetupFloorHeight), setupFloorHeightState);
         states.Add(typeof(SetupFloorSize), setupFloorSizeState);
-        states.Add(typeof(StageSetupIdle), setupStageIdle);
         states.Add(typeof(SetupFloorDirection), setupFloorDir);
 
         setupStateMachine = new StateMachine(setupFloorHeightState, setupFloorSizeState, setupStageIdle);
@@ -82,6 +85,14 @@ public class StageSetupManager : MonoBehaviour
     public void GoToSetDir()
     {
         if (states.TryGetValue(typeof(SetupFloorDirection), out IState state))
+        {
+            setupStateMachine.SwitchState(state);
+        }
+    }
+
+    public void GoToMenu()
+    {
+        if (states.TryGetValue(typeof(StageSetupMenu), out IState state))
         {
             setupStateMachine.SwitchState(state);
         }
