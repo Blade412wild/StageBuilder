@@ -8,6 +8,13 @@ public class SwitchManager : MonoBehaviour
     [SerializeField] private GameObject light;
     [SerializeField] private GameObject builderMode;
     [SerializeField] private GameObject performanceMode;
+    [SerializeField] private StageSetupManager stageSetupManager;
+
+
+    [Header("Bool")]
+    [SerializeField] private bool StartOnBuildMode;
+    [SerializeField] private bool StartOnStageSetup;
+    
     private StateMachine stateMachine;
     private bool builderModeState = true;
 
@@ -18,6 +25,20 @@ public class SwitchManager : MonoBehaviour
     private void Start()
     {
         CreateStateMachine();
+        if (StartOnBuildMode == true && StartOnStageSetup == false)
+        {
+            GoToBuilderMode();
+            stageSetupManager.GoToIdleState();
+        }
+        if(StartOnBuildMode == false && StartOnStageSetup == true)
+        {
+            GoToIdleState();
+            stageSetupManager.GoToMenu();
+        }
+
+
+
+
     }
 
     private void Update()
@@ -116,6 +137,20 @@ public class SwitchManager : MonoBehaviour
     public void GoToBuilderMode()
     {
         if (states.TryGetValue(typeof(BuilderState), out IState state))
+        {
+            stateMachine.SwitchState(state);
+        }
+    }
+    public void GoToPerformanceMode()
+    {
+        if (states.TryGetValue(typeof(PerformanceState), out IState state))
+        {
+            stateMachine.SwitchState(state);
+        }
+    }
+    public void GoToIdleState()
+    {
+        if (states.TryGetValue(typeof(IdleState), out IState state))
         {
             stateMachine.SwitchState(state);
         }

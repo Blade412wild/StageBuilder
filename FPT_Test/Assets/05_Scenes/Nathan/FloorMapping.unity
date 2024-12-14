@@ -9196,6 +9196,9 @@ MonoBehaviour:
   light: {fileID: 45001212}
   builderMode: {fileID: 1269120181}
   performanceMode: {fileID: 2122552031}
+  stageSetupManager: {fileID: 1315365298}
+  StartOnBuildMode: 1
+  StartOnStageSetup: 0
 --- !u!4 &1266885652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6420241020223802052, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
@@ -10699,7 +10702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1422296038
 Transform:
   m_ObjectHideFlags: 0

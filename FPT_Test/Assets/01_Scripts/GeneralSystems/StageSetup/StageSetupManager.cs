@@ -27,7 +27,7 @@ public class StageSetupManager : MonoBehaviour
     {
         SeptupStatemMachine();
         //GoToIdleState();
-        GoToSetHeight();
+        //GoToSetHeight();
     }
 
     // Update is called once per frame
