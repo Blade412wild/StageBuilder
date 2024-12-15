@@ -28,17 +28,29 @@ public class OSCManager : MonoBehaviour
     public HeadTracking1 HeadTracking1;
     public string Value;
     public string Value2;
+
+    public static OSCManager Instance { get; private set; }
+
     private string oscSendMessage;
-
-    // readonly List<>
-
-    private List<ISendableData> DataOuputList = new List<ISendableData>();
-
     private OSCSender sender;
     private OSCReceiver listener;
 
     private string incommingData;
 
+    private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+    }
+    private void Start()
+    {
+       
+    }
 
     private void Update()
     {
@@ -153,5 +165,11 @@ public class OSCManager : MonoBehaviour
         {
             DestroyUDPListener();
         }
+    }
+
+    private T ConvertOutputToString<T>(T input)
+    {
+        input.ToString();
+        return input;
     }
 }
