@@ -24,6 +24,6 @@ public class TestItem : MonoBehaviour, ISendableData
 
     public void AddItemToManager()
     {
-        DataOuputGenericTest.Instance.AddDataOutputToList(this);
+        OSCManager.Instance.AddDataOutputToList(this);
     }
 }

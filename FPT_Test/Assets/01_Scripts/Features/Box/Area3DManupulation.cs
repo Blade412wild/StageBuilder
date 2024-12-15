@@ -41,6 +41,6 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
     }
     public void AddItemToManager()
     {
-        DataOuputGenericTest.Instance.AddDataOutputToList(this);
+        OSCManager.Instance.AddDataOutputToList(this);
     }
 }

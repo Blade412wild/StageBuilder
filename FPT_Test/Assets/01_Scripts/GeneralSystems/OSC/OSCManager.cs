@@ -31,9 +31,17 @@ public class OSCManager : MonoBehaviour
 
     public static OSCManager Instance { get; private set; }
 
+    private List<ISendableData> activeList = new List<ISendableData>();
+    private List<ISendableData> dataOutputsNonActiveList = new List<ISendableData>();
+
+    string NamesSeperator = "/";
+    string dataSeperator = ":";
+
     private string oscSendMessage;
     private OSCSender sender;
     private OSCReceiver listener;
+
+
 
     private string incommingData;
 
@@ -56,8 +64,9 @@ public class OSCManager : MonoBehaviour
     {
         chatIncomingData.text = incommingData;
         //Value = HeadTracking.TempValue;
-        Value = HeadTracking1.TempValue;
-        Value2 = HeadTracking1.TempValue2;
+        //Value = HeadTracking1.TempValue;
+        //Value2 = HeadTracking1.TempValue2;
+        oscSendMessage = GetData();
     }
 
     public void CreateUDPSender()
@@ -95,7 +104,7 @@ public class OSCManager : MonoBehaviour
         }
         else
         {
-            oscSendMessage = "HeadTracking/1/" + Value + "/" + "HeadTracking/2/" + Value2 + "/";
+            //oscSendMessage = "HeadTracking/1/" + Value + "/" + "HeadTracking/2/" + Value2 + "/";
             //sender.SendMessage("HeadTracking/1", Value);
             //sender.SendMessage("HeadTracking/2", Value2);
             sender.SendMessage("ARGlasses", oscSendMessage);
@@ -107,12 +116,10 @@ public class OSCManager : MonoBehaviour
         incommingData = value;
     }
 
-
     private void DestroyUDPSender()
     {
         sender.CloseSender();
         sender = null;
-
     }
 
     private void DestroyUDPListener()
@@ -146,14 +153,6 @@ public class OSCManager : MonoBehaviour
         else return true;
     }
 
-    public void GetDataOutput()
-    {
-        //foreach (ISendableData data in DataOuputList)
-        //{
-        //    data.GetData();
-        //}
-    }
-
     private void OnDestroy()
     {
         if (sender != null)
@@ -167,9 +166,45 @@ public class OSCManager : MonoBehaviour
         }
     }
 
+    public void AddDataOutputToList(ISendableData dataOutput)
+    {
+        dataOutputsNonActiveList.Add(dataOutput);
+        dataOutput.OnActivation += ActivateItem;
+        dataOutput.OnDeactivation += DeActivated;
+    }
+
+    private string GetData()
+    {
+        string dataOutput = "";
+        foreach (ISendableData data in activeList)
+        {
+            string smallDataOutput;
+
+            var convertedData = ConvertOutputToString<object>(data.Data);
+
+            smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData;
+            dataOutput = dataOutput + smallDataOutput;
+        }
+        Debug.Log(dataOutput);
+        return dataOutput;
+    }
+
     private T ConvertOutputToString<T>(T input)
     {
         input.ToString();
         return input;
     }
+
+    private void ActivateItem(ISendableData data)
+    {
+        dataOutputsNonActiveList.Remove(data);
+        activeList.Add(data);
+    }
+
+    private void DeActivated(ISendableData data)
+    {
+        dataOutputsNonActiveList.Add(data);
+        activeList.Remove(data);
+    }
+
 }

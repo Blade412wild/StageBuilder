@@ -9,9 +9,6 @@ public class DataOuputGenericTest : MonoBehaviour
     private List<ISendableData> activeList = new List<ISendableData>();
     private List<ISendableData> dataOutputsNonActiveList = new List<ISendableData>();
 
-
-
-    [SerializeField] private List<MonoBehaviour> list;
     string NamesSeperator = "/";
     string dataSeperator = ":";
 

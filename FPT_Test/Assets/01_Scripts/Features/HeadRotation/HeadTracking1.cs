@@ -5,8 +5,14 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class HeadTracking1 : MonoBehaviour
+public class HeadTracking1 : MonoBehaviour, ISendableData
 {
+    public event Action<ISendableData> OnActivation;
+    public event Action<ISendableData> OnDeactivation;
+    public object Data { get; set; }
+    public bool Active { get; set; }
+    public string Name { get; set; }
+
     [SerializeField] private Material minLimit;
     [SerializeField] private Material maxLimit;
     [SerializeField] private Transform indicatorTransform;
@@ -30,6 +36,11 @@ public class HeadTracking1 : MonoBehaviour
     public string TempValue = "0";
     public string TempValue2 = "0";
 
+    private void Start()
+    {
+        AddItemToManager();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -49,12 +60,14 @@ public class HeadTracking1 : MonoBehaviour
             TempValue = outputValue;
         }
 
-        if(counter >= 4)
+        if (counter >= 4)
         {
             float value = MapData(dotProductH, rotationLimits[2].dotProduct, rotationLimits[3].dotProduct);
             string outputValue = FormatUIOutput(value, UIoutputH);
             TempValue2 = outputValue;
         }
+
+        Data = "(" + TempValue + "," + TempValue2 + ")";
 
     }
 
@@ -187,6 +200,12 @@ public class HeadTracking1 : MonoBehaviour
         angles[counter] = transform.forward;
         counter++;
     }
+
+    public void AddItemToManager()
+    {
+        OSCManager.Instance.AddDataOutputToList(this);
+    }
+
 
 
 
