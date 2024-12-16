@@ -23,7 +23,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/05_Scenes/Nathan/FloorMapping.unity
     guid: e9467449e54b791438e90ecffed3e75e
-  - enabled: 1
+  - enabled: 0
     path: Assets/NRSDK/Demos/MappingExample.unity
     guid: e75a8c0548f7c3b44a68f2662d18d5a0
+  - enabled: 1
+    path: Assets/05_Scenes/Nathan/Looper.unity
+    guid: c8ea5e90a0f556a42908bff58095780f
   m_configObjects: {}
