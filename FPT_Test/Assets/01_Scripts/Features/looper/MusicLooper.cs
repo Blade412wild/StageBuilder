@@ -18,15 +18,12 @@ public class MusicLooper : MonoBehaviour
     public void StartLoop()
     {
         counter = 0;
-        timer = new Timer(0.25f);
+        timer = new Timer(0.5f, true, 4);
         timer.OnTimerIsDone += PlayNextSound;
     }
 
     private void PlayNextSound()
     {
-        timer.OnTimerIsDone -= PlayNextSound;
-
-
         if (counter == list.Count)
         {
             counter = 0;
@@ -36,8 +33,5 @@ public class MusicLooper : MonoBehaviour
         Debug.Log(list[counter].name + " playSound");
 
         counter++;
-
-        timer = new Timer(0.25f);
-        timer.OnTimerIsDone += PlayNextSound;
     }
 }

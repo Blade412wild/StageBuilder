@@ -16,7 +16,6 @@ public class StageSetupMenu : State<StageSetupManager>
 
     public override void OnEnter()
     {
-        Debug.Log("hallo");
         UI.transform.position = headTrans.position;
         Vector3 headRotationEuler = headTrans.rotation.eulerAngles;
         headRotationEuler = new Vector3(0, headRotationEuler.y, 0);

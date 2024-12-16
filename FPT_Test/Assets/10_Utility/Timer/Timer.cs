@@ -25,6 +25,7 @@ public class Timer
     {
         endTime = _seconds;
         repeat = _repeat;
+        TimerManager.Instance.AddTimerToList(this);
     }
 
     public Timer(float _seconds, bool _repeat, int _amount)
@@ -32,6 +33,7 @@ public class Timer
         endTime = _seconds;
         repeat = _repeat;
         repeatAmount = _amount;
+        TimerManager.Instance.AddTimerToList(this);
     }
 
 
@@ -46,22 +48,37 @@ public class Timer
 
     private void RunTimer()
     {
-        if (currentTime >= endTime)
+        if (currentTime < endTime) return;
+
+        if (repeat == false)
         {
-            //Debug.Log(" Timer is finished, [" + endTime + "] have past");
-            if (repeat == true && currentAmount < repeatAmount)
-            {
-                var t = Time.time;
-                currentAmount++;
-                ResetTimer();
-                OnTimerIsDone?.Invoke();
-            }
-            else
-            {
-                OnTimerIsDone?.Invoke();
-                ResetTimer();
-                OnRemoveTimer?.Invoke(this);
-            }
+            OnTimerIsDone?.Invoke();
+            OnRemoveTimer?.Invoke(this);
+            return;
+        }
+
+        // repeat 
+        if (repeatAmount <= 0)
+        {
+            OnTimerIsDone?.Invoke();
+            ResetTimer();
+            return;
+        }
+
+        // repeat for an amount
+        if (currentAmount < repeatAmount)
+        {
+            Debug.Log("amount : " + currentAmount + " RepeatAmount : " + repeatAmount);
+            currentAmount++;
+            ResetTimer();
+            OnTimerIsDone?.Invoke();
+        }
+        else
+        {
+            Debug.Log("timer has had " + currentAmount + " interations");
+            ResetTimer();
+            OnTimerIsDone?.Invoke();
+            OnRemoveTimer?.Invoke(this);
         }
     }
 
