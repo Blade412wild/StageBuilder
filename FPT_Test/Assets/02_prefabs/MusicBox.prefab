@@ -159,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5023136707511400421}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.126, y: 0.297, z: 2.298}
   m_LocalScale: {x: 0.55806, y: 0.55806, z: 0.55806}
   m_ConstrainProportionsScale: 0
@@ -353,6 +353,7 @@ MonoBehaviour:
   - {fileID: 25029458723105589}
   - {fileID: 1057975148697248705}
   - {fileID: 1369895523742113729}
+  musicPanel: {fileID: 11400000, guid: c32265d15784af84a971b1ad584f81f5, type: 2}
 --- !u!1 &6293768744745356886
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +405,7 @@ MonoBehaviour:
   deactivationButton: {fileID: 6743517860934877945}
   chooseButtons: {fileID: 1547364686457317610}
   collider: {fileID: 7957418202448997904}
+  musicBox: {fileID: 2363811823909252732}
 --- !u!1001 &2521069305593556852
 PrefabInstance:
   m_ObjectHideFlags: 0

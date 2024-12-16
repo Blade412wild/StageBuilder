@@ -8,6 +8,7 @@ public class MusicBoxInteraction : MonoBehaviour
     [SerializeField] private GameObject deactivationButton;
     [SerializeField] private GameObject chooseButtons;
     [SerializeField] private ColliderInteraction collider;
+    [SerializeField] private MusicBox musicBox;
 
     private bool choiceConfirmed = false;
 
@@ -17,6 +18,7 @@ public class MusicBoxInteraction : MonoBehaviour
     }
     public void StartChooseInteraction()
     {
+        musicBox.Source.clip = null;
         choiceConfirmed = false;
         activatiorButton.SetActive(false);
         chooseButtons.SetActive(true);
