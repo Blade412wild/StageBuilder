@@ -9,6 +9,8 @@ public class MusicBox : MonoBehaviour
     public AudioClip clip;
     public List<MusicChooser> musicChooserList = new List<MusicChooser>();
 
+    [SerializeField] private MusicPanel musicPanel;
+
     private void Awake()
     {
         Source = GetComponent<AudioSource>();
@@ -17,6 +19,7 @@ public class MusicBox : MonoBehaviour
     private void Start()
     {
         SetEvents();
+        SetMusic();
     }
 
     private void SetEvents()
@@ -41,18 +44,11 @@ public class MusicBox : MonoBehaviour
         Source.clip = clip;
     }
 
-    public void OpenInteraction()
+    private void SetMusic()
     {
-
-    }
-
-    public void CloseInteraction()
-    {
-
-    }
-
-    public void ShowStartButton()
-    {
-
+        for(int i = 0; i < musicChooserList.Count; i++)
+        {
+            musicChooserList[i].Clip = musicPanel.audioClips[i];
+        }
     }
 }

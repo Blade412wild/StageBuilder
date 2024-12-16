@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MusicLooper : MonoBehaviour
 {
-
-    [SerializeField] private List<MusicBox> list = new List<MusicBox>();
-    private Timer timer;
-    private int counter = 0;
-
     public float BPM;
     public float seconds;
+
+    [SerializeField] private List<MusicBox> list = new List<MusicBox>();
+
+    private Timer timer;
+    private int counter = 0;
+    private bool isPLaying;
+
     
     // Start is called before the first frame update
     void Start()
@@ -20,20 +22,23 @@ public class MusicLooper : MonoBehaviour
 
     private void Update()
     {
-        seconds = ConvertBPMTOSeconds.ConvertBPMToSeconds(BPM);
+        //seconds = ConvertBPMTOSeconds.ConvertBPMToSeconds(BPM);
     }
 
     public void StartLoop()
     {
-        if (timer != null) return;
-        timer = new Timer(0.1f, true);
+        if (isPLaying == true) return;
+        isPLaying = true;
+        timer = new Timer(seconds, true);
         timer.OnTimerIsDone += PlayNextSound;
     }
 
     public void StopLoop()
     {
+        if(isPLaying == false) return;
         counter = 0;
         timer.RemoveTimer();
+        isPLaying = false;
     }
     private void PlayNextSound()
     {

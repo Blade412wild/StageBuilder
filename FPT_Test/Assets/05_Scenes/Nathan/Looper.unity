@@ -552,6 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61743146}
   - component: {fileID: 61743147}
+  - component: {fileID: 61743148}
   m_Layer: 0
   m_Name: MusicBoxes
   m_TagString: Untagged
@@ -592,12 +593,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56378be341ca7d4b8d8b79c7048d709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BPM: 320
+  seconds: 0.37
   list:
   - {fileID: 1636689512}
   - {fileID: 1391618695}
   - {fileID: 1058205272}
   - {fileID: 109493816}
-  BPM: 0
+--- !u!114 &61743148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61743145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1658ecb61490c7940a4858d90192ea28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BPM: 81
   seconds: 0
 --- !u!1 &78647787
 GameObject:
@@ -2925,7 +2940,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369958538}
   m_LocalRotation: {x: -0, y: -0.50421864, z: -0, w: 0.86357605}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2925823}
+  m_LocalPosition: {x: 0, y: 0, z: 0.2135}
   m_LocalScale: {x: 0.00015866723, y: 0.03734937, z: 0.00015867523}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2936,7 +2951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -60.559, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.21816742, y: 54.5}
+  m_AnchoredPosition: {x: -0.3344, y: 54.5}
   m_SizeDelta: {x: 1080, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &369958543
@@ -6312,6 +6327,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2363811823909252732, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: musicPanel
+      value: 
+      objectReference: {fileID: 11400000, guid: c32265d15784af84a971b1ad584f81f5, type: 2}
     - target: {fileID: 5023136707511400421, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
       propertyPath: m_Name
       value: MusicBox (1)
@@ -9538,6 +9557,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2363811823909252732, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: musicPanel
+      value: 
+      objectReference: {fileID: 11400000, guid: c32265d15784af84a971b1ad584f81f5, type: 2}
     - target: {fileID: 5023136707511400421, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
       propertyPath: m_Name
       value: MusicBox (2)
@@ -10215,7 +10238,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -10499,7 +10522,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -10561,6 +10584,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1870334049}
     m_Modifications:
+    - target: {fileID: 1287629729828632, guid: 9e73c86b401a7c34cb70b4dcaf94be65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4261144047474834, guid: 9e73c86b401a7c34cb70b4dcaf94be65, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -14702,7 +14729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1736674810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16273,6 +16300,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2363811823909252732, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: musicPanel
+      value: 
+      objectReference: {fileID: 11400000, guid: c32265d15784af84a971b1ad584f81f5, type: 2}
     - target: {fileID: 5023136707511400421, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
       propertyPath: m_Name
       value: MusicBox (3)
@@ -17708,6 +17739,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 61743146}
     m_Modifications:
+    - target: {fileID: 251130044702116220, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547364686457317610, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2021803714701132753, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.126
@@ -17748,9 +17787,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2363811823909252732, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: musicPanel
+      value: 
+      objectReference: {fileID: 11400000, guid: c32265d15784af84a971b1ad584f81f5, type: 2}
     - target: {fileID: 5023136707511400421, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
       propertyPath: m_Name
       value: MusicBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023136707511400421, guid: 888c799aeac84ef4485e5613b397d06c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
