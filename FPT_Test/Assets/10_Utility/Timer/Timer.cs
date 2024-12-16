@@ -86,4 +86,9 @@ public class Timer
     {
         currentTime = startTime;
     }
+
+    public void RemoveTimer()
+    {
+        OnRemoveTimer.Invoke(this);
+    }
 }

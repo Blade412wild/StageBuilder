@@ -17,11 +17,16 @@ public class MusicLooper : MonoBehaviour
 
     public void StartLoop()
     {
-        counter = 0;
-        timer = new Timer(0.5f, true, 4);
+        if (timer != null) return;
+        timer = new Timer(0.25f, true);
         timer.OnTimerIsDone += PlayNextSound;
     }
 
+    public void StopLoop()
+    {
+        counter = 0;
+        timer.RemoveTimer();
+    }
     private void PlayNextSound()
     {
         if (counter == list.Count)
