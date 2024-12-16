@@ -5,8 +5,10 @@ using UnityEngine;
 public class TimerManager : MonoBehaviour
 {
     private static TimerManager instance;
-    public List<Timer> timersList = new List<Timer>();
-    public List<Timer> timersTobeRemoved = new List<Timer>();
+    public List<Timer> ActiveTimersList = new List<Timer>();
+    public List<Timer> waitingTimerList = new List<Timer>();
+    public List<Timer> waitingRemoveList = new List<Timer>();
+    public List<Timer> ActiveTimerRemoveList = new List<Timer>();
     public static TimerManager Instance
     {
         get
@@ -27,28 +29,48 @@ public class TimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (Timer timer in timersList)
+
+        // adding the timers from the waiting list to the activeList
+        foreach (Timer timer in waitingTimerList)
+        {
+            ActiveTimersList.Add(timer);
+            waitingRemoveList.Add(timer);
+        }
+
+        // Remove every timer in the waiting list 
+        foreach (Timer timer in waitingRemoveList)
+        {
+            waitingTimerList.Remove(timer);
+        }
+
+        waitingRemoveList.Clear();
+
+        // update the active TimerList
+        foreach (Timer timer in ActiveTimersList)
         {
             timer.OnUpdate();
         }
 
-        foreach (Timer timer in timersTobeRemoved)
+        // remove the timer from the activeList 
+        foreach (Timer timer in ActiveTimerRemoveList)
         {
-            timersList.Remove(timer);
+            ActiveTimersList.Remove(timer);
         }
 
-        timersTobeRemoved.Clear();
+        // clearing the remove
+        ActiveTimerRemoveList.Clear();
     }
 
 
     public void RemoveTimerFromList(Timer _timer)
     {
-        timersTobeRemoved.Add(_timer);
+        ActiveTimerRemoveList.Add(_timer);
     }
 
     public void AddTimerToList(Timer _timer)
     {
         _timer.OnRemoveTimer += RemoveTimerFromList;
-        timersList.Add(_timer);
+        waitingTimerList.Add(_timer);
+        //ActiveTimersList.Add(_timer);
     }
 }

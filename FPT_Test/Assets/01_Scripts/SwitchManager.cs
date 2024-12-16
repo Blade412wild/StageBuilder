@@ -32,6 +32,7 @@ public class SwitchManager : MonoBehaviour
         }
         if(StartOnBuildMode == false && StartOnStageSetup == true)
         {
+            Debug.Log("switch to stage");
             GoToIdleState();
             stageSetupManager.GoToMenu();
         }

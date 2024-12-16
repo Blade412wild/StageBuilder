@@ -21,11 +21,14 @@ public class StageSetupManager : MonoBehaviour
     private StateMachine setupStateMachine;
     private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
 
+    private void Awake()
+    {
+        SeptupStatemMachine();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        SeptupStatemMachine();
         //GoToIdleState();
         //GoToSetHeight();
     }
@@ -92,6 +95,7 @@ public class StageSetupManager : MonoBehaviour
 
     public void GoToMenu()
     {
+        Debug.Log(states.Count);
         if (states.TryGetValue(typeof(StageSetupMenu), out IState state))
         {
             setupStateMachine.SwitchState(state);

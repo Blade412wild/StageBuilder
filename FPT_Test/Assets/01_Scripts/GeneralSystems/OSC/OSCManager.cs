@@ -47,17 +47,17 @@ public class OSCManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        
+
         Instance = this;
     }
     private void Start()
     {
-       
+
     }
 
     private void Update()
@@ -184,8 +184,8 @@ public class OSCManager : MonoBehaviour
 
             smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData;
             dataOutput = dataOutput + smallDataOutput;
+            Debug.Log(dataOutput);
         }
-        Debug.Log(dataOutput);
         return dataOutput;
     }
 
