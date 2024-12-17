@@ -7,6 +7,9 @@ public class UIStatusBlock : MonoBehaviour
 {
     [SerializeField] private Color failedColor;
     [SerializeField] private Color succesColor;
+    public bool useImage;
+    [SerializeField] private Sprite failedImage;
+    [SerializeField] private Sprite succesImage;
     private Image uiImage;
 
     void Start()
@@ -14,7 +17,22 @@ public class UIStatusBlock : MonoBehaviour
         uiImage = GetComponent<Image>();
     }
 
-    public void ChangeColor(bool state)
+    public void DoImage(bool state)
+    {
+        if (uiImage != null)
+        {
+
+            if (state)
+            {
+                uiImage.sprite = succesImage;
+            }
+            else
+            {
+                uiImage.sprite = failedImage;
+            }
+        }
+    }
+    public void DoColor(bool state)
     {
         if (uiImage != null)
         {
@@ -28,6 +46,13 @@ public class UIStatusBlock : MonoBehaviour
                 uiImage.color = failedColor;
             }
         }
+    }
+    public void ChangeColor(bool state)
+    {
+        if (useImage)
+            DoImage(state);
+        else
+            DoColor(state);
     }
 
 
