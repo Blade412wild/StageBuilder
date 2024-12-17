@@ -7,14 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: Reverb
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHABLEND_ON
+  - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -79,7 +80,7 @@ Material:
     - _DstBlend: 10
     - _ExtraHeight: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.837
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 2
@@ -93,7 +94,7 @@ Material:
     - _WaveSpeed: 1
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.3820755, g: 0.81304985, b: 1, a: 0.36862746}
+    - _Color: {r: 1, g: 0.88471824, b: 0.3160377, a: 0.2901961}
     - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0.93891484, b: 0.4575472, a: 1}
   m_BuildTextureStacks: []
