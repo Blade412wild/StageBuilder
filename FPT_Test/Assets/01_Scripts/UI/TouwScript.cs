@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TouwScript : MonoBehaviour
+public class TouwScript : MonoBehaviour, IInteractible
 {
     public UnityEvent events = new();
     public GameObject rope;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,16 +16,21 @@ public class TouwScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    RaycastHit hit;
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        //if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == rope)
+    //        //{
+    //        //    events.Invoke();
+    //        //}
+    //        events?.Invoke();
+    //    }
+    //}
+    public void Activate()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == rope)
-            {
-                events.Invoke();
-            }
-        }
+        events?.Invoke();
     }
 }

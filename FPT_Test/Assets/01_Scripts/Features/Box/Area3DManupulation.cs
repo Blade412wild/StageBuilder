@@ -22,13 +22,14 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
         Data = data;
         Name = name;
         AddItemToManager();
+        OnActivation?.Invoke(this);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Head head))
         {
             Data = 1;
-            OnActivation?.Invoke(this);
+            //OnActivation?.Invoke(this);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -36,7 +37,7 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
         if (other.gameObject.TryGetComponent(out Head head))
         {
             Data = 0;
-            OnDeactivation?.Invoke(this);
+            //OnDeactivation?.Invoke(this);
         }
     }
     public void AddItemToManager()

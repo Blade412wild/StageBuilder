@@ -36,10 +36,6 @@ public class SwitchManager : MonoBehaviour
             GoToIdleState();
             stageSetupManager.GoToMenu();
         }
-
-
-
-
     }
 
     private void Update()

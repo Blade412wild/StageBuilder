@@ -39,6 +39,8 @@ public class HeadTracking1 : MonoBehaviour, ISendableData
     private void Start()
     {
         AddItemToManager();
+        //OnActivation?.Invoke(this);
+        Name = "HeadRotation";
     }
 
     // Update is called once per frame
@@ -67,7 +69,7 @@ public class HeadTracking1 : MonoBehaviour, ISendableData
             TempValue2 = outputValue;
         }
 
-        Data = "(" + TempValue + "," + TempValue2 + ")";
+        Data =  TempValue + " " + TempValue2;
 
     }
 

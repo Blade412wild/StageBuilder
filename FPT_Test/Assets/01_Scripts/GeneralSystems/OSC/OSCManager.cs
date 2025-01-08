@@ -182,10 +182,10 @@ public class OSCManager : MonoBehaviour
 
             var convertedData = ConvertOutputToString<object>(data.Data);
 
-            smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData;
+            smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData + " ";
             dataOutput = dataOutput + smallDataOutput;
-            Debug.Log(dataOutput);
         }
+            Debug.Log(dataOutput);
         return dataOutput;
     }
 

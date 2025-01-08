@@ -6620,6 +6620,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oscManager: {fileID: 1433059694}
   light: {fileID: 45001212}
+  builderMode: {fileID: 0}
+  performanceMode: {fileID: 0}
+  stageSetupManager: {fileID: 0}
+  StartOnBuildMode: 0
+  StartOnStageSetup: 0
 --- !u!4 &1266885652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6420241020223802052, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
@@ -10403,7 +10408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1736674810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12428,10 +12433,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 798755737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 907.12}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2365.7385, y: -453.56}
+  m_SizeDelta: {x: 4731.477, y: 907.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2126098239
 MonoBehaviour:
