@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 
-public struct IPConfig
+public class IPConfig
 {
+    public string FileName;
     public string Ip;
-    public int SendingPort;
+    public int TargetPort;
     public int ListeningPort;
 }

@@ -25,6 +25,8 @@ public class SwitchManager : MonoBehaviour
     private void Start()
     {
         CreateStateMachine();
+
+        // for debugging
         if (StartOnBuildMode == true && StartOnStageSetup == false)
         {
             GoToBuilderMode();

@@ -6,7 +6,7 @@ using static Saver;
 
 public class Loader : MonoBehaviour
 {
-    public object LoadData<T>(string fileName)
+    public T LoadData<T>(string fileName)
     {
         string path;
 
@@ -19,11 +19,9 @@ public class Loader : MonoBehaviour
             path = Application.persistentDataPath + fileName + ".txt";
         }
 
-        if (File.Exists(path) == false) return null;
+        if (File.Exists(path) == false) return default;
 
         StreamReader streamReader = new StreamReader(path);
-
-
 
         T data2 = JsonUtility.FromJson<T>(streamReader.ReadToEnd());
         streamReader.Close();

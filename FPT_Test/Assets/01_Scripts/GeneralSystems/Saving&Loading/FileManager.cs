@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using static Saver;
 
 public class FileManager : MonoBehaviour
 {
@@ -20,27 +21,31 @@ public class FileManager : MonoBehaviour
 
     private void Start()
     {
+        saver = new Saver();
+        loader = new Loader();
+
         dataRequestHandler = new DataRequestHandler(this);
         savedObjects = new Dictionary<Type, string>();
 
         dataRequestHandler.OnRequestData += HandleDataRequest;
-    }
-
-    private object LoadData(Type order )
-    {
-        //savedObjects.TryGetValue(datatype, out string path);
-        loader.LoadData<>(order.Name);
-
-
-        return dataOrder;
+        //dataRequestHandler.OnGenericEvent += TestGeneric;
     }
 
     private void HandleDataRequest(IDataAccess client, Type order)
     {
         Debug.Log("I Have received the order");
-        savedObjects.Add(order, "hallo");
-        order data = LoadData<order>(typeof(order));
+        //savedObjects.Add(order, "hallo");
+        //order data = LoadData<order>(typeof(order));
 
+        //object data = loader.LoadData("DataTestWow");
+        //DataTestObject data2 = (DataTestObject)data;
+        //Debug.Log("loader test : " + data);
+
+    }
+
+    private void TestGeneric<T>()
+    {
+        T data = loader.LoadData<T>("string");
     }
 
     private void SaveData()

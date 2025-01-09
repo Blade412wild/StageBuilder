@@ -27,6 +27,7 @@ public class SetupFloorDirection : State<StageSetupManager>
     public override void OnExit()
     {
         UI.SetActive(false);
+        Owner.Save();
     }
 
     private void SetDirection()

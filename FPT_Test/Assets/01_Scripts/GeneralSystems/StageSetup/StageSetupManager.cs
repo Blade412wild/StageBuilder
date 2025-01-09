@@ -1,9 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
-public class StageSetupManager : MonoBehaviour
+public class StageSetupManager : MonoBehaviour, ISaveableData
 {
+    public Action<bool> OnStageSetupLoadDone;
+
+    private WorldData worldData;
+
+
+    public Saver Saver { get; set; }
+    public Loader Loader { get; set; }
+    public string FileName { get; set; }
+    
     [Header("Other")]
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject rightHand;
@@ -29,8 +39,13 @@ public class StageSetupManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Saver = new Saver();
+        Loader = new Loader();
+        FileName = "WorldData";
+
         //GoToIdleState();
         //GoToSetHeight();
+        Load();
     }
 
     // Update is called once per frame
@@ -82,6 +97,7 @@ public class StageSetupManager : MonoBehaviour
         if (states.TryGetValue(typeof(StageSetupIdle), out IState state))
         {
             setupStateMachine.SwitchState(state);
+
         }
     }
 
@@ -100,5 +116,41 @@ public class StageSetupManager : MonoBehaviour
         {
             setupStateMachine.SwitchState(state);
         }
+    }
+    private WorldData CreateWorldData()
+    {
+        worldData = new WorldData
+        {
+            FloorDirection = floor.transform.rotation,
+            FloorPos = floor.transform.position,
+        };
+        return worldData;
+    }
+
+    public void Save()
+    {
+        CreateWorldData();
+        Saver.SaveData<WorldData>(worldData, FileName);
+    }
+
+
+    public void Load()
+    {
+        worldData = Loader.LoadData<WorldData>(FileName);
+        if (worldData != null)
+        {
+            OnStageSetupLoadDone?.Invoke(true);
+            SetFloor();
+        }
+        else
+        {
+            OnStageSetupLoadDone?.Invoke(false);
+            GoToMenu();
+        }
+    }
+    private void SetFloor()
+    {
+        floor.transform.position = worldData.FloorPos;
+        floor.transform.rotation = worldData.FloorDirection;
     }
 }

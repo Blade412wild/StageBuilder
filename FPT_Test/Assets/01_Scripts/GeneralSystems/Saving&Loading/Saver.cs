@@ -6,13 +6,10 @@ using UnityEngine;
 
 public class Saver
 {
-    public Action<IDataAccess> OnSaveData;
-
     private DataTestObject dataObject;
 
     public Saver()
     {
-        //OnSaveData += SaveData;
 
         dataObject = new DataTestObject()
         {
@@ -24,17 +21,17 @@ public class Saver
 
     }
 
-    public void SaveData(DataTestObject data)
+    public void SaveData<T>(T data, string fileName)
     {
         string path;
 
         if (Application.isEditor)
         {
-            path = Application.dataPath + data.FileName + ".txt";
+            path = Application.dataPath + fileName + ".txt";
         }
         else
         {
-            path = Application.persistentDataPath + data.FileName + ".txt";
+            path = Application.persistentDataPath + fileName + ".txt";
         }
 
 
@@ -43,31 +40,6 @@ public class Saver
         writer.Close();
         writer.Dispose();
     }
-
-    public void LoadData(DataTestObject data)
-    {
-        string path = data.FileName;
-
-        if (Application.isEditor)
-        {
-            path = Application.dataPath + data.FileName + ".txt";
-        }
-        else
-        {
-            path = Application.persistentDataPath + data.FileName + ".txt";
-        }
-
-        if (File.Exists(path) == false) return;
-
-        StreamReader streamReader = new StreamReader(path);
-
-        DataTestObject data2 = JsonUtility.FromJson<DataTestObject>(streamReader.ReadToEnd());
-        streamReader.Close();
-        streamReader.Dispose();
-
-        Debug.Log(data2.Position);
-    }
-
 
     public struct DataTestObject
     {

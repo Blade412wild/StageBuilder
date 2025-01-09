@@ -13,6 +13,7 @@ public class StageSetupIdle : State<StageSetupManager>
     public override void OnEnter()
     {
         setup.SetActive(false);
+        Owner.Save();
     }
 
     public override void OnExit()

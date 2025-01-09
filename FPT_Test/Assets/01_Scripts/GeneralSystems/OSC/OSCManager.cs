@@ -5,8 +5,10 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OSCManager : MonoBehaviour
+public class OSCManager : MonoBehaviour, ISaveableData
 {
+    public Action OnLoadingIpConfig;
+
     [Header("UI Target Device UI")]
     public TMP_InputField TargetIPField;
     public TMP_InputField TargetPortField;
@@ -30,6 +32,9 @@ public class OSCManager : MonoBehaviour
     public string Value2;
 
     public static OSCManager Instance { get; private set; }
+    public Saver Saver { get; set; }
+    public Loader Loader { get; set; }
+    public string FileName { get; set; }
 
     private List<ISendableData> activeList = new List<ISendableData>();
     private List<ISendableData> dataOutputsNonActiveList = new List<ISendableData>();
@@ -40,6 +45,7 @@ public class OSCManager : MonoBehaviour
     private string oscSendMessage;
     private OSCSender sender;
     private OSCReceiver listener;
+
 
 
 
@@ -57,7 +63,10 @@ public class OSCManager : MonoBehaviour
     }
     private void Start()
     {
-
+        Saver = new Saver();
+        Loader = new Loader();
+        FileName = "IpConfig";
+        Load();
     }
 
     private void Update()
@@ -77,6 +86,7 @@ public class OSCManager : MonoBehaviour
 
         sender = new OSCSender(targetIP, targetPort);
         SenderUIStatus.ChangeColor(true);
+        Save();
     }
 
     public void CreateUDPListener()
@@ -205,6 +215,44 @@ public class OSCManager : MonoBehaviour
     {
         dataOutputsNonActiveList.Add(data);
         activeList.Remove(data);
+    }
+
+    private IPConfig CreateIpConfig()
+    {
+        string targetIP = TargetIPField.text;
+        int targetPort = Convert.ToInt32(TargetPortField.text);
+        int listeningport = Convert.ToInt32(OwnDevicePortField.text);
+
+        IPConfig iPConfig = new IPConfig()
+        {
+            Ip = targetIP,
+            TargetPort = targetPort,
+            ListeningPort = listeningport,
+        };
+
+        return iPConfig;
+    }
+
+    public void Save()
+    {
+        IPConfig data = CreateIpConfig();
+        Saver.SaveData<IPConfig>(data, FileName);
+    }
+
+    public void Load()
+    {
+        IPConfig data = Loader.LoadData<IPConfig>(FileName);
+        if (data != null)
+        {
+            OnLoadingIpConfig?.Invoke();
+            SetUIElements(data);
+        }
+    }
+    private void SetUIElements(IPConfig data)
+    {
+        TargetIPField.text = data.Ip;
+        TargetPortField.text = data.TargetPort.ToString();
+        OwnDevicePortField.text = data.ListeningPort.ToString();
     }
 
 }

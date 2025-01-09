@@ -7,6 +7,9 @@ using UnityEditor.PackageManager;
 
 public class DataRequestHandler
 {
+    public delegate void GenericEvent<T>(T eventData);
+    public Action<int, Type> OnGenericEvent;
+
     public Action<IDataAccess, Type> OnRequestData;
 
     private FileManager fileManager;
@@ -34,6 +37,12 @@ public class DataRequestHandler
     {
         Debug.Log(client.ToString() + " needs the data : " + order.ToString());
         OnRequestData?.Invoke(client, order);
+    }
+
+    private void TriggerEventGenericEvent<T>()
+    {
+        Debug.Log("trying a generic event");
+        OnGenericEvent?.Invoke(10, typeof(T));
     }
 
     private void ReturnData(IDataAccess client, object order)

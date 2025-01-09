@@ -37,6 +37,7 @@ public class SetupFloorHeight : State<StageSetupManager>
     public override void OnExit()
     {
         UI.SetActive(false);
+        Owner.Save();
     }
 
     private void LowerFloor()
