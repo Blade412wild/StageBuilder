@@ -1,0 +1,1 @@
+{"FileName":"DataTestWow","Position":{"x":0.0,"y":1.0,"z":0.0},"Rotation":{"x":0.0,"y":90.0,"z":0.0},"height":10}
