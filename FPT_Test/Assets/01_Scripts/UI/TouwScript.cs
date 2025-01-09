@@ -14,21 +14,6 @@ public class TouwScript : MonoBehaviour, IInteractible
     {
         rope = gameObject;
     }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit hit;
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        //if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == rope)
-    //        //{
-    //        //    events.Invoke();
-    //        //}
-    //        events?.Invoke();
-    //    }
-    //}
     public void Activate()
     {
         events?.Invoke();

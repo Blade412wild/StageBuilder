@@ -185,7 +185,7 @@ public class OSCManager : MonoBehaviour
             smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData + " ";
             dataOutput = dataOutput + smallDataOutput;
         }
-            Debug.Log(dataOutput);
+        Debug.Log(dataOutput);
         return dataOutput;
     }
 
