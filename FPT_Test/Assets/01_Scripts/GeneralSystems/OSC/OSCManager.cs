@@ -198,7 +198,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
         {
             string smallDataOutput;
 
-            var convertedData = ConvertOutputToString<object>(data.Data);
+            var convertedData = ConvertOutputToString(data.Data);
 
             smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData + " ";
             dataOutput = dataOutput + smallDataOutput;

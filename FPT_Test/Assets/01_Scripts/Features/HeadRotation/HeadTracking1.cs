@@ -39,7 +39,7 @@ public class HeadTracking1 : MonoBehaviour, ISendableData
     private void Start()
     {
         AddItemToManager();
-        //OnActivation?.Invoke(this);
+        OnActivation?.Invoke(this);
         Name = "HeadRotation";
     }
 

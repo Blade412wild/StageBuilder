@@ -5,8 +5,11 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class HeadTracking : MonoBehaviour
+public class HeadTracking : MonoBehaviour, ISendableData
 {
+    public event Action<ISendableData> OnActivation;
+    public event Action<ISendableData> OnDeactivation;
+
     [SerializeField] private Material minLimit;
     [SerializeField] private Material maxLimit;
     [SerializeField] private Transform indicatorTransform;
@@ -26,6 +29,21 @@ public class HeadTracking : MonoBehaviour
     // even voor vrijdag
     public string TempValue = "0";
 
+    public object Data { get; set; }
+    public bool Active { get; set; }
+    public string Name { get; set; }
+
+    private void Awake()
+    {
+        Name = "head";
+        Data = "0";
+    }
+    private void Start()
+    {
+        AddItemToManager();
+        OnActivation?.Invoke(this);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -36,9 +54,8 @@ public class HeadTracking : MonoBehaviour
         {
             float value = MapData();
             FormatUIOutput(value);
-
+            Data = value;
         }
-
     }
 
     private void FormatUIOutput(float value)
@@ -145,5 +162,8 @@ public class HeadTracking : MonoBehaviour
 
     }
 
-
+    public void AddItemToManager()
+    {
+        OSCManager.Instance.AddDataOutputToList(this);
+    }
 }

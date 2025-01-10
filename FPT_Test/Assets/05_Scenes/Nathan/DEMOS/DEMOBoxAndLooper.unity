@@ -978,7 +978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &98051275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2650,8 +2650,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1422296040}
-        m_TargetAssemblyTypeName: HeadTracking1, Assembly-CSharp
+      - m_Target: {fileID: 1422296039}
+        m_TargetAssemblyTypeName: HeadTracking, Assembly-CSharp
         m_MethodName: AddRotationValue
         m_Mode: 1
         m_Arguments:
@@ -4207,6 +4207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38991f4e82111448acce39acc25f713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageSetupManager: {fileID: 0}
+  switchManager: {fileID: 0}
 --- !u!4 &505453234
 Transform:
   m_ObjectHideFlags: 0
@@ -10148,7 +10150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1189705634
 Transform:
   m_ObjectHideFlags: 0
@@ -12680,7 +12682,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422296037}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40fbf19d10c0a6a47967e15d672f338d, type: 3}
   m_Name: 
@@ -12698,7 +12700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422296037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a549c5eb63a904fa53de6e04570fb5, type: 3}
   m_Name: 
@@ -18720,6 +18722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputfield: {fileID: 195128221}
+  NetworkingMenu: {fileID: 0}
 --- !u!4 &2098701049
 Transform:
   m_ObjectHideFlags: 0

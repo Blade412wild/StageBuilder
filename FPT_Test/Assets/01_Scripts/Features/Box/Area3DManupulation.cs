@@ -43,5 +43,6 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
     public void AddItemToManager()
     {
         OSCManager.Instance.AddDataOutputToList(this);
+        Debug.Log("add : " + name + " to the activeList");
     }
 }
