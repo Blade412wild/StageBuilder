@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StageSetupManager : MonoBehaviour, ISaveableData
 {
-    public Action<bool> OnStageSetupLoadDone;
+    public Action OnStageSetupDone;
 
     private WorldData worldData;
 
@@ -139,12 +139,11 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
         worldData = Loader.LoadData<WorldData>(FileName);
         if (worldData != null)
         {
-            OnStageSetupLoadDone?.Invoke(true);
             SetFloor();
+            OnStageSetupDone?.Invoke();
         }
         else
         {
-            OnStageSetupLoadDone?.Invoke(false);
             GoToMenu();
         }
     }

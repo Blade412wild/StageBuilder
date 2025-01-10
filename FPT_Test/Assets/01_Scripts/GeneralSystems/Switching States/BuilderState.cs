@@ -15,7 +15,6 @@ public class BuilderState : State<SwitchManager>
     public override void OnEnter()
     {
         Debug.Log("Entered Builder State");
-        light.SetActive(false);
         builderMode.SetActive(true);
     }
 

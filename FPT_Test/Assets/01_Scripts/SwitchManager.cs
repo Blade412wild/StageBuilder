@@ -38,6 +38,8 @@ public class SwitchManager : MonoBehaviour
             GoToIdleState();
             stageSetupManager.GoToMenu();
         }
+
+        stageSetupManager.OnStageSetupDone += GoToBuilderMode;
     }
 
     private void Update()
@@ -61,7 +63,6 @@ public class SwitchManager : MonoBehaviour
         stateMachine.AddTransition(new Transition(performanceState, builderState, ChangeToBuilder));
 
         stateMachine.SwitchState(idleState);
-
     }
 
     private bool ChangeToPerformance()

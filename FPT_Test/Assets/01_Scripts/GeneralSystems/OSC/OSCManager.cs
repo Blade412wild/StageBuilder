@@ -68,7 +68,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
 
     private void Update()
     {
-        chatIncomingData.text = incommingData;
+        //chatIncomingData.text = incommingData;
         //Value = HeadTracking.TempValue;
         //Value = HeadTracking1.TempValue;
         //Value2 = HeadTracking1.TempValue2;
@@ -94,7 +94,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         int targetPort = Convert.ToInt32(TargetPortField.text);
 
         sender = new OSCSender(targetIP, targetPort);
-        SenderUIStatus.ChangeColor(true);
         Save();
     }
 
