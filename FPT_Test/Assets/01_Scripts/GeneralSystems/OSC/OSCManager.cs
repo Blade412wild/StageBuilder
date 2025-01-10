@@ -203,7 +203,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
             smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData + " ";
             dataOutput = dataOutput + smallDataOutput;
         }
-        Debug.Log(dataOutput);
+        //Debug.Log(dataOutput);
         return dataOutput;
     }
 

@@ -1,3 +1,4 @@
+using NRKernal;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -33,7 +34,6 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
 
     private void Awake()
     {
-        SeptupStatemMachine();
     }
 
     // Start is called before the first frame update
@@ -43,8 +43,9 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
         Loader = new Loader();
         FileName = "WorldData";
 
-        //GoToIdleState();
-        //GoToSetHeight();
+        headTrans = FindAnyObjectByType<NRSessionBehaviour>().transform;
+
+        SeptupStatemMachine();
         Load();
     }
 
