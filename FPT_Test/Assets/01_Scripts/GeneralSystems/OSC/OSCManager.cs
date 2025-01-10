@@ -46,9 +46,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
     private OSCSender sender;
     private OSCReceiver listener;
 
-
-
-
     private string incommingData;
 
     private void Awake()
@@ -76,6 +73,18 @@ public class OSCManager : MonoBehaviour, ISaveableData
         //Value = HeadTracking1.TempValue;
         //Value2 = HeadTracking1.TempValue2;
         oscSendMessage = GetData();
+    }
+    private void OnDisable()
+    {
+        if (sender != null)
+        {
+            sender.CloseSender();
+        }
+
+        if(listener != null)
+        {
+            listener.CloseListener();
+        }
     }
 
     public void CreateUDPSender()
@@ -246,6 +255,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
         {
             OnLoadingIpConfig?.Invoke();
             SetUIElements(data);
+            CreateUDPSender();
         }
     }
     private void SetUIElements(IPConfig data)

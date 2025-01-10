@@ -5,20 +5,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static event Action OnQuiteGame;
     [SerializeField] private StageSetupManager stageSetupManager;
     [SerializeField] private SwitchManager switchManager;
 
 
     private void Start()
     {
-        // eerst checken we of setupManager is nessary
-        //stageSetupManager.Load();
 
         
     }
 
-    private void Update()
+    public void QuiteApplication()
     {
-        
+        OnQuiteGame?.Invoke();
     }
 }
