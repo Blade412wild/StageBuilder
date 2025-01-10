@@ -11487,18 +11487,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SwitchManager, Assembly-CSharp
-        m_MethodName: GoToBuilderMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1588240481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12191,18 +12179,18 @@ PrefabInstance:
     - target: {fileID: 1849279431078642784, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
       propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1315365298}
     - target: {fileID: 1849279431078642784, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
       propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1849279431078642784, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
       propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeButtonState
+      value: GoToMenu
       objectReference: {fileID: 0}
     - target: {fileID: 1849279431078642784, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
       propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SwitchManager, Assembly-CSharp
+      value: StageSetupManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1849279431078642784, guid: d73b0ff7ad20c6e44a803c3446cb33ff, type: 3}
       propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

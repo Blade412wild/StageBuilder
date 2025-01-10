@@ -24,7 +24,7 @@ public class BuilderState : State<SwitchManager>
 
     public override void OnExit()
     {
-        light.SetActive(true);
+        //light.SetActive(true);
         builderMode.SetActive(false);
     }
 

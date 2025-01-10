@@ -6,7 +6,7 @@ public class StateMachine
 {
     private List<Transition> allTransitions = new List<Transition>();
     private List<Transition> activeTransitions = new List<Transition>();
-    private IState currentState;
+    public IState currentState;
     private Dictionary<Type, IState> stateCollection = new Dictionary<Type,
     IState>();
     public StateMachine(params IState[] states)

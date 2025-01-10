@@ -14,7 +14,7 @@ public class SwitchManager : MonoBehaviour
     [Header("Bool")]
     [SerializeField] private bool StartOnBuildMode;
     [SerializeField] private bool StartOnStageSetup;
-    
+
     private StateMachine stateMachine;
     private bool builderModeState = true;
 
@@ -32,7 +32,7 @@ public class SwitchManager : MonoBehaviour
             GoToBuilderMode();
             stageSetupManager.GoToIdleState();
         }
-        if(StartOnBuildMode == false && StartOnStageSetup == true)
+        if (StartOnBuildMode == false && StartOnStageSetup == true)
         {
             Debug.Log("switch to stage");
             GoToIdleState();
@@ -90,7 +90,7 @@ public class SwitchManager : MonoBehaviour
 
         else
         {
-            foreach(CustomError error in errorList.list)
+            foreach (CustomError error in errorList.list)
             {
                 if (error.errorLevel == CustomError.ErrorLevel.Fatal)
                 {
@@ -103,7 +103,7 @@ public class SwitchManager : MonoBehaviour
                 }
             }
 
-            if(errorList.FatalErrors == 0) return true;
+            if (errorList.FatalErrors == 0) return true;
 
             return false;
         }
@@ -116,7 +116,7 @@ public class SwitchManager : MonoBehaviour
         if (oscManager.CheckSenderAvailable() == false)
         {
             errorList.Add(new CustomError("There is No Sender, Fix that before you go into Perforance mode"));
-        } 
+        }
 
         return errorList;
     }
@@ -138,13 +138,17 @@ public class SwitchManager : MonoBehaviour
     {
         if (states.TryGetValue(typeof(BuilderState), out IState state))
         {
-            stateMachine.SwitchState(state);
+            // checks if this state isnt't already active
+            if (stateMachine.currentState == state) return;
+                stateMachine.SwitchState(state);
         }
     }
     public void GoToPerformanceMode()
     {
         if (states.TryGetValue(typeof(PerformanceState), out IState state))
         {
+            // checks if this state isnt't already active
+            if (stateMachine.currentState == state) return;
             stateMachine.SwitchState(state);
         }
     }

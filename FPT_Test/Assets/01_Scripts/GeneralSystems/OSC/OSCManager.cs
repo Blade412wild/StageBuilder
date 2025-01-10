@@ -254,7 +254,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
         {
             OnLoadingIpConfig?.Invoke();
             SetUIElements(data);
-            CreateUDPSender();
+            //CreateUDPSender();
         }
     }
     private void SetUIElements(IPConfig data)

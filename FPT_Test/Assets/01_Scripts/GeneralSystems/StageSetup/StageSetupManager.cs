@@ -13,7 +13,7 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
     public Saver Saver { get; set; }
     public Loader Loader { get; set; }
     public string FileName { get; set; }
-    
+
     [Header("Other")]
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject rightHand;
@@ -140,7 +140,7 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
         if (worldData != null)
         {
             SetFloor();
-            OnStageSetupDone?.Invoke();
+            SetupFinished();
         }
         else
         {
@@ -151,5 +151,10 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
     {
         floor.transform.position = worldData.FloorPos;
         floor.transform.rotation = worldData.FloorDirection;
+    }
+
+    public void SetupFinished()
+    {
+        OnStageSetupDone?.Invoke();
     }
 }
