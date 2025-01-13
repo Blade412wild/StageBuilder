@@ -94,7 +94,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
 
         int ownPort = Convert.ToInt32(OwnDevicePortField.text);
 
-
         listener = new OSCReceiver(ownPort);
 
         // set event listener

@@ -38,13 +38,23 @@ public class OSCReceiver
             while (isListening) // Continue while listening is true
             {
                 var packet = listener.Receive();
+
+                if (packet != null)
+                {
+                    Debug.Log("reveived package");
+                    Debug.Log(packet);
+                }
+
                 if (packet != null && packet is OscMessage message)
                 {
+
                     // Extract the OSC message data and handle it
                     string address = message.Address;
-                    string receivedValue = message.Arguments[0].ToString();
-                    //incommingData = message.Arguments[0].ToString();
-                    //Debug.Log("OSC Message received. Address: " + address + ", Value: " + receivedValue);
+                    var receivedValue = message.Arguments[0].ToString();
+                    for(int i = 0; i < message.Arguments.Count; i++)
+                    {
+                        Debug.Log(message.Arguments[i]);
+                    }
 
                     // Process the received OSC message
                     ProcessOSCMessage(address, receivedValue);
