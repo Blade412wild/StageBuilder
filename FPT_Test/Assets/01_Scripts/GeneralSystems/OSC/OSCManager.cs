@@ -14,7 +14,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
     public TMP_InputField TargetPortField;
 
     [Header("UI Own Device UI")]
-    //public TMP_InputField OwnDeviceIPField;
     public TMP_InputField OwnDevicePortField;
 
     [Header("UI Data UI")]
@@ -25,11 +24,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
     public UIStatusBlock ListenerUIStatus;
     public UIStatusBlock SenderUIStatus;
 
-    [Header("HeadRotation")]
-    public HeadTracking HeadTracking;
-    public HeadTracking1 HeadTracking1;
-    public string Value;
-    public string Value2;
+    [SerializeField] private string scene;
 
     public static OSCManager Instance { get; private set; }
     public Saver Saver { get; set; }
@@ -68,10 +63,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
 
     private void Update()
     {
-        //chatIncomingData.text = incommingData;
-        //Value = HeadTracking.TempValue;
-        //Value = HeadTracking1.TempValue;
-        //Value2 = HeadTracking1.TempValue2;
         oscSendMessage = GetData();
     }
     private void OnDisable()
@@ -122,9 +113,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         }
         else
         {
-            //oscSendMessage = "HeadTracking/1/" + Value + "/" + "HeadTracking/2/" + Value2 + "/";
-            //sender.SendMessage("HeadTracking/1", Value);
-            //sender.SendMessage("HeadTracking/2", Value2);
             sender.SendMessage("ARGlasses", oscSendMessage);
         }
     }
@@ -193,7 +181,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
 
     private string GetData()
     {
-        string dataOutput = "";
+        string dataOutput = NamesSeperator + scene + " ";
         foreach (ISendableData data in activeList)
         {
             string smallDataOutput;

@@ -7340,7 +7340,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ResizeFloor
+  m_text: LowerFloor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9240,10 +9240,7 @@ MonoBehaviour:
   chatIncomingData: {fileID: 0}
   ListenerUIStatus: {fileID: 0}
   SenderUIStatus: {fileID: 0}
-  HeadTracking: {fileID: 1422296039}
-  HeadTracking1: {fileID: 1422296040}
-  Value: 
-  Value2: 
+  scene: Scene/2
 --- !u!4 &1433059695
 Transform:
   m_ObjectHideFlags: 0

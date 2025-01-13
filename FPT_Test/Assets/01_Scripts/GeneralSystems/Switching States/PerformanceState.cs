@@ -18,7 +18,6 @@ public class PerformanceState : State<SwitchManager>
 
     public override void OnUpdate()
     {
-        Debug.Log("OSC Message : " + oscManager.Value);
         oscManager.SendMessage();
     }
 
