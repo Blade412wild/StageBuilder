@@ -35,7 +35,7 @@ public class HeadTracking : MonoBehaviour, ISendableData
 
     private void Awake()
     {
-        Name = "head";
+        Name = "Head";
         Data = "0";
     }
     private void Start()

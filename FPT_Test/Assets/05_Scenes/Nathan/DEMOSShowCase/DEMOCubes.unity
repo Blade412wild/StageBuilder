@@ -8958,7 +8958,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422296037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a549c5eb63a904fa53de6e04570fb5, type: 3}
   m_Name: 
@@ -9236,11 +9236,9 @@ MonoBehaviour:
   TargetIPField: {fileID: 1908915621}
   TargetPortField: {fileID: 2144751757}
   OwnDevicePortField: {fileID: 1636159687}
-  chatInput: {fileID: 0}
-  chatIncomingData: {fileID: 0}
   ListenerUIStatus: {fileID: 0}
   SenderUIStatus: {fileID: 0}
-  scene: Scene/2
+  scene: Boxes
 --- !u!4 &1433059695
 Transform:
   m_ObjectHideFlags: 0

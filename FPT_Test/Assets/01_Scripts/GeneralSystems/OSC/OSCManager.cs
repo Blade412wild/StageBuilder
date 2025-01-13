@@ -16,10 +16,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
     [Header("UI Own Device UI")]
     public TMP_InputField OwnDevicePortField;
 
-    [Header("UI Data UI")]
-    public TMP_InputField chatInput;
-    public TMP_InputField chatIncomingData;
-
     [Header("UI Status")]
     public UIStatusBlock ListenerUIStatus;
     public UIStatusBlock SenderUIStatus;
@@ -37,7 +33,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
     string NamesSeperator = "/";
     string dataSeperator = ":";
 
-    private string oscSendMessage;
+    private OscBundle oscBundle;
     private OSCSender sender;
     private OSCReceiver listener;
 
@@ -63,7 +59,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
 
     private void Update()
     {
-        oscSendMessage = GetData();
+        oscBundle = GetData();
     }
     private void OnDisable()
     {
@@ -72,7 +68,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
             sender.CloseSender();
         }
 
-        if(listener != null)
+        if (listener != null)
         {
             listener.CloseListener();
         }
@@ -112,7 +108,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
         }
         else
         {
-            sender.SendMessage("ARGlasses", oscSendMessage);
+            sender.SendMessage(oscBundle);
         }
     }
 
@@ -178,20 +174,22 @@ public class OSCManager : MonoBehaviour, ISaveableData
         dataOutput.OnDeactivation += DeActivated;
     }
 
-    private string GetData()
+    private OscBundle GetData()
     {
-        string dataOutput = NamesSeperator + scene + " ";
-        foreach (ISendableData data in activeList)
+        OscMessage[] oscMessages = new OscMessage[activeList.Count + 1];
+        oscMessages[0] = new OscMessage( NamesSeperator + "Scene", scene);
+
+
+        for (int i = 0; i < activeList.Count; i++)
         {
-            string smallDataOutput;
-
-            var convertedData = ConvertOutputToString(data.Data);
-
-            smallDataOutput = NamesSeperator + data.Name + NamesSeperator + convertedData + " ";
-            dataOutput = dataOutput + smallDataOutput;
+            OscMessage message = new OscMessage(NamesSeperator + activeList[i].Name, activeList[i].Data);
+            Debug.Log(activeList[i].Name);
+            oscMessages[i + 1] = message;
         }
         //Debug.Log(dataOutput);
-        return dataOutput;
+        OscBundle bundle = new OscBundle(100, oscMessages);
+
+        return bundle;
     }
 
     private T ConvertOutputToString<T>(T input)

@@ -9208,11 +9208,9 @@ MonoBehaviour:
   TargetIPField: {fileID: 1908915621}
   TargetPortField: {fileID: 2144751757}
   OwnDevicePortField: {fileID: 1636159687}
-  chatInput: {fileID: 0}
-  chatIncomingData: {fileID: 0}
   ListenerUIStatus: {fileID: 0}
   SenderUIStatus: {fileID: 0}
-  scene: Scene/1
+  scene: Head
 --- !u!4 &1433059695
 Transform:
   m_ObjectHideFlags: 0

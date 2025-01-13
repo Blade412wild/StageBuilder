@@ -28,8 +28,8 @@ public class NewOSCTest : MonoBehaviour
     void Start()
     {
         //CreateUDPReceiver();
-        CreateUDPSender(hans, 9000);
-        CreateOSCReceiver(54001);
+        CreateUDPSender(ik, 9000);
+        CreateOSCReceiver(9000);
         //OSCSender = new OSCSender(ik, 9002);
        //CreateNewUDPListner();
     }
@@ -47,7 +47,12 @@ public class NewOSCTest : MonoBehaviour
     {
         var message1 = new OscMessage("/test1", 23, 42.01f, test);
         var message2 = new OscMessage("/test2", 32, 50);
-        var bundle = new OscBundle(100, message1, message2);
+
+        OscMessage[] messages = new OscMessage[2];
+        messages[0] = message1;
+        messages[1] = message2;
+
+        var bundle = new OscBundle(100, messages);
 
         Sender.Send(bundle);
         //OSCSender.SendMessage("192.168.2.235", test);

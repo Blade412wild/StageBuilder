@@ -22,11 +22,10 @@ public class OSCSender
         Debug.Log("OSC Sender Initialized on IP: " + ipAddress + "and port: " + port);
     }
 
-    public void SendMessage(string address, string messageContent)
+    public void SendMessage(OscBundle messagebundle)
     {
-        var message = new OscMessage(address, messageContent);
-        sender.Send(message);
-        Debug.Log("OSC Message sent to " + address + ": " + messageContent);
+        sender.Send(messagebundle);
+        Debug.Log("OSC Message sent to " + ipAddress + ": " + messagebundle);
     }
 
     public void CloseSender()

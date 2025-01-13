@@ -45,15 +45,17 @@ public class OSCReceiver
                     Debug.Log(packet);
                 }
 
-                if (packet != null && packet is OscMessage message)
+
+
+                if (packet != null && packet is OscBundle message)
                 {
 
                     // Extract the OSC message data and handle it
-                    string address = message.Address;
-                    var receivedValue = message.Arguments[0].ToString();
-                    for(int i = 0; i < message.Arguments.Count; i++)
+                    string address = message.Messages[0].Address;
+                    var receivedValue = message.Messages[0].Arguments[0].ToString();
+                    for(int i = 0; i < message.Messages[0].Arguments.Count; i++)
                     {
-                        Debug.Log(message.Arguments[i]);
+                        Debug.Log(message.Messages[0].Arguments[i]);
                     }
 
                     // Process the received OSC message
