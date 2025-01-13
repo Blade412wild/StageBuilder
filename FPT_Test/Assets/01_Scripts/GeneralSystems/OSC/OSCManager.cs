@@ -9,35 +9,35 @@ public class OSCManager : MonoBehaviour, ISaveableData
 {
     public Action OnLoadingIpConfig;
 
+    public enum ConnectionStatus {NotConnected, TryingToConnect, Connected}
+    public ConnectionStatus Status;
+
     [Header("UI Target Device UI")]
     public TMP_InputField TargetIPField;
     public TMP_InputField TargetPortField;
 
     [Header("UI Own Device UI")]
     public TMP_InputField OwnDevicePortField;
-
-    [Header("UI Status")]
-    public UIStatusBlock ListenerUIStatus;
-    public UIStatusBlock SenderUIStatus;
-
-    [SerializeField] private string scene;
-
     public static OSCManager Instance { get; private set; }
     public Saver Saver { get; set; }
     public Loader Loader { get; set; }
     public string FileName { get; set; }
 
+    [SerializeField] private string scene;
+
     private List<ISendableData> activeList = new List<ISendableData>();
     private List<ISendableData> dataOutputsNonActiveList = new List<ISendableData>();
 
-    string NamesSeperator = "/";
-    string dataSeperator = ":";
+    private string NamesSeperator = "/";
+    private string dataSeperator = ":";
 
     private OscBundle oscBundle;
     private OSCSender sender;
     private OSCReceiver listener;
 
     private string incommingData;
+
+    private StateMachine stateMachine;
 
     private void Awake()
     {
@@ -74,6 +74,10 @@ public class OSCManager : MonoBehaviour, ISaveableData
         }
     }
 
+    private void CreateStateMachine()
+    {
+
+    }
     public void CreateUDPSender()
     {
         if (sender != null) return;
@@ -97,7 +101,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         {
             listener.OndataReceived += CheckIncomingMessage;
         }
-        ListenerUIStatus.ChangeColor(true);
     }
 
     public void SendMessage()
@@ -133,14 +136,12 @@ public class OSCManager : MonoBehaviour, ISaveableData
     {
         if (sender == null) return;
         DestroyUDPSender();
-        SenderUIStatus.ChangeColor(false);
     }
 
     public void ResetListener()
     {
         if (listener == null) return;
         DestroyUDPListener();
-        ListenerUIStatus.ChangeColor(false);
     }
 
     public bool CheckSenderAvailable()
@@ -152,19 +153,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
     {
         if (listener == null) return false;
         else return true;
-    }
-
-    private void OnDestroy()
-    {
-        if (sender != null)
-        {
-            DestroyUDPSender();
-        }
-
-        if (listener != null)
-        {
-            DestroyUDPListener();
-        }
     }
 
     public void AddDataOutputToList(ISendableData dataOutput)
@@ -179,7 +167,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         OscMessage[] oscMessages = new OscMessage[activeList.Count + 1];
         oscMessages[0] = new OscMessage( NamesSeperator + "Scene", scene);
 
-
         for (int i = 0; i < activeList.Count; i++)
         {
             OscMessage message = new OscMessage(NamesSeperator + activeList[i].Name, activeList[i].Data);
@@ -190,12 +177,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         OscBundle bundle = new OscBundle(100, oscMessages);
 
         return bundle;
-    }
-
-    private T ConvertOutputToString<T>(T input)
-    {
-        input.ToString();
-        return input;
     }
 
     private void ActivateItem(ISendableData data)
