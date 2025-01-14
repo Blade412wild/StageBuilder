@@ -44,6 +44,7 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
         {
             // <Go to Not Connected>
             Debug.Log("no config found");
+            Owner.SwitchState(typeof(PhaseNotConnected));
         }
         else
         {

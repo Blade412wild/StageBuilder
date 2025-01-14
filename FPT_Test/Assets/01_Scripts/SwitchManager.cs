@@ -113,9 +113,9 @@ public class SwitchManager : MonoBehaviour
     {
         List<CustomError> errorList = new List<CustomError>();
 
-        if (oscManager.CheckSenderAvailable() == false)
+        if (oscManager.ConnectionStat != OSCManager.ConnectionStatus.Connected)
         {
-            errorList.Add(new CustomError("There is No Sender, Fix that before you go into Perforance mode"));
+            errorList.Add(new CustomError("You're not Connected to the the internet"));
         }
 
         return errorList;

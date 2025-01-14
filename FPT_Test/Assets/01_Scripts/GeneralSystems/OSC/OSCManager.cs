@@ -10,8 +10,8 @@ public class OSCManager : MonoBehaviour
     public Action OnSaveIpConfig;
     public enum ConnectionStatus { Idle, NotConnected, TryingToConnect, Connected }
     public ConnectionStatus ConnectionStat;
-    public enum SendingStatus { sendingData, notSendingData }
-    public SendingStatus SendingStat;
+    public enum SendingPermission { Allowed, NotAllowed }
+    public SendingPermission Permission;
 
     [Header("UI Target Device UI")]
     public TMP_InputField TargetIPField;
@@ -60,15 +60,8 @@ public class OSCManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (sender != null)
-        {
-            sender.CloseSender();
-        }
-
-        if (listener != null)
-        {
-            listener.CloseListener();
-        }
+        if (listener == null) return;
+        listener.CloseListener();
     }
     public void CreateUDPSender()
     {
@@ -106,29 +99,18 @@ public class OSCManager : MonoBehaviour
             sender.SendMessage(oscBundle);
         }
     }
-
-    private void DestroyUDPSender()
-    {
-        sender.CloseSender();
-        sender = null;
-    }
-
-    private void DestroyUDPListener()
-    {
-        listener.CloseListener();
-        listener = null;
-    }
-
     public void ResetSender()
     {
         if (sender == null) return;
-        DestroyUDPSender();
+        sender.CloseSender();
+        sender = null;
     }
 
     public void ResetListener()
     {
         if (listener == null) return;
-        DestroyUDPListener();
+        listener.CloseListener();
+        listener = null;
     }
 
     public bool CheckSenderAvailable()

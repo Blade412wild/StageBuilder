@@ -18,11 +18,12 @@ public class PerformanceState : State<SwitchManager>
 
     public override void OnUpdate()
     {
-        oscManager.SendMessage();
+        oscManager.Permission = OSCManager.SendingPermission.Allowed;
     }
 
     public override void OnExit()
     {
+        oscManager.Permission = OSCManager.SendingPermission.NotAllowed;
     }
 
     private void CheckInputList()

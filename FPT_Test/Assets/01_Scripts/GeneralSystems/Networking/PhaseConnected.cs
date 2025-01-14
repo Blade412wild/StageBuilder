@@ -1,6 +1,7 @@
 ﻿using SharpOSC;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class PhaseConnected : State<OSCManager>
 {
@@ -27,21 +28,22 @@ public class PhaseConnected : State<OSCManager>
 
     public override void OnEnter()
     {
-        sender = scratchpad.Read<OSCSender>("Sender");
-        receiver = scratchpad.Read<OSCReceiver>("Listener");    
-        Debug.Log("entered conntedPhase");
         Owner.ConnectionStat = OSCManager.ConnectionStatus.Connected;
+        sender = scratchpad.Read<OSCSender>("Sender");
+        receiver = scratchpad.Read<OSCReceiver>("Listener");
+        Debug.Log("entered conntedPhase");
     }
 
     public override void OnUpdate()
     {
         if (sender == null) return;
+        if (Owner.Permission == OSCManager.SendingPermission.NotAllowed) return;
         dataBundle = GetData();
     }
 
     public override void OnExit()
     {
-
+        sender.CloseSender();
     }
 
     private OscBundle GetData()
