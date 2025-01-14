@@ -9233,11 +9233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86e177dbdab15148af2883ed2af37d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Status: 0
   TargetIPField: {fileID: 1908915621}
   TargetPortField: {fileID: 2144751757}
   OwnDevicePortField: {fileID: 1636159687}
-  ListenerUIStatus: {fileID: 0}
-  SenderUIStatus: {fileID: 0}
   scene: Boxes
 --- !u!4 &1433059695
 Transform:
@@ -11039,37 +11038,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589020256}
   m_CullTransparentMesh: 1
---- !u!1 &1595987151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1595987153}
-  m_Layer: 0
-  m_Name: Ober
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1595987153
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1595987151}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.50032324, y: 1.0619214, z: 0.66572803}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1597246454
 GameObject:
   m_ObjectHideFlags: 0
@@ -14534,4 +14502,3 @@ SceneRoots:
   - {fileID: 807842096}
   - {fileID: 1533558272}
   - {fileID: 1168502783}
-  - {fileID: 1595987153}

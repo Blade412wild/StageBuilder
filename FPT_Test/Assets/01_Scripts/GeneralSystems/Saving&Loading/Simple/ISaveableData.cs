@@ -9,6 +9,6 @@ public interface ISaveableData
     string FileName { get; set; }
 
     void Save();
-    void Load();
+    T Load<T>();
 
 }

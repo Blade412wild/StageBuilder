@@ -46,7 +46,16 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
         headTrans = FindAnyObjectByType<NRSessionBehaviour>().transform;
 
         SeptupStatemMachine();
-        Load();
+        worldData = Load<WorldData>();
+        if (worldData != null)
+        {
+            SetFloor();
+            SetupFinished();
+        }
+        else
+        {
+            GoToMenu();
+        }
     }
 
     // Update is called once per frame
@@ -135,18 +144,11 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
     }
 
 
-    public void Load()
+    public T Load<T>()
     {
-        worldData = Loader.LoadData<WorldData>(FileName);
-        if (worldData != null)
-        {
-            SetFloor();
-            SetupFinished();
-        }
-        else
-        {
-            GoToMenu();
-        }
+        T worldData = Loader.LoadData<T>(FileName);
+
+        return worldData;
     }
     private void SetFloor()
     {

@@ -2,15 +2,16 @@ using SharpOSC;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class OSCManager : MonoBehaviour, ISaveableData
+public class OSCManager : MonoBehaviour
 {
     public Action OnLoadingIpConfig;
-
-    public enum ConnectionStatus {NotConnected, TryingToConnect, Connected}
-    public ConnectionStatus Status;
+    public Action OnSaveIpConfig;
+    public enum ConnectionStatus { Idle, NotConnected, TryingToConnect, Connected }
+    public ConnectionStatus ConnectionStat;
+    public enum SendingStatus { sendingData, notSendingData }
+    public SendingStatus SendingStat;
 
     [Header("UI Target Device UI")]
     public TMP_InputField TargetIPField;
@@ -19,25 +20,23 @@ public class OSCManager : MonoBehaviour, ISaveableData
     [Header("UI Own Device UI")]
     public TMP_InputField OwnDevicePortField;
     public static OSCManager Instance { get; private set; }
-    public Saver Saver { get; set; }
-    public Loader Loader { get; set; }
-    public string FileName { get; set; }
 
     [SerializeField] private string scene;
 
     private List<ISendableData> activeList = new List<ISendableData>();
     private List<ISendableData> dataOutputsNonActiveList = new List<ISendableData>();
 
-    private string NamesSeperator = "/";
-    private string dataSeperator = ":";
-
     private OscBundle oscBundle;
     private OSCSender sender;
     private OSCReceiver listener;
-
-    private string incommingData;
+    private IPConfig config;
+    private string FileName = "IpConfig";
 
     private StateMachine stateMachine;
+    private Scratchpad scratchpad;
+
+    private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
+
 
     private void Awake()
     {
@@ -51,15 +50,13 @@ public class OSCManager : MonoBehaviour, ISaveableData
     }
     private void Start()
     {
-        Saver = new Saver();
-        Loader = new Loader();
-        FileName = "IpConfig";
-        Load();
+        SetScratchPad();
+        CreateStateMachine();
     }
 
     private void Update()
     {
-        oscBundle = GetData();
+        stateMachine.OnUpdate();
     }
     private void OnDisable()
     {
@@ -73,11 +70,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
             listener.CloseListener();
         }
     }
-
-    private void CreateStateMachine()
-    {
-
-    }
     public void CreateUDPSender()
     {
         if (sender != null) return;
@@ -85,7 +77,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
         int targetPort = Convert.ToInt32(TargetPortField.text);
 
         sender = new OSCSender(targetIP, targetPort);
-        Save();
+        OnSaveIpConfig?.Invoke();
     }
 
     public void CreateUDPListener()
@@ -99,7 +91,7 @@ public class OSCManager : MonoBehaviour, ISaveableData
         // set event listener
         if (listener != null)
         {
-            listener.OndataReceived += CheckIncomingMessage;
+            //listener.OndataReceived += CheckIncomingMessage;
         }
     }
 
@@ -113,11 +105,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         {
             sender.SendMessage(oscBundle);
         }
-    }
-
-    private void CheckIncomingMessage(string value)
-    {
-        incommingData = value;
     }
 
     private void DestroyUDPSender()
@@ -162,23 +149,6 @@ public class OSCManager : MonoBehaviour, ISaveableData
         dataOutput.OnDeactivation += DeActivated;
     }
 
-    private OscBundle GetData()
-    {
-        OscMessage[] oscMessages = new OscMessage[activeList.Count + 1];
-        oscMessages[0] = new OscMessage( NamesSeperator + "Scene", scene);
-
-        for (int i = 0; i < activeList.Count; i++)
-        {
-            OscMessage message = new OscMessage(NamesSeperator + activeList[i].Name, activeList[i].Data);
-            Debug.Log(activeList[i].Name);
-            oscMessages[i + 1] = message;
-        }
-        //Debug.Log(dataOutput);
-        OscBundle bundle = new OscBundle(100, oscMessages);
-
-        return bundle;
-    }
-
     private void ActivateItem(ISendableData data)
     {
         dataOutputsNonActiveList.Remove(data);
@@ -191,43 +161,50 @@ public class OSCManager : MonoBehaviour, ISaveableData
         activeList.Remove(data);
     }
 
-    private IPConfig CreateIpConfig()
+    private void SetScratchPad()
     {
-        string targetIP = TargetIPField.text;
-        int targetPort = Convert.ToInt32(TargetPortField.text);
-        int listeningport = Convert.ToInt32(OwnDevicePortField.text);
-
-        IPConfig iPConfig = new IPConfig()
-        {
-            Ip = targetIP,
-            TargetPort = targetPort,
-            ListeningPort = listeningport,
-        };
-
-        return iPConfig;
+        scratchpad = new Scratchpad();
+        scratchpad.Write("FileName", FileName);
+        scratchpad.Write("Ip", TargetIPField);
+        scratchpad.Write("Port", TargetPortField);
+        scratchpad.Write("OwnPort", OwnDevicePortField);
+        scratchpad.Write("Scene", scene);
+        //scratchpad.Write("Listener", listener);
+        //scratchpad.Write("Sender", sender);
     }
 
-    public void Save()
+    private void CreateStateMachine()
     {
-        IPConfig data = CreateIpConfig();
-        Saver.SaveData<IPConfig>(data, FileName);
+        IState idleState = new PhaseNetworkingIdle(this);
+        IState notConnectedPhase = new PhaseNotConnected(this);
+        IState connectedPhase = new PhaseConnected(this, scratchpad, activeList);
+        IState tryConnectionPhase = new PhaseTryConnecting(this);
+        IState automaticConfigPhase = new PhaseAutomaticConfiguration(this, scratchpad);
+        IState manualConfigPhase = new ManualConfigurationPhase(this, scratchpad);
+
+        states.Add(typeof(PhaseNetworkingIdle), idleState);
+        states.Add(typeof(PhaseNotConnected), notConnectedPhase);
+        states.Add(typeof(PhaseConnected), connectedPhase);
+        states.Add(typeof(PhaseTryConnecting), tryConnectionPhase);
+        states.Add(typeof(PhaseAutomaticConfiguration), automaticConfigPhase);
+        states.Add(typeof(ManualConfigurationPhase), manualConfigPhase);
+
+        stateMachine = new StateMachine();
+        stateMachine.SwitchState(automaticConfigPhase);
     }
 
-    public void Load()
+    public void SwitchState<T>(T searchstate) where T : System.Type
     {
-        IPConfig data = Loader.LoadData<IPConfig>(FileName);
-        if (data != null)
+        Debug.Log("try to switch state");
+        if (states.TryGetValue(searchstate, out IState state))
         {
-            OnLoadingIpConfig?.Invoke();
-            SetUIElements(data);
-            //CreateUDPSender();
+            Debug.Log("SwitchState");
+            stateMachine.SwitchState(state);
         }
-    }
-    private void SetUIElements(IPConfig data)
-    {
-        TargetIPField.text = data.Ip;
-        TargetPortField.text = data.TargetPort.ToString();
-        OwnDevicePortField.text = data.ListeningPort.ToString();
+        else
+        {
+            Debug.Log("didn't find it");
+        }
     }
 
 }
