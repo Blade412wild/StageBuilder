@@ -169,6 +169,7 @@ public class OSCManager : MonoBehaviour
         scratchpad.Write("Port", TargetPortField);
         scratchpad.Write("OwnPort", OwnDevicePortField);
         scratchpad.Write("Scene", scene);
+        scratchpad.Write("ActiveList", activeList);
         //scratchpad.Write("Listener", listener);
         //scratchpad.Write("Sender", sender);
     }
@@ -195,15 +196,9 @@ public class OSCManager : MonoBehaviour
 
     public void SwitchState<T>(T searchstate) where T : System.Type
     {
-        Debug.Log("try to switch state");
         if (states.TryGetValue(searchstate, out IState state))
         {
-            Debug.Log("SwitchState");
             stateMachine.SwitchState(state);
-        }
-        else
-        {
-            Debug.Log("didn't find it");
         }
     }
 

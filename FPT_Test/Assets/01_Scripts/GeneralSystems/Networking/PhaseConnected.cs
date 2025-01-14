@@ -22,7 +22,7 @@ public class PhaseConnected : State<OSCManager>
     {
         this.scratchpad = scratchpad;
         scene = scratchpad.Read<string>("Scene");
-        activeList = activeList;
+        //activeList = activeList;
     }
 
     public override void OnEnter()
@@ -36,7 +36,7 @@ public class PhaseConnected : State<OSCManager>
     public override void OnUpdate()
     {
         if (sender == null) return;
-        //dataBundle = GetData();
+        dataBundle = GetData();
     }
 
     public override void OnExit()
@@ -46,6 +46,7 @@ public class PhaseConnected : State<OSCManager>
 
     private OscBundle GetData()
     {
+        activeList = scratchpad.Read<List<ISendableData>>("ActiveList");
         OscMessage[] oscMessages = new OscMessage[activeList.Count + 1];
         oscMessages[0] = new OscMessage(NamesSeperator + "Scene", scene);
 
@@ -56,6 +57,7 @@ public class PhaseConnected : State<OSCManager>
             oscMessages[i + 1] = message;
         }
         //Debug.Log(dataOutput);
+        Debug.Log(activeList.Count);
         OscBundle bundle = new OscBundle(100, oscMessages);
 
         return bundle;
