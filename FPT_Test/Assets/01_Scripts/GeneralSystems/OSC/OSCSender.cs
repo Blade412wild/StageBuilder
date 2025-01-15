@@ -25,7 +25,7 @@ public class OSCSender
     public void SendMessage(OscBundle messagebundle)
     {
         sender.Send(messagebundle);
-        Debug.Log("OSC Message sent to " + ipAddress + ": " + messagebundle);
+        //Debug.Log("OSC Message sent to " + ipAddress + ": " + messagebundle);
     }
 
     public void CloseSender()

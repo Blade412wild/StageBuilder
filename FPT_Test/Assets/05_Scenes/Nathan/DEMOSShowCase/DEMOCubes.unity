@@ -9233,7 +9233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86e177dbdab15148af2883ed2af37d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Status: 0
+  ConnectionStat: 0
+  Permission: 1
   TargetIPField: {fileID: 1908915621}
   TargetPortField: {fileID: 2144751757}
   OwnDevicePortField: {fileID: 1636159687}

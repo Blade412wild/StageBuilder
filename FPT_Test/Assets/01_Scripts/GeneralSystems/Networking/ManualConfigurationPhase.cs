@@ -17,6 +17,9 @@ public class ManualConfigurationPhase : State<OSCManager>, ISaveableData
     public ManualConfigurationPhase(OSCManager owner, Scratchpad scratchpad) : base(owner)
     {
         owner.OnSaveIpConfig += Save;
+        ip = scratchpad.Read<TMP_InputField>("Ip");
+        port = scratchpad.Read<TMP_InputField>("Port");
+        ownPort = scratchpad.Read<TMP_InputField>("OwnPort");
 
         this.scratchpad = scratchpad;
 
@@ -32,9 +35,6 @@ public class ManualConfigurationPhase : State<OSCManager>, ISaveableData
     {
         Debug.Log("entered Manual Configuration");
         config = scratchpad.Read<IPConfig>("IpConfig");
-        ip = scratchpad.Read<TMP_InputField>("Ip");
-        port = scratchpad.Read<TMP_InputField>("Port");
-        ownPort = scratchpad.Read<TMP_InputField>("OwnPort");
     }
 
     public override void OnExit()

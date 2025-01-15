@@ -60,7 +60,7 @@ public class OSCManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (listener == null) return;
+        listener = scratchpad.Read<OSCReceiver>("Listener");
         listener.CloseListener();
     }
     public void CreateUDPSender()
@@ -161,7 +161,7 @@ public class OSCManager : MonoBehaviour
         IState idleState = new PhaseNetworkingIdle(this);
         IState notConnectedPhase = new PhaseNotConnected(this);
         IState connectedPhase = new PhaseConnected(this, scratchpad, activeList);
-        IState tryConnectionPhase = new PhaseTryConnecting(this);
+        IState tryConnectionPhase = new PhaseTryConnecting(this, scratchpad);
         IState automaticConfigPhase = new PhaseAutomaticConfiguration(this, scratchpad);
         IState manualConfigPhase = new ManualConfigurationPhase(this, scratchpad);
 

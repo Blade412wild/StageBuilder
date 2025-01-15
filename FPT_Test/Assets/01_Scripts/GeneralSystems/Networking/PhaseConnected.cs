@@ -39,6 +39,7 @@ public class PhaseConnected : State<OSCManager>
         if (sender == null) return;
         if (Owner.Permission == OSCManager.SendingPermission.NotAllowed) return;
         dataBundle = GetData();
+        sender.SendMessage(dataBundle);
     }
 
     public override void OnExit()
@@ -55,11 +56,11 @@ public class PhaseConnected : State<OSCManager>
         for (int i = 0; i < activeList.Count; i++)
         {
             OscMessage message = new OscMessage(NamesSeperator + activeList[i].Name, activeList[i].Data);
-            Debug.Log(activeList[i].Name);
+            //Debug.Log(activeList[i].Name);
             oscMessages[i + 1] = message;
         }
         //Debug.Log(dataOutput);
-        Debug.Log(activeList.Count);
+        //Debug.Log(activeList.Count);
         OscBundle bundle = new OscBundle(100, oscMessages);
 
         return bundle;

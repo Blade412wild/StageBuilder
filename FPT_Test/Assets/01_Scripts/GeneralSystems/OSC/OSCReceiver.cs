@@ -2,10 +2,13 @@ using UnityEngine;
 using SharpOSC;
 using System.Threading; // For threading
 using System;
+using System.Collections.Generic;
 
 public class OSCReceiver
 {
     public Action<string> OndataReceived;
+    public Action OnConnectionMade;
+    public Action OnConnectionTestReceived;
 
     private UDPListener listener;
     private int port; // Listening port
@@ -39,27 +42,9 @@ public class OSCReceiver
             {
                 var packet = listener.Receive();
 
-                if (packet != null)
+                if (packet != null && packet is OscBundle bundle)
                 {
-                    Debug.Log("reveived package");
-                    Debug.Log(packet);
-                }
-
-
-
-                if (packet != null && packet is OscBundle message)
-                {
-
-                    // Extract the OSC message data and handle it
-                    string address = message.Messages[0].Address;
-                    var receivedValue = message.Messages[0].Arguments[0].ToString();
-                    for(int i = 0; i < message.Messages[0].Arguments.Count; i++)
-                    {
-                        Debug.Log(message.Messages[0].Arguments[i]);
-                    }
-
-                    // Process the received OSC message
-                    ProcessOSCMessage(address, receivedValue);
+                    ProcessOSCMessage(bundle);
                 }
             }
         });
@@ -68,14 +53,47 @@ public class OSCReceiver
     }
 
     // Custom method to handle OSC messages
-    private void ProcessOSCMessage(string address, string value)
+    private void ProcessOSCMessage(OscBundle bundle)
     {
-        // Example: If the message address is "/example", trigger an event in Unity
+        for (int i = 0; i < bundle.Messages.Count; i++)
+        {
+            //Debug.Log("message addres : " + bundle.Messages[i].Address.ToString());
+            //for (int j = 0; i < bundle.Messages[i].Arguments.Count - 1; j++)
+            //{
+            //    Debug.Log("-Value : " + bundle.Messages[i].Arguments[j].ToString());
+            //}
+        }
 
-        Debug.Log("Processing OSC message with value: " + value);
-        OndataReceived?.Invoke(value);
-        // Perform actions in Unity based on OSC message
+        foreach (OscMessage oscMessage in bundle.Messages)
+        {
 
+            //Debug.Log(oscMessage.Address);
+
+            for (int i = 0; i < oscMessage.Arguments.Count; i++)
+            {
+                //Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
+
+                // I need to check This
+                if (oscMessage.Address == "ConnectionValue")
+                {
+                    if (oscMessage.Arguments[0].GetType() != typeof(int)) return;
+                    if ((int)oscMessage.Arguments[0] != 0) return;
+                    OnConnectionMade?.Invoke();
+                    //Debug.Log("Connection is Made");
+
+                }
+
+                // checking icoming (gerben code)
+                if (oscMessage.Address == "TestConnection")
+                {
+                    if (oscMessage.Arguments[0].GetType() != typeof(int)) return;
+                    if ((int)oscMessage.Arguments[0] != 0) return;
+
+                    OnConnectionTestReceived?.Invoke();
+                    //Debug.Log("Connection is Made");
+                }
+            }
+        }
     }
 
     public void CloseListener()
