@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/05_Scenes/Nathan/DEMOSShowCase/DEMOMenu.unity
     guid: a102d865d7401224ea3a55a62bbdfd9d
-  - enabled: 0
+  - enabled: 1
     path: Assets/05_Scenes/Nathan/DEMOSShowCase/DEMOCubes.unity
     guid: ea2bb8471714f6b49944d2797a6d42f1
-  - enabled: 0
+  - enabled: 1
     path: Assets/05_Scenes/Nathan/DEMOSShowCase/DEMOLooper.unity
     guid: 4ce92ca372489d64caa01254e3439e3d
-  - enabled: 0
+  - enabled: 1
     path: Assets/05_Scenes/Nathan/DEMOSShowCase/DEMOHead.unity
     guid: bcb3acfe52f49ca4296caa4779428749
   - enabled: 0
@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/05_Scenes/Nathan/ScreenRecording/DEMOCubesRecord.unity
     guid: f9322082827eeec46ab8bd28a4741125
-  - enabled: 1
+  - enabled: 0
     path: Assets/05_Scenes/Nathan/ScreenRecording/DEMOLooperRecord.unity
     guid: fd3581183cd92b54282ab7c87801cadc
   m_configObjects: {}

@@ -18,7 +18,8 @@ public class NetworkingUI : MonoBehaviour, IUI
 
     private void Start()
     {
-        Active = true;
+        Active = false;
+        GameObject.SetActive(Active);
     }
     public void ChangeCurrentState()
     {

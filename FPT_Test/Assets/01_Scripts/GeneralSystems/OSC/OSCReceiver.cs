@@ -55,15 +55,6 @@ public class OSCReceiver
     // Custom method to handle OSC messages
     private void ProcessOSCMessage(OscBundle bundle)
     {
-        for (int i = 0; i < bundle.Messages.Count; i++)
-        {
-            //Debug.Log("message addres : " + bundle.Messages[i].Address.ToString());
-            //for (int j = 0; i < bundle.Messages[i].Arguments.Count - 1; j++)
-            //{
-            //    Debug.Log("-Value : " + bundle.Messages[i].Arguments[j].ToString());
-            //}
-        }
-
         foreach (OscMessage oscMessage in bundle.Messages)
         {
 

@@ -16,6 +16,8 @@ public class TouwScript : MonoBehaviour, IInteractible
     }
     public void Activate()
     {
+        Debug.Log("Collided");
+        Debug.Log("invoke : " + events.ToString());
         events?.Invoke();
     }
 }

@@ -16,6 +16,7 @@ public class BuilderState : State<SwitchManager>
     {
         Debug.Log("Entered Builder State");
         builderMode.SetActive(true);
+        OSCManager.Instance.Permission = OSCManager.SendingPermission.NotAllowed;
     }
 
     public override void OnUpdate()

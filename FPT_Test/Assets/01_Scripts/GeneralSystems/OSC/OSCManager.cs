@@ -46,12 +46,14 @@ public class OSCManager : MonoBehaviour
             return;
         }
 
+        //Permission = SendingPermission.NotAllowed;
         Instance = this;
     }
     private void Start()
     {
         SetScratchPad();
         CreateStateMachine();
+        Debug.Log("hallo test ");
     }
 
     private void Update()
@@ -60,8 +62,14 @@ public class OSCManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (scratchpad == null) return;
         listener = scratchpad.Read<OSCReceiver>("Listener");
-        listener.CloseListener();
+        if (listener != null)
+        {
+            listener.CloseListener();
+        }
+        Debug.Log("doei test ");
+
     }
     public void CreateUDPSender()
     {

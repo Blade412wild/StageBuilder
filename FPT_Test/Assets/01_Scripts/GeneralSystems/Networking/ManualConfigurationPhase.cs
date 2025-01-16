@@ -48,6 +48,7 @@ public class ManualConfigurationPhase : State<OSCManager>, ISaveableData
         Saver.SaveData<IPConfig>(data, FileName);
         scratchpad.Write("IpConfig", data, true);
         Debug.Log("saved Data");
+        Owner.SwitchState(typeof(PhaseAutomaticConfiguration));
     }
     public T Load<T>()
     {

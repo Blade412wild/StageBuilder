@@ -22,6 +22,7 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
         Data = data;
         Name = name;
         AddItemToManager();
+        Debug.Log(name + " has been started");
         //OnActivation?.Invoke(this);
     }
     private void OnTriggerEnter(Collider other)
@@ -43,6 +44,6 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
     public void AddItemToManager()
     {
         OSCManager.Instance.AddDataOutputToList(this);
-        Debug.Log("add : " + name + " to the activeList");
+        Debug.Log("add : " + name + " to the nonactiveList");
     }
 }

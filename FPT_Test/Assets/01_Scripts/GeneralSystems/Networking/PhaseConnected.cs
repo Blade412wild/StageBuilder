@@ -56,7 +56,7 @@ public class PhaseConnected : State<OSCManager>
         for (int i = 0; i < activeList.Count; i++)
         {
             OscMessage message = new OscMessage(NamesSeperator + activeList[i].Name, activeList[i].Data);
-            //Debug.Log(activeList[i].Name);
+            Debug.Log(activeList[i].Name + " : " + activeList[i].Data);
             oscMessages[i + 1] = message;
         }
         //Debug.Log(dataOutput);

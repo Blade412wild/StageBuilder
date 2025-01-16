@@ -40,6 +40,7 @@ public class HeadTracking : MonoBehaviour, ISendableData
     }
     private void Start()
     {
+        TempValue = "0";
         AddItemToManager();
         OnActivation?.Invoke(this);
     }
@@ -56,6 +57,13 @@ public class HeadTracking : MonoBehaviour, ISendableData
             FormatUIOutput(value);
             Data = value;
         }
+    }
+
+    private void OnDisable()
+    {
+        rotationLimits.Clear();
+        counter = 0;
+        TempValue = "0";
     }
 
     private void FormatUIOutput(float value)

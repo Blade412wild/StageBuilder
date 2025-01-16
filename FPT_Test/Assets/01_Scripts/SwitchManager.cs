@@ -20,8 +20,6 @@ public class SwitchManager : MonoBehaviour
 
     private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
 
-
-
     private void Start()
     {
         CreateStateMachine();
@@ -68,7 +66,6 @@ public class SwitchManager : MonoBehaviour
     private bool ChangeToPerformance()
     {
         if (builderModeState == false) return true;
-
         // check before going into perfromance mode if there is made a connection
         //checkErrorList();
 
