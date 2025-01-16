@@ -14,7 +14,7 @@ public class SetPlayerRefs : MonoBehaviour
         
         playerRefs.Canvas.gameObject.SetActive(false);  
 
-        Debug.Log(playerRefs.HeadTracking);
-        Debug.Log(playerRefs.Canvas);
+        //Debug.Log(playerRefs.HeadTracking);
+        //Debug.Log(playerRefs.Canvas);
     }
 }

@@ -53,7 +53,6 @@ public class OSCManager : MonoBehaviour
     {
         SetScratchPad();
         CreateStateMachine();
-        Debug.Log("hallo test ");
     }
 
     private void Update()
@@ -68,7 +67,6 @@ public class OSCManager : MonoBehaviour
         {
             listener.CloseListener();
         }
-        Debug.Log("doei test ");
 
     }
     public void CreateUDPSender()

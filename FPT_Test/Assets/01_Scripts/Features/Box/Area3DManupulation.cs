@@ -8,6 +8,7 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
 {
     public event Action<ISendableData> OnActivation;
     public event Action<ISendableData> OnDeactivation;
+    Timer timer;
 
     public object Data { get; set; }
 
@@ -22,7 +23,7 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
         Data = data;
         Name = name;
         AddItemToManager();
-        Debug.Log(name + " has been started");
+        //Debug.Log(name + " has been started");
         //OnActivation?.Invoke(this);
     }
     private void OnTriggerEnter(Collider other)
@@ -38,12 +39,20 @@ public class Area3DManupulation : MonoBehaviour, ISendableData
         if (other.gameObject.TryGetComponent(out Head head))
         {
             Data = 0;
-            OnDeactivation?.Invoke(this);
+
+            timer = new Timer(0.1f);
+            timer.OnTimerIsDone += DeactivateBox;
         }
     }
     public void AddItemToManager()
     {
         OSCManager.Instance.AddDataOutputToList(this);
-        Debug.Log("add : " + name + " to the nonactiveList");
+        //Debug.Log("add : " + name + " to the nonactiveList");
+    }
+
+    private void DeactivateBox()
+    {
+        timer.OnTimerIsDone -= DeactivateBox;
+        OnDeactivation?.Invoke(this);
     }
 }

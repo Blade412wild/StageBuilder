@@ -58,11 +58,11 @@ public class OSCReceiver
         foreach (OscMessage oscMessage in bundle.Messages)
         {
 
-            //Debug.Log(oscMessage.Address);
+            Debug.Log(oscMessage.Address);
 
             for (int i = 0; i < oscMessage.Arguments.Count; i++)
             {
-                //Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
+                Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
 
                 // I need to check This
                 if (oscMessage.Address == "ConnectionValue")
@@ -75,12 +75,12 @@ public class OSCReceiver
                 }
 
                 // checking icoming (gerben code)
-                if (oscMessage.Address == "TestConnection")
+                if (oscMessage.Address == "/TestConnection")
                 {
                     if (oscMessage.Arguments[0].GetType() != typeof(int)) return;
                     if ((int)oscMessage.Arguments[0] != 0) return;
 
-                    OnConnectionTestReceived?.Invoke();
+                    OnConnectionMade?.Invoke();
                     //Debug.Log("Connection is Made");
                 }
             }

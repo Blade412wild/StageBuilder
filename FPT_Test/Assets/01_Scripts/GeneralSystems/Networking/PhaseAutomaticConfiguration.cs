@@ -48,25 +48,35 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
         {
             Debug.Log("have found Config");
             SetUIElements(config);
+            if(listener != null)
+            {
+                listener.CloseListener();
+            }
+            if(sender != null)
+            {
+                sender.CloseSender();
+            }
+
             CreateUDPSender();
             CreateUDPListener();
             OnConfigDone?.Invoke();
-            Owner.SwitchState(typeof(PhaseTryConnecting));
+            //Owner.SwitchState(typeof(PhaseTryConnecting));
+            Owner.SwitchState(typeof(PhaseConnected));
         }
     }
     public void CreateUDPSender()
     {
-        if (sender != null) return;
+        //if (sender != null) return;
         string targetIP = ip.text;
         int targetPort = Convert.ToInt32(port.text);
 
         sender = new OSCSender(targetIP, targetPort);
-        scratchpad.Write("Sender", sender);
+        scratchpad.Write("Sender", sender, true);
     }
 
     public void CreateUDPListener()
     {
-        if (listener != null) return;
+        //if (listener != null) return;
 
         int ownPortInt = Convert.ToInt32(ownPort.text);
 

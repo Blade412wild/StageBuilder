@@ -26,13 +26,13 @@ public class NetworkingUI : MonoBehaviour, IUI
         if (Active)
         {
             GameObject.SetActive(false);
-            Debug.Log("zet uit");
+            //Debug.Log("zet uit");
             Active = false;
         }
         else
         {
             GameObject.SetActive(true);
-            Debug.Log("zet aan");
+            //Debug.Log("zet aan");
             Active = true;
         }
     }

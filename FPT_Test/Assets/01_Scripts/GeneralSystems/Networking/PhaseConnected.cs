@@ -60,7 +60,7 @@ public class PhaseConnected : State<OSCManager>
             oscMessages[i + 1] = message;
         }
         //Debug.Log(dataOutput);
-        //Debug.Log(activeList.Count);
+        Debug.Log(activeList.Count);
         OscBundle bundle = new OscBundle(100, oscMessages);
 
         return bundle;

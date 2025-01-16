@@ -4850,18 +4850,6 @@ MonoBehaviour:
   events:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1756092265}
-        m_TargetAssemblyTypeName: GordijnTest, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 484403402}
         m_TargetAssemblyTypeName: SwitchManager, Assembly-CSharp
         m_MethodName: ChangeButtonState
@@ -10890,6 +10878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484967623a7f4574c9927941880f54d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchManager: {fileID: 484403402}
   isClosed: 1
 --- !u!4 &1756092266 stripped
 Transform:

@@ -129,13 +129,13 @@ public class SwitchManager : MonoBehaviour
             if (OSCManager.Instance.ConnectionStat != OSCManager.ConnectionStatus.Connected) return;
             builderModeState = false;
             SwitchState(typeof(PerformanceState));
-            OnSwitchToPerformance.Invoke();
+            OnSwitchToPerformance?.Invoke();
         }
         else
         {
             builderModeState = true;
             SwitchState(typeof(BuilderState));
-            OnSwitchToBuilder.Invoke();
+            OnSwitchToBuilder?.Invoke();
         }
     }
 
