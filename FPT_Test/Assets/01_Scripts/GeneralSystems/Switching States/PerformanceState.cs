@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PerformanceState : State<SwitchManager>
 {
+    public Action OnPerfomanceStateExited;
+
     private OSCManager oscManager;
     public PerformanceState(SwitchManager owner, OSCManager oscManager) : base(owner)
     {
@@ -24,6 +27,7 @@ public class PerformanceState : State<SwitchManager>
     public override void OnExit()
     {
         oscManager.Permission = OSCManager.SendingPermission.NotAllowed;
+        OnPerfomanceStateExited?.Invoke();
     }
 
     private void CheckInputList()

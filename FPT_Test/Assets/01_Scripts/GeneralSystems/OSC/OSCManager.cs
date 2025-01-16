@@ -19,8 +19,13 @@ public class OSCManager : MonoBehaviour
 
     [Header("UI Own Device UI")]
     public TMP_InputField OwnDevicePortField;
+
     public static OSCManager Instance { get; private set; }
 
+    [Header("Managers")]
+    [SerializeField] private SwitchManager switchManager;
+
+    [Header("Scene")]
     [SerializeField] private string scene;
 
     private List<ISendableData> activeList = new List<ISendableData>();
@@ -53,6 +58,10 @@ public class OSCManager : MonoBehaviour
     {
         SetScratchPad();
         CreateStateMachine();
+        if (switchManager != null)
+        {
+            switchManager.OnSwitchToBuilder += HandleOnEnteredBuilderMode;
+        }
     }
 
     private void Update()
@@ -189,5 +198,13 @@ public class OSCManager : MonoBehaviour
             stateMachine.SwitchState(state);
         }
     }
+    private void HandleOnEnteredBuilderMode()
+    {
+        sender = scratchpad.Read<OSCSender>("Sender");
+        OscMessage oscMessage = new OscMessage("/EnteredBuilderMode", 0);
+        OscBundle bundle = new OscBundle(100, oscMessage);
+        sender.SendMessage(bundle);
+    }
+
 
 }

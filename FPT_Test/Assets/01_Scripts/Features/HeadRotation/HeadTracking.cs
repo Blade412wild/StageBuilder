@@ -38,7 +38,8 @@ public class HeadTracking : MonoBehaviour, ISendableData
         Name = "Head";
         Data = 0.0f;
     }
-    private void Start()
+
+    private void OnEnable()
     {
         TempValue = "0";
         AddItemToManager();

@@ -7037,6 +7037,10 @@ PrefabInstance:
       propertyPath: LogLevel
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 425166732989500197, guid: 665d8158924bd2648a94fb3f87691bbb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

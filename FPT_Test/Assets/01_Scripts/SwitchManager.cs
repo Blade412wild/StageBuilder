@@ -6,6 +6,7 @@ public class SwitchManager : MonoBehaviour
 {
     public Action OnSwitchToPerformance;
     public Action OnSwitchToBuilder;
+    public Action OnExitedPerformance;
 
     [SerializeField] private OSCManager oscManager;
     [SerializeField] private GameObject light;
