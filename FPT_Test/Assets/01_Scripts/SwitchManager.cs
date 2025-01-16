@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SwitchManager : MonoBehaviour
 {
+    public Action OnSwitchToPerformance;
+    public Action OnSwitchToBuilder;
+
     [SerializeField] private OSCManager oscManager;
     [SerializeField] private GameObject light;
     [SerializeField] private GameObject builderMode;
@@ -57,8 +60,8 @@ public class SwitchManager : MonoBehaviour
 
         stateMachine = new StateMachine();
 
-        stateMachine.AddTransition(new Transition(builderState, performanceState, ChangeToPerformance));
-        stateMachine.AddTransition(new Transition(performanceState, builderState, ChangeToBuilder));
+        //stateMachine.AddTransition(new Transition(builderState, performanceState, ChangeToPerformance));
+        //stateMachine.AddTransition(new Transition(performanceState, builderState, ChangeToBuilder));
 
         stateMachine.SwitchState(idleState);
     }
@@ -123,11 +126,16 @@ public class SwitchManager : MonoBehaviour
     {
         if (builderModeState)
         {
+            if (OSCManager.Instance.ConnectionStat != OSCManager.ConnectionStatus.Connected) return;
             builderModeState = false;
+            SwitchState(typeof(PerformanceState));
+            OnSwitchToPerformance.Invoke();
         }
         else
         {
             builderModeState = true;
+            SwitchState(typeof(BuilderState));
+            OnSwitchToBuilder.Invoke();
         }
     }
 
@@ -152,6 +160,13 @@ public class SwitchManager : MonoBehaviour
     public void GoToIdleState()
     {
         if (states.TryGetValue(typeof(IdleState), out IState state))
+        {
+            stateMachine.SwitchState(state);
+        }
+    }
+    public void SwitchState<T>(T searchstate) where T : System.Type
+    {
+        if (states.TryGetValue(searchstate, out IState state))
         {
             stateMachine.SwitchState(state);
         }

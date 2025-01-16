@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class GordijnTest : MonoBehaviour
 {
+    [SerializeField] private SwitchManager switchManager;
     Animator animator;
     public bool isClosed = true;
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        switchManager.OnSwitchToPerformance += ChangeState;
+        switchManager.OnSwitchToBuilder += ChangeState;
     }
 
-    //void Update()
-    //{
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    ChangeState();
-        //}
-    //}
+    private void OnDisable()
+    {
+        switchManager.OnSwitchToPerformance -= ChangeState;
+        switchManager.OnSwitchToBuilder -= ChangeState;
+    }
 
     public void ChangeState()
     {
