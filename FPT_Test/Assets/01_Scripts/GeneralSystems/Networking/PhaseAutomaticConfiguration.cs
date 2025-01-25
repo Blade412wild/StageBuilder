@@ -17,8 +17,6 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
     private OSCSender sender;
     private OSCReceiver listener;
 
-
-
     private IPConfig config;
 
     public PhaseAutomaticConfiguration(OSCManager owner, Scratchpad scratchpad) : base(owner)
@@ -48,6 +46,8 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
         {
             Debug.Log("have found Config");
             SetUIElements(config);
+
+            // first remove the existing sockets
             if(listener != null)
             {
                 listener.CloseListener();
@@ -61,12 +61,10 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
             CreateUDPListener();
             OnConfigDone?.Invoke();
             Owner.SwitchState(typeof(PhaseTryConnecting));
-            //Owner.SwitchState(typeof(PhaseConnected));
         }
     }
     public void CreateUDPSender()
     {
-        //if (sender != null) return;
         string targetIP = ip.text;
         int targetPort = Convert.ToInt32(port.text);
 
@@ -76,27 +74,15 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
 
     public void CreateUDPListener()
     {
-        //if (listener != null) return;
-
         int ownPortInt = Convert.ToInt32(ownPort.text);
 
         listener = new OSCReceiver(ownPortInt);
         scratchpad.Write("Listener", listener, true);
-
-        // set event listener
-        if (listener != null)
-        {
-            //listener.OndataReceived += CheckIncomingMessage;
-        }
-    }
-    public override void OnExit()
-    {
-
     }
 
     public void Save()
     {
-
+        
     }
 
     public T Load<T>()
