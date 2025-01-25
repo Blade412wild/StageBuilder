@@ -60,8 +60,8 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
             CreateUDPSender();
             CreateUDPListener();
             OnConfigDone?.Invoke();
-            //Owner.SwitchState(typeof(PhaseTryConnecting));
-            Owner.SwitchState(typeof(PhaseConnected));
+            Owner.SwitchState(typeof(PhaseTryConnecting));
+            //Owner.SwitchState(typeof(PhaseConnected));
         }
     }
     public void CreateUDPSender()
