@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomError
+[CreateAssetMenu(menuName = "Messages/CustomMessage", fileName = "CustomError", order = 0)]
+public class CustomError : ScriptableObject
 {
-    public enum ErrorLevel {Recommondation,Fatal}
-    public ErrorLevel errorLevel;
-    public string message { get; private set; }
+    public enum TypeMessage { FatalError, Recommondation }
 
-    public CustomError(string message)
-    {
-        this.message = message;
-        this.errorLevel = errorLevel;
-    }
+    [TextAreaAttribute(minLines: 3, maxLines: 6)]
+    public string ShortMessage;
+    [TextAreaAttribute]
+    public string DetailedMessage = "...";
+
+    public TypeMessage type;
 }

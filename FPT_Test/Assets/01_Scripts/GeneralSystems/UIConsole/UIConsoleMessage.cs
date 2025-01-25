@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class UIConsoleMessage : MonoBehaviour
 {
-    public event Action<CustomError2> OnMoreInformation;
+    public event Action<CustomError> OnMoreInformation;
 
     [SerializeField] public TMPro.TMP_Text Text;
     [SerializeField] public Image Icon;
-    public CustomError2 CustomMessage;
+    public CustomError CustomMessage;
 
     public void ActivateMoreInformationEvent()
     {

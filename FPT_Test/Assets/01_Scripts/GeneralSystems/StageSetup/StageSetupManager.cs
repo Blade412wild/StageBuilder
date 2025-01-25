@@ -32,9 +32,6 @@ public class StageSetupManager : MonoBehaviour, ISaveableData
     private StateMachine setupStateMachine;
     private Dictionary<Type, IState> states = new Dictionary<Type, IState>();
 
-    private void Awake()
-    {
-    }
 
     // Start is called before the first frame update
     void Start()

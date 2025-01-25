@@ -17,7 +17,7 @@ public class ConsoleManager : MonoBehaviour
     [SerializeField] private ArtDataBase artBase;
 
     [Header("Errors")]
-    [SerializeField] private List<CustomError2> messages = new List<CustomError2>();
+    [SerializeField] private List<CustomError> messages = new List<CustomError>();
 
 
     private ConsoleMessageSpawner consoleMessageSpawner;
@@ -105,7 +105,7 @@ public class ConsoleManager : MonoBehaviour
     }
 
 
-    private void HandleRequestMoreInfo(CustomError2 message)
+    private void HandleRequestMoreInfo(CustomError message)
     {
         moreInfoTextField.text = message.DetailedMessage;
     }

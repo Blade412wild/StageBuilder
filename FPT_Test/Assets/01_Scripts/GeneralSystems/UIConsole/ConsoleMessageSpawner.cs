@@ -17,27 +17,27 @@ public class ConsoleMessageSpawner : MonoBehaviour
         this.artDataBase = artDataBase;
     }
 
-    public List<CustomError2> SortMessageList(List<CustomError2> CustomMessages)
+    public List<CustomError> SortMessageList(List<CustomError> CustomMessages)
     {
        return CustomMessages.OrderBy(x => x.type).ToList();
     }
 
-    public List<UIConsoleMessage> CreateUIMessages(List<CustomError2> CustomMessages)
+    public List<UIConsoleMessage> CreateUIMessages(List<CustomError> CustomMessages)
     {
-        List<CustomError2> newList =  SortMessageList(CustomMessages);
+        List<CustomError> newList =  SortMessageList(CustomMessages);
         List<UIConsoleMessage> uIConsoleMessages = new List<UIConsoleMessage>();
 
-        foreach (CustomError2 customMessage in newList)
+        foreach (CustomError customMessage in newList)
         {
             UIConsoleMessage consoleMessage =  Instantiate(uiMessage, parent);
             consoleMessage.Text.text = customMessage.ShortMessage;
 
-            if (customMessage.type == CustomError2.TypeMessage.Recommondation)
+            if (customMessage.type == CustomError.TypeMessage.Recommondation)
             {
                 consoleMessage.Icon.sprite = artDataBase.RecommondationIcon;
             }
 
-            if(customMessage.type == CustomError2.TypeMessage.FatalError)
+            if(customMessage.type == CustomError.TypeMessage.FatalError)
             {
                 consoleMessage.Icon.sprite = artDataBase.FatalIcon;
             }

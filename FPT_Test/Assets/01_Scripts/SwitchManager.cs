@@ -80,49 +80,6 @@ public class SwitchManager : MonoBehaviour
         if (builderModeState) return true;
         return false;
     }
-
-    private bool checkErrorList()
-    {
-        List<CustomError> customErrors = CreateErrorList();
-
-        ErrorList errorList = new ErrorList(customErrors);
-
-        if (errorList.list.Count <= 0) return true;
-
-        else
-        {
-            foreach (CustomError error in errorList.list)
-            {
-                if (error.errorLevel == CustomError.ErrorLevel.Fatal)
-                {
-                    errorList.FatalErrors++;
-                }
-
-                if (error.errorLevel == CustomError.ErrorLevel.Recommondation)
-                {
-                    errorList.RecomdationErrors++;
-                }
-            }
-
-            if (errorList.FatalErrors == 0) return true;
-
-            return false;
-        }
-    }
-
-    private List<CustomError> CreateErrorList()
-    {
-        List<CustomError> errorList = new List<CustomError>();
-
-        if (oscManager.ConnectionStat != OSCManager.ConnectionStatus.Connected)
-        {
-            errorList.Add(new CustomError("You're not Connected to the the internet"));
-        }
-
-        return errorList;
-    }
-
-
     public void ChangeButtonState()
     {
         if (builderModeState)

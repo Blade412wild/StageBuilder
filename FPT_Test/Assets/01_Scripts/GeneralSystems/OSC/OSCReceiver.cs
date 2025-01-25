@@ -58,11 +58,11 @@ public class OSCReceiver
         foreach (OscMessage oscMessage in bundle.Messages)
         {
 
-            Debug.Log(oscMessage.Address);
+            //Debug.Log(oscMessage.Address);
 
             for (int i = 0; i < oscMessage.Arguments.Count; i++)
             {
-                Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
+                //Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
 
                 if (oscMessage.Address == "ConnectionValue")
                 {
