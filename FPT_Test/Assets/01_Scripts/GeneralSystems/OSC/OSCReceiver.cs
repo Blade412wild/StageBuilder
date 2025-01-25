@@ -64,24 +64,11 @@ public class OSCReceiver
             {
                 Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
 
-                // I need to check This
                 if (oscMessage.Address == "ConnectionValue")
                 {
                     if (oscMessage.Arguments[0].GetType() != typeof(int)) return;
                     if ((int)oscMessage.Arguments[0] != 0) return;
                     OnConnectionMade?.Invoke();
-                    //Debug.Log("Connection is Made");
-
-                }
-
-                // checking icoming (gerben code)
-                if (oscMessage.Address == "/TestConnection")
-                {
-                    if (oscMessage.Arguments[0].GetType() != typeof(int)) return;
-                    if ((int)oscMessage.Arguments[0] != 0) return;
-
-                    OnConnectionMade?.Invoke();
-                    //Debug.Log("Connection is Made");
                 }
             }
         }

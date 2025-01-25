@@ -167,8 +167,6 @@ public class OSCManager : MonoBehaviour
         scratchpad.Write("OwnPort", OwnDevicePortField);
         scratchpad.Write("Scene", scene);
         scratchpad.Write("ActiveList", activeList);
-        //scratchpad.Write("Listener", listener);
-        //scratchpad.Write("Sender", sender);
     }
 
     private void CreateStateMachine()

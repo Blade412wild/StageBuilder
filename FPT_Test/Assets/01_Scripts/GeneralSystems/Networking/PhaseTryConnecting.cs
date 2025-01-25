@@ -18,7 +18,6 @@ public class PhaseTryConnecting : State<OSCManager>
         sender = scratchpad.Read<OSCSender>("Sender");
         listener = scratchpad.Read<OSCReceiver>("Listener");
         listener.OnConnectionMade += ConnectionIsMade;
-        listener.OnConnectionTestReceived += ReceivedConnectionTest;
         Debug.Log("entered TryConnectionPhase");
         CreateMessage();
     }
@@ -32,7 +31,6 @@ public class PhaseTryConnecting : State<OSCManager>
     public override void OnExit()
     {
         listener.OnConnectionMade -= ConnectionIsMade;
-        listener.OnConnectionTestReceived -= ReceivedConnectionTest;
     }
 
     private void CreateMessage()
@@ -45,13 +43,6 @@ public class PhaseTryConnecting : State<OSCManager>
     private void ConnectionIsMade()
     {
         Owner.SwitchState(typeof(PhaseConnected));
-    }
-
-    private void ReceivedConnectionTest()
-    {
-        string name = "ConnectionValue";
-        OscMessage connectionMessage = new OscMessage(name, 0);
-        bundle = new OscBundle(100, connectionMessage);
     }
 }
 
