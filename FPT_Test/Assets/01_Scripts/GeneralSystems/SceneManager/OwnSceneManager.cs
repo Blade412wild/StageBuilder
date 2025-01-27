@@ -8,14 +8,14 @@ public class OwnSceneManager : MonoBehaviour
 {
     public Action<Scenes> OnSceneHeadEntered;
     public Action<Scenes> OnSceneHeadExited;
-    [SerializeField] private Scenes scenes;
-
+    [SerializeField] private Scenes scenes; // scriptableObject
 
     private void Start()
     {
         if(scenes.CurrentScene == scenes.sceneHead)
         {
-            OnSceneHeadEntered?.Invoke(scenes);
+            OnSceneHeadEntered?.Invoke(scenes); // voor het activeren van headrotation feature.
+            // dit werkt omdat er in elke scene een scenemanager zit.
         }
     }
 
@@ -23,7 +23,7 @@ public class OwnSceneManager : MonoBehaviour
     {
         if (scenes.CurrentScene == scenes.sceneHead)
         {
-            OnSceneHeadExited?.Invoke(scenes);
+            OnSceneHeadExited?.Invoke(scenes); // voor het deactiveren van headrotation feature.
         }
 
         scenes.CurrentScene = scenes.sceneMenu;

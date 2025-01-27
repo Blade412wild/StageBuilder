@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         ownSceneManager.OnSceneHeadExited += HandleOnSceneHeadExited;
     }
 
-    private void HandleOnSceneHeadEntered(Scenes scenes)
+    private void HandleOnSceneHeadEntered(Scenes scenes) // dezet methods horen hier eigenlijk niet thuis
     {
         playerPrefs.Canvas.gameObject.SetActive(true);
         playerPrefs.HeadTracking.enabled = true;
