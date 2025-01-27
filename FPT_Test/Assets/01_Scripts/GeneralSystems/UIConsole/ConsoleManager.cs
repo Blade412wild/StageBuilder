@@ -104,7 +104,6 @@ public class ConsoleManager : MonoBehaviour
         }
     }
 
-
     private void HandleRequestMoreInfo(CustomError message)
     {
         moreInfoTextField.text = message.DetailedMessage;

@@ -12,10 +12,12 @@ public class Loader : MonoBehaviour
 
         if (Application.isEditor)
         {
+            // data path voor wanneer in editor
             path = Application.dataPath + fileName + ".txt";
         }
         else
         {
+            // data path voor wanneer in built
             path = Application.persistentDataPath + fileName + ".txt";
         }
 
@@ -24,8 +26,8 @@ public class Loader : MonoBehaviour
         StreamReader streamReader = new StreamReader(path);
 
         T data2 = JsonUtility.FromJson<T>(streamReader.ReadToEnd());
-        streamReader.Close();
-        streamReader.Dispose();
+        streamReader.Close(); // belangrijk om altijd eerst te sluiten.
+        streamReader.Dispose();// nu kan je hem disposen, anders krijg je dataleaks
 
         return data2;
     }

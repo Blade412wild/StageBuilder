@@ -13,19 +13,18 @@ public class OSCSender
         this.ipAddress = ipAddress;
         this.port = port;
 
-        //Debug.Log(ipAddress + port);
         CreateUDPSender();
     }
     private void CreateUDPSender()
     {
         sender = new UDPSender(ipAddress, port);
-        Debug.Log("OSC Sender Initialized on IP: " + ipAddress + "and port: " + port);
+        Debug.Log("OSC Sender Initialized on IP: " + ipAddress + " and port: " + port);
     }
 
     public void SendMessage(OscBundle messagebundle)
     {
         sender.Send(messagebundle);
-        Debug.Log("OSC Message sent to " + ipAddress + ": " + messagebundle);
+        //Debug.Log("OSC Message sent to " + ipAddress + ": " + messagebundle);
     }
 
     public void CloseSender()

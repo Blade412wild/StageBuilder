@@ -51,7 +51,7 @@ public class OSCManager : MonoBehaviour
             return;
         }
 
-        //Permission = SendingPermission.NotAllowed;
+        Permission = SendingPermission.NotAllowed;
         Instance = this;
     }
     private void Start()

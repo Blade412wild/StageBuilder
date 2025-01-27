@@ -30,12 +30,10 @@ public class OSCReceiver
         Debug.Log("OSC Receiver initialized on Port: " + port);
     }
 
-    // This method listens for incoming OSC messages
     public void StartListening()
     {
-        isListening = true; // Set the flag to true when starting
+        isListening = true;
 
-        // Run the listener on a new thread to avoid blocking the main Unity thread
         listenerThread = new Thread(() =>
         {
             while (isListening) // Continue while listening is true
@@ -49,10 +47,9 @@ public class OSCReceiver
             }
         });
 
-        listenerThread.Start(); // Start the thread
+        listenerThread.Start();
     }
 
-    // Custom method to handle OSC messages
     private void ProcessOSCMessage(OscBundle bundle)
     {
         foreach (OscMessage oscMessage in bundle.Messages)
@@ -64,9 +61,9 @@ public class OSCReceiver
             {
                 //Debug.Log(oscMessage.Address + " : " + oscMessage.Arguments[i].ToString());
 
-                if (oscMessage.Address == "ConnectionValue")
+                if (oscMessage.Address == "ConnectionValue") // deze naam moet worden verstuurd vanuit de DAW
                 {
-                    if (oscMessage.Arguments[0].GetType() != typeof(int)) return;
+                    if (oscMessage.Arguments[0].GetType() != typeof(int)) return; // het fhoeft niet per se een int te zijn, is vooral voor zekerheid van het bericht, naam zou al genoeg kunnen zijn.
                     if ((int)oscMessage.Arguments[0] != 0) return;
                     OnConnectionMade?.Invoke();
                 }
@@ -74,12 +71,11 @@ public class OSCReceiver
         }
     }
 
-    public void CloseListener()
+    public void CloseListener() // deze moet eigenlijk altijd gecalled worden bij het sluiten van de applicatie of wanneer er een nieuwe IP config wordt aangemaakt
     {
         // Stop listening and wait for the thread to finish
         if (listenerThread != null && listenerThread.IsAlive)
         {
-            // Set the flag to false to stop the thread loop
             isListening = false;
 
             // Close the UDPListener to stop receiving new messages

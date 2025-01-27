@@ -44,9 +44,9 @@ public class ManualConfigurationPhase : State<OSCManager>, ISaveableData
 
     public void Save()
     {
-        IPConfig data = CreateIpConfig();
-        Saver.SaveData<IPConfig>(data, FileName);
-        scratchpad.Write("IpConfig", data, true);
+        IPConfig data = CreateIpConfig(); // haalt de data op 
+        Saver.SaveData<IPConfig>(data, FileName); // update 
+        scratchpad.Write("IpConfig", data, true); // overwrite scratchpad naar de scratchpad
         Debug.Log("saved Data");
         Owner.SwitchState(typeof(PhaseAutomaticConfiguration));
     }

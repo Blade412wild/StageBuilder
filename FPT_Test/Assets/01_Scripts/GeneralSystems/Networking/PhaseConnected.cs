@@ -11,10 +11,8 @@ public class PhaseConnected : State<OSCManager>
     private OscBundle dataBundle;
 
     private List<ISendableData> activeList = new List<ISendableData>();
-    private List<ISendableData> dataOutputsNonActiveList = new List<ISendableData>();
 
     private string NamesSeperator = "/";
-    private string dataSeperator = ":";
     private string scene;
     private Scratchpad scratchpad;
 
@@ -56,11 +54,11 @@ public class PhaseConnected : State<OSCManager>
         for (int i = 0; i < activeList.Count; i++)
         {
             OscMessage message = new OscMessage(NamesSeperator + activeList[i].Name, activeList[i].Data);
-            Debug.Log(activeList[i].Name + " : " + activeList[i].Data);
+            //Debug.Log(activeList[i].Name + " : " + activeList[i].Data);
             oscMessages[i + 1] = message;
         }
         //Debug.Log(dataOutput);
-        Debug.Log(activeList.Count);
+        //Debug.Log(activeList.Count);
         OscBundle bundle = new OscBundle(100, oscMessages);
 
         return bundle;

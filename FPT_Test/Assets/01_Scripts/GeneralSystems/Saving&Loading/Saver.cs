@@ -17,16 +17,18 @@ public class Saver
 
         if (Application.isEditor)
         {
+            // data path in editor
             path = Application.dataPath + fileName + ".txt";
         }
         else
         {
+            // data path in built
             path = Application.persistentDataPath + fileName + ".txt";
         }
 
         StreamWriter writer = new StreamWriter(path, false);
         writer.WriteLine(JsonUtility.ToJson(data));
-        writer.Close();
-        writer.Dispose();
+        writer.Close(); // eerst sluiten
+        writer.Dispose(); // daarna disposen, als je dit niet doet krijg je dataleaks
     }
 }

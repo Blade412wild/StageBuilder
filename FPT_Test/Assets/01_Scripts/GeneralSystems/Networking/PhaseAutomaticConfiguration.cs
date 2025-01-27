@@ -23,7 +23,7 @@ public class PhaseAutomaticConfiguration : State<OSCManager>, ISaveableData
     {
         this.scratchpad = scratchpad;
 
-        //config = scratchpad.Read<IPConfig>("IpConfig");
+        config = scratchpad.Read<IPConfig>("IpConfig");
         ip = scratchpad.Read<TMP_InputField>("Ip");
         port = scratchpad.Read<TMP_InputField>("Port");
         ownPort = scratchpad.Read<TMP_InputField>("OwnPort");
